@@ -1,0 +1,59 @@
+# ------------------------------------------------------------
+# Vivado generated directories
+# ------------------------------------------------------------
+*.cache/
+*.runs/
+*.sim/
+*.hw/
+*.ip_user_files/
+*.gen/
+*.tmp/
+*.backup/
+
+# If the project name changes, catch common generated dirs too
+*.jou
+*.log
+*.str
+*.zip
+*.wdb
+*.wcfg
+
+# Vivado generated databases / checkpoints / reports
+*.dcp
+*.rpt
+*.rpx
+*.pb
+*.vdi
+*.wdf
+*.wpc
+*.lpr
+*.xml
+*.html
+*.csv
+
+# Generated bitstreams / hardware handoff
+*.bit
+*.bin
+*.ltx
+*.hwh
+*.xsa
+*.sysdef
+
+# Simulation outputs
+xsim.dir/
+*.vcd
+*.fst
+*.saif
+
+# Editor / OS files
+.DS_Store
+.vscode/
+.idea/
+*~
+*.swp
+
+# Python caches, if scripts are added later
+__pycache__/
+*.pyc
+.venv/
+venv/
