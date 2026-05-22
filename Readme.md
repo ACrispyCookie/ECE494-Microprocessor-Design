@@ -23,3 +23,32 @@ The `Makefile` creates and deletes the Vivado project. Use `make clean` to delet
 ├── sw
 └── zedboard-wrapper                # zedboard specific design (.sv) and constraints (.xdc) files, used by the Vivado project
 ```
+
+### Project Purpose
+The purpose of this project is to compare the original CPU design and a modified one in the following aspects:
+
+1. Utilization
+   - LUTs
+   - FFs
+   - DSPs
+   - BRAMs
+
+2. Timing
+   - WNS
+   - estimated/swept Fmax
+   - critical path start/end
+   - logic delay vs net delay
+
+3. Path distribution
+   - slack histogram
+   - datapath delay histogram
+   - critical path categories per hierarchy
+
+4. Power
+   - vectorless estimate
+   - SAIF-based estimate from simulation
+
+5. Performance
+   - cycles until completion for small benchmarks
+   - Fmax
+   - estimated execution time = cycles / Fmax
