@@ -59,3 +59,8 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# Exclude hand-picked reports
+!reports/**/*.rpt
+!reports/**/*.csv
+!reports/**/*.png

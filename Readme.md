@@ -52,3 +52,7 @@ The purpose of this project is to compare the original CPU design and a modified
    - cycles until completion for small benchmarks
    - Fmax
    - estimated execution time = cycles / Fmax
+
+
+### Creating and Parsing reports
+To create and parse the reports of the above targets, the `report.sh` script can be used.
