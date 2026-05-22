@@ -1,0 +1,7 @@
+resource,Baseline_used,Baseline_available,Baseline_percent,No MUL Forwarding_used,No MUL Forwarding_available,No MUL Forwarding_percent,used_delta,percent_delta
+Slice LUTs,4076.0,53200.0,7.66,4076.0,53200.0,7.66,0.0,0.0
+Slice Registers,2151.0,106400.0,2.02,2151.0,106400.0,2.02,0.0,0.0
+Block RAM Tile,4.5,140.0,3.21,4.5,140.0,3.21,0.0,0.0
+RAMB36/FIFO,4.0,140.0,2.86,4.0,140.0,2.86,0.0,0.0
+RAMB18,1.0,280.0,0.36,1.0,280.0,0.36,0.0,0.0
+DSPs,5.0,220.0,2.27,5.0,220.0,2.27,0.0,0.0
