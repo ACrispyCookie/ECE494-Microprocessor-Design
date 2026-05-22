@@ -82,6 +82,7 @@
 #    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_rounding.sv"
 #    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_top.sv"
 #    "$origin_dir/zedboard-wrapper/imem_bram.sv"
+#    "$origin_dir/zedboard-wrapper/program_imem.mem"
 #    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lzc.sv"
 #    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv"
 #    "$origin_dir/zedboard-wrapper/zedboard_cv32e40p_wrapper.sv"
@@ -227,6 +228,7 @@ proc checkRequiredFiles { origin_dir} {
  "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_rounding.sv"]"\
  "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_top.sv"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/imem_bram.sv"]"\
+ "[file normalize "$origin_dir/zedboard-wrapper/program_imem.mem"]"\
  "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lzc.sv"]"\
  "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/zedboard_cv32e40p_wrapper.sv"]"\
@@ -484,6 +486,7 @@ set files [list \
  [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_rounding.sv" ]\
  [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_top.sv" ]\
  [file normalize "${origin_dir}/zedboard-wrapper/imem_bram.sv" ]\
+ [file normalize "${origin_dir}/zedboard-wrapper/program_imem.mem" ]\
  [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lzc.sv" ]\
  [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv" ]\
  [file normalize "${origin_dir}/zedboard-wrapper/zedboard_cv32e40p_wrapper.sv" ]\
@@ -751,6 +754,10 @@ set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 set file "zedboard-wrapper/imem_bram.sv"
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
+
+set file "zedboard-wrapper/program_imem.mem"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "Memory Initialization Files" -objects $file_obj
 
 set file "src/lzc.sv"
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
@@ -1094,7 +1101,7 @@ set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
 # Set 'sim_1' fileset properties
 set obj [get_filesets sim_1]
-set_property -name "top" -value "cb_filter" -objects $obj
+set_property -name "top" -value "tb_zedboard_cv32e40p_wrapper" -objects $obj
 set_property -name "top_lib" -value "xil_defaultlib" -objects $obj
 
 # Set 'utils_1' fileset object

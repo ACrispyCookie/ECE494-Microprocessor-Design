@@ -1,6 +1,7 @@
 *.xpr
 
 # Vivado generated directories
+.Xil/
 *.cache/
 *.runs/
 *.sim/

@@ -1,6 +1,6 @@
 ## cv32e40p on ZedBoard
 
-#### Getting Started
+### Getting Started
 To clone this repo and create the vivado project, you need to run the following commands:
 
 ```cmd

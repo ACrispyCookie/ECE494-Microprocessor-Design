@@ -1,5 +1,5 @@
 
-smoke_test/smoke.elf:     file format elf32-littleriscv
+/home/tsiantosd/Desktop/TsiantosD/ECE494-Microprocessor-Design/sw/smoke_test/smoke.elf:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
