@@ -10,7 +10,7 @@
 *.tmp/
 *.backup/
 
-# If the project name changes, catch common generated dirs too
+# Common generated dirs
 *.jou
 *.log
 *.str
@@ -52,7 +52,7 @@ xsim.dir/
 *~
 *.swp
 
-# Python caches, if scripts are added later
+# Python caches
 __pycache__/
 *.pyc
 .venv/
