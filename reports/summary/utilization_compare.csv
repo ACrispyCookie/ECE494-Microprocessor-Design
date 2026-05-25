@@ -1,0 +1,9 @@
+experiment,resource,label,used,available,util_percent
+baseline,Slice LUTs,LUTs,4114,53200,7.73
+baseline,Slice Registers,FFs/Regs,2151,106400,2.02
+baseline,DSPs,DSPs,5,220,2.27
+baseline,Block RAM Tile,BRAM Tiles,4.5,140,3.21
+no-mul-forwarding,Slice LUTs,LUTs,4114,53200,7.73
+no-mul-forwarding,Slice Registers,FFs/Regs,2151,106400,2.02
+no-mul-forwarding,DSPs,DSPs,5,220,2.27
+no-mul-forwarding,Block RAM Tile,BRAM Tiles,4.5,140,3.21

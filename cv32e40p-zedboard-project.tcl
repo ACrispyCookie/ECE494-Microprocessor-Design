@@ -23,139 +23,139 @@
 # 2. The following source(s) files that were local or imported into the original project.
 #    (Please see the '$orig_proj_dir' and '$origin_dir' variable setting below at the start of the script)
 #
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/clk/rtl/gated_clk_cell.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ctrl.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ff1.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_pack_single.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_prepare.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_round_single.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_special.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_srt_single.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_top.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_dp.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_frbus.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_src_type.v"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cf_math_pkg.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_aligner.sv"
-#    "$origin_dir/cv32e40p/rtl/include/cv32e40p_pkg.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_alu.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_alu_div.sv"
-#    "$origin_dir/cv32e40p/rtl/include/cv32e40p_apu_core_pkg.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_apu_disp.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/clk/rtl/gated_clk_cell.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ctrl.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ff1.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_pack_single.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_prepare.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_round_single.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_special.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_srt_single.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_top.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_dp.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_frbus.v"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_src_type.v"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cf_math_pkg.sv"
+#    "$core_dir/rtl/cv32e40p_aligner.sv"
+#    "$core_dir/rtl/include/cv32e40p_pkg.sv"
+#    "$core_dir/rtl/cv32e40p_alu.sv"
+#    "$core_dir/rtl/cv32e40p_alu_div.sv"
+#    "$core_dir/rtl/include/cv32e40p_apu_core_pkg.sv"
+#    "$core_dir/rtl/cv32e40p_apu_disp.sv"
 #    "$origin_dir/zedboard-wrapper/cv32e40p_clock_gate.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_compressed_decoder.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_controller.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_core.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_cs_registers.sv"
-#    "$origin_dir/cv32e40p/rtl/include/cv32e40p_fpu_pkg.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_decoder.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_ex_stage.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_ff_one.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_fifo.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_pkg.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_fp_wrapper.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_hwloop_regs.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_id_stage.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_if_stage.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_int_controller.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_load_store_unit.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_mult.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_obi_interface.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_popcnt.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_prefetch_buffer.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_prefetch_controller.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_register_file_latch.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_sleep_unit.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_top.sv"
+#    "$core_dir/rtl/cv32e40p_compressed_decoder.sv"
+#    "$core_dir/rtl/cv32e40p_controller.sv"
+#    "$core_dir/rtl/cv32e40p_core.sv"
+#    "$core_dir/rtl/cv32e40p_cs_registers.sv"
+#    "$core_dir/rtl/include/cv32e40p_fpu_pkg.sv"
+#    "$core_dir/rtl/cv32e40p_decoder.sv"
+#    "$core_dir/rtl/cv32e40p_ex_stage.sv"
+#    "$core_dir/rtl/cv32e40p_ff_one.sv"
+#    "$core_dir/rtl/cv32e40p_fifo.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_pkg.sv"
+#    "$core_dir/rtl/cv32e40p_fp_wrapper.sv"
+#    "$core_dir/rtl/cv32e40p_hwloop_regs.sv"
+#    "$core_dir/rtl/cv32e40p_id_stage.sv"
+#    "$core_dir/rtl/cv32e40p_if_stage.sv"
+#    "$core_dir/rtl/cv32e40p_int_controller.sv"
+#    "$core_dir/rtl/cv32e40p_load_store_unit.sv"
+#    "$core_dir/rtl/cv32e40p_mult.sv"
+#    "$core_dir/rtl/cv32e40p_obi_interface.sv"
+#    "$core_dir/rtl/cv32e40p_popcnt.sv"
+#    "$core_dir/rtl/cv32e40p_prefetch_buffer.sv"
+#    "$core_dir/rtl/cv32e40p_prefetch_controller.sv"
+#    "$core_dir/rtl/cv32e40p_register_file_latch.sv"
+#    "$core_dir/rtl/cv32e40p_sleep_unit.sv"
+#    "$core_dir/rtl/cv32e40p_top.sv"
 #    "$origin_dir/zedboard-wrapper/dmem_bram.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/include/common_cells/registers.svh"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_cast_multi.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_classifier.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_multi.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_th_32.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma_multi.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_noncomp.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_block.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_fmt_slice.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_multifmt_slice.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_rounding.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_top.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/include/common_cells/registers.svh"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_cast_multi.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_classifier.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_multi.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_th_32.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma_multi.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_noncomp.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_block.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_fmt_slice.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_multifmt_slice.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_rounding.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_top.sv"
 #    "$origin_dir/zedboard-wrapper/imem_bram.sv"
 #    "$origin_dir/zedboard-wrapper/program_imem.mem"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lzc.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/lzc.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv"
 #    "$origin_dir/zedboard-wrapper/zedboard_cv32e40p_wrapper.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cb_filter_pkg.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/counter.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/delta_counter.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/sub_per_hash.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cb_filter.sv"
-#    "$origin_dir/cv32e40p/rtl/cv32e40p_register_file_ff.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/addr_decode.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/binary_to_gray.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cdc_2phase.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_2phase.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_gray.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/clk_div.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider_counter.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/ecc_pkg.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/ecc_decode.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/ecc_encode.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_detect.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_propagator.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_rx.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_tx.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/exp_backoff.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/fall_through_register.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v1.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v2.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/fifo_v3.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/find_first_one.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_LFSR_8bit.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo_adv.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/gray_to_binary.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/id_queue.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/isochronous_spill_register.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lfsr.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lfsr_16bit.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lfsr_8bit.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/max_counter.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/mv_filter.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/onehot_to_bin.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/plru_tree.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/popcount.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/prioarbiter.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync_wedge.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/rrarbiter.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rstgen.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rstgen_bypass.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/serial_deglitch.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/shift_reg.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/spill_register.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/sram.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter_flushable.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_delay.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_demux.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_fifo.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_filter.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_fork.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_fork_dynamic.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_join.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_mux.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_omega_net.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_register.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_to_mem.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_xbar.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/sync.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/sync_wedge.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/unread.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_intf.sv"
-#    "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/include/common_cells/assertions.svh"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cb_filter_pkg.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/counter.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/delta_counter.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/sub_per_hash.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cb_filter.sv"
+#    "$core_dir/rtl/cv32e40p_register_file_ff.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/addr_decode.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/binary_to_gray.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cdc_2phase.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_2phase.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_gray.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/clk_div.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider_counter.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/ecc_pkg.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/ecc_decode.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/ecc_encode.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/edge_detect.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/edge_propagator.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_rx.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_tx.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/exp_backoff.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/fall_through_register.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v1.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v2.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/fifo_v3.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/find_first_one.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_LFSR_8bit.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo_adv.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/gray_to_binary.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/id_queue.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/isochronous_spill_register.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/lfsr.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/lfsr_16bit.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/lfsr_8bit.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/max_counter.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/mv_filter.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/onehot_to_bin.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/plru_tree.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/popcount.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/prioarbiter.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync_wedge.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/rrarbiter.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/rstgen.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/rstgen_bypass.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/serial_deglitch.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/shift_reg.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/spill_register.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/sram.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter_flushable.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_delay.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_demux.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_fifo.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_filter.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_fork.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_fork_dynamic.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_join.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_mux.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_omega_net.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_register.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_to_mem.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_xbar.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/sync.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/sync_wedge.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/unread.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_intf.sv"
+#    "$core_dir/rtl/vendor/pulp_platform_common_cells/include/common_cells/assertions.svh"
 #    "$origin_dir/zedboard-wrapper/constraints.xdc"
 #    "$origin_dir/zedboard-wrapper/tb_zedboard_cv32e40p_wrapper.sv"
 #
@@ -169,139 +169,139 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set files [list \
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/clk/rtl/gated_clk_cell.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ctrl.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ff1.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_pack_single.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_prepare.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_round_single.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_special.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_srt_single.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_top.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_dp.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_frbus.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_src_type.v"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cf_math_pkg.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_aligner.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/include/cv32e40p_pkg.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_alu.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_alu_div.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/include/cv32e40p_apu_core_pkg.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_apu_disp.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/clk/rtl/gated_clk_cell.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ctrl.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ff1.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_pack_single.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_prepare.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_round_single.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_special.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_srt_single.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_top.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_dp.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_frbus.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_src_type.v"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cf_math_pkg.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_aligner.sv"]"\
+ "[file normalize "$core_dir/rtl/include/cv32e40p_pkg.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_alu.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_alu_div.sv"]"\
+ "[file normalize "$core_dir/rtl/include/cv32e40p_apu_core_pkg.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_apu_disp.sv"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/cv32e40p_clock_gate.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_compressed_decoder.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_controller.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_core.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_cs_registers.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/include/cv32e40p_fpu_pkg.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_decoder.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_ex_stage.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_ff_one.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_fifo.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_pkg.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_fp_wrapper.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_hwloop_regs.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_id_stage.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_if_stage.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_int_controller.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_load_store_unit.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_mult.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_obi_interface.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_popcnt.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_prefetch_buffer.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_prefetch_controller.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_register_file_latch.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_sleep_unit.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_top.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_compressed_decoder.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_controller.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_core.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_cs_registers.sv"]"\
+ "[file normalize "$core_dir/rtl/include/cv32e40p_fpu_pkg.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_decoder.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_ex_stage.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_ff_one.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_fifo.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_pkg.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_fp_wrapper.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_hwloop_regs.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_id_stage.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_if_stage.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_int_controller.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_load_store_unit.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_mult.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_obi_interface.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_popcnt.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_prefetch_buffer.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_prefetch_controller.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_register_file_latch.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_sleep_unit.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_top.sv"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/dmem_bram.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/include/common_cells/registers.svh"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_cast_multi.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_classifier.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_multi.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_th_32.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma_multi.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_noncomp.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_block.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_fmt_slice.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_multifmt_slice.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_rounding.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_top.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/include/common_cells/registers.svh"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_cast_multi.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_classifier.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_multi.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_th_32.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma_multi.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_noncomp.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_block.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_fmt_slice.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_multifmt_slice.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_rounding.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/fpnew_top.sv"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/imem_bram.sv"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/program_imem.mem"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lzc.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/lzc.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/zedboard_cv32e40p_wrapper.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cb_filter_pkg.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/counter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/delta_counter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/sub_per_hash.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cb_filter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/cv32e40p_register_file_ff.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/addr_decode.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/binary_to_gray.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cdc_2phase.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_2phase.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_gray.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/clk_div.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider_counter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/ecc_pkg.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/ecc_decode.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/ecc_encode.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_detect.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_propagator.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_rx.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_tx.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/exp_backoff.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/fall_through_register.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v1.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v2.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/fifo_v3.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/find_first_one.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_LFSR_8bit.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo_adv.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/gray_to_binary.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/id_queue.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/isochronous_spill_register.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lfsr.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lfsr_16bit.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lfsr_8bit.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/max_counter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/mv_filter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/onehot_to_bin.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/plru_tree.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/popcount.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/prioarbiter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync_wedge.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/rrarbiter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rstgen.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rstgen_bypass.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/serial_deglitch.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/shift_reg.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/spill_register.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/sram.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter_flushable.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_delay.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_demux.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_fifo.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_filter.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_fork.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_fork_dynamic.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_join.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_mux.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_omega_net.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_register.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_to_mem.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_xbar.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/sync.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/sync_wedge.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/unread.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_intf.sv"]"\
- "[file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/include/common_cells/assertions.svh"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cb_filter_pkg.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/counter.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/delta_counter.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/sub_per_hash.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cb_filter.sv"]"\
+ "[file normalize "$core_dir/rtl/cv32e40p_register_file_ff.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/addr_decode.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/binary_to_gray.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cdc_2phase.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_2phase.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_gray.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/clk_div.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider_counter.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/ecc_pkg.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/ecc_decode.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/ecc_encode.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/edge_detect.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/edge_propagator.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_rx.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_tx.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/exp_backoff.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/fall_through_register.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v1.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v2.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/fifo_v3.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/find_first_one.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_LFSR_8bit.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo_adv.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/gray_to_binary.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/id_queue.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/isochronous_spill_register.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/lfsr.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/lfsr_16bit.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/lfsr_8bit.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/max_counter.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/mv_filter.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/onehot_to_bin.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/plru_tree.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/popcount.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/prioarbiter.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync_wedge.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/rrarbiter.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/rstgen.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/rstgen_bypass.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/serial_deglitch.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/shift_reg.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/spill_register.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/deprecated/sram.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter_flushable.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_delay.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_demux.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_fifo.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_filter.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_fork.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_fork_dynamic.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_join.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_mux.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_omega_net.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_register.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_to_mem.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_xbar.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/sync.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/sync_wedge.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/unread.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/src/stream_intf.sv"]"\
+ "[file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/include/common_cells/assertions.svh"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/constraints.xdc"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/tb_zedboard_cv32e40p_wrapper.sv"]"\
   ]
@@ -322,6 +322,14 @@ set origin_dir [file normalize $script_dir]
 if { [info exists ::origin_dir_loc] } {
   set origin_dir $::origin_dir_loc
 }
+
+# Select which cv32e40p checkout to use. The repository keeps the baseline
+# and modified RTL checkouts side by side so the parent repository can stay
+# on one branch while Vivado projects choose a design with --experiment or
+# --core_dir.
+set experiment "baseline"
+set core_dir ""
+set user_build_dir ""
 
 # Set the project name
 set _xil_proj_name_ "cv32e40p-zedboard-project"
@@ -345,15 +353,24 @@ proc print_help {} {
   puts "Syntax:"
   puts "$script_file"
   puts "$script_file -tclargs \[--origin_dir <path>\]"
+  puts "$script_file -tclargs \[--experiment <baseline|no-mul-forwarding>\]"
+  puts "$script_file -tclargs \[--core_dir <path-to-cv32e40p-checkout>\]"
+  puts "$script_file -tclargs \[--build_dir <path>\]"
   puts "$script_file -tclargs \[--project_name <name>\]"
   puts "$script_file -tclargs \[--help\]\n"
   puts "Usage:"
   puts "Name                   Description"
   puts "-------------------------------------------------------------------------"
-  puts "\[--origin_dir <path>\]  Determine source file paths wrt this path. Default"
-  puts "                       origin_dir path value is \".\", otherwise, the value"
-  puts "                       that was set with the \"-paths_relative_to\" switch"
-  puts "                       when this script was generated.\n"
+  puts "\[--origin_dir <path>\]  Determine wrapper/source paths wrt this path. Default"
+  puts "                       origin_dir path value is the script directory.\n"
+  puts "\[--experiment <name>\]  Select an RTL checkout by experiment name. Defaults"
+  puts "                       to baseline. Known values:"
+  puts "                         baseline -> cv32e40p_baseline"
+  puts "                         no-mul-forwarding -> cv32e40p_no_mul_forwarding\n"
+  puts "\[--core_dir <path>\]   Explicit cv32e40p checkout path. Overrides"
+  puts "                       --experiment-based selection.\n"
+  puts "\[--build_dir <path>\]  Vivado project output directory. Default:"
+  puts "                       build/vivado-<experiment>.\n"
   puts "\[--project_name <name>\] Create project with the specified name. Default"
   puts "                       name is the name of the project from where this"
   puts "                       script was generated.\n"
@@ -367,6 +384,9 @@ if { $::argc > 0 } {
     set option [string trim [lindex $::argv $i]]
     switch -regexp -- $option {
       "--origin_dir"   { incr i; set origin_dir [lindex $::argv $i] }
+      "--experiment"   { incr i; set experiment [lindex $::argv $i] }
+      "--core_dir"     { incr i; set core_dir [lindex $::argv $i] }
+      "--build_dir"    { incr i; set user_build_dir [lindex $::argv $i] }
       "--project_name" { incr i; set _xil_proj_name_ [lindex $::argv $i] }
       "--help"         { print_help }
       default {
@@ -378,6 +398,24 @@ if { $::argc > 0 } {
     }
   }
 }
+
+# Resolve the selected cv32e40p checkout. Both checkouts are separate
+# submodules so switching the parent repository branch is no longer required
+# to compare baseline vs. modified RTL.
+if { $core_dir eq "" } {
+  switch -- $experiment {
+    "baseline" { set core_dir [file join $origin_dir "cv32e40p_baseline"] }
+    "no-mul-forwarding" { set core_dir [file join $origin_dir "cv32e40p_no_mul_forwarding"] }
+    default {
+      puts "ERROR: Unknown experiment '$experiment'. Use --core_dir for a custom checkout."
+      return 1
+    }
+  }
+}
+if { [file pathtype $core_dir] eq "relative" } {
+  set core_dir [file join $origin_dir $core_dir]
+}
+set core_dir [file normalize $core_dir]
 
 # Set the directory path for the original project from where this script was exported
 set orig_proj_dir "[file normalize "$origin_dir/"]"
@@ -393,8 +431,26 @@ if { $validate_required } {
   }
 }
 
-set build_dir [file join $origin_dir "build" "vivado"]
+if { $user_build_dir eq "" } {
+  set safe_experiment [string map {"/" "_" " " "_"} $experiment]
+  set build_dir [file join $origin_dir "build" "vivado-$safe_experiment"]
+} else {
+  if { [file pathtype $user_build_dir] eq "relative" } {
+    set user_build_dir [file join $origin_dir $user_build_dir]
+  }
+  set build_dir [file normalize $user_build_dir]
+}
 file mkdir $build_dir
+
+puts "========================================"
+puts "cv32e40p ZedBoard project generation"
+puts "========================================"
+puts "origin_dir  = $origin_dir"
+puts "experiment  = $experiment"
+puts "core_dir    = $core_dir"
+puts "build_dir   = $build_dir"
+puts "project     = ${_xil_proj_name_}"
+puts "========================================"
 
 # Create project
 create_project ${_xil_proj_name_} $build_dir -part xc7z020clg484-1 -force
@@ -427,139 +483,139 @@ if {[string equal [get_filesets -quiet sources_1] ""]} {
 set obj [get_filesets sources_1]
 # Add local files from the original project (-no_copy_sources specified)
 set files [list \
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/clk/rtl/gated_clk_cell.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ctrl.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ff1.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_pack_single.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_prepare.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_round_single.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_special.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_srt_single.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_top.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_dp.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_frbus.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_src_type.v" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cf_math_pkg.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_aligner.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/include/cv32e40p_pkg.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_alu.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_alu_div.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/include/cv32e40p_apu_core_pkg.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_apu_disp.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/clk/rtl/gated_clk_cell.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ctrl.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_ff1.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_pack_single.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_prepare.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_round_single.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_special.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_srt_single.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fdsu/rtl/pa_fdsu_top.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_dp.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_frbus.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/vendor/opene906/E906_RTL_FACTORY/gen_rtl/fpu/rtl/pa_fpu_src_type.v" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/cf_math_pkg.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_aligner.sv" ]\
+ [file normalize "${core_dir}/rtl/include/cv32e40p_pkg.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_alu.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_alu_div.sv" ]\
+ [file normalize "${core_dir}/rtl/include/cv32e40p_apu_core_pkg.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_apu_disp.sv" ]\
  [file normalize "${origin_dir}/zedboard-wrapper/cv32e40p_clock_gate.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_compressed_decoder.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_controller.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_core.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_cs_registers.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/include/cv32e40p_fpu_pkg.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_decoder.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_ex_stage.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_ff_one.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_fifo.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_pkg.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_fp_wrapper.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_hwloop_regs.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_id_stage.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_if_stage.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_int_controller.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_load_store_unit.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_mult.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_obi_interface.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_popcnt.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_prefetch_buffer.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_prefetch_controller.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_register_file_latch.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_sleep_unit.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_top.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_compressed_decoder.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_controller.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_core.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_cs_registers.sv" ]\
+ [file normalize "${core_dir}/rtl/include/cv32e40p_fpu_pkg.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_decoder.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_ex_stage.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_ff_one.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_fifo.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_pkg.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_fp_wrapper.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_hwloop_regs.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_id_stage.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_if_stage.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_int_controller.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_load_store_unit.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_mult.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_obi_interface.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_popcnt.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_prefetch_buffer.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_prefetch_controller.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_register_file_latch.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_sleep_unit.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_top.sv" ]\
  [file normalize "${origin_dir}/zedboard-wrapper/dmem_bram.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/include/common_cells/registers.svh" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_cast_multi.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_classifier.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_multi.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_th_32.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma_multi.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_noncomp.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_block.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_fmt_slice.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_multifmt_slice.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_rounding.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/fpnew_top.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/include/common_cells/registers.svh" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_cast_multi.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_classifier.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_multi.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_divsqrt_th_32.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_fma_multi.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_noncomp.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_block.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_fmt_slice.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_opgroup_multifmt_slice.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_rounding.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_fpnew/src/fpnew_top.sv" ]\
  [file normalize "${origin_dir}/zedboard-wrapper/imem_bram.sv" ]\
  [file normalize "${origin_dir}/zedboard-wrapper/program_imem.mem" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lzc.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/lzc.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv" ]\
  [file normalize "${origin_dir}/zedboard-wrapper/zedboard_cv32e40p_wrapper.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cb_filter_pkg.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/counter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/delta_counter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/sub_per_hash.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cb_filter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/cv32e40p_register_file_ff.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/addr_decode.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/binary_to_gray.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cdc_2phase.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_2phase.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_gray.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/clk_div.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider_counter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/ecc_pkg.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/ecc_decode.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/ecc_encode.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_detect.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_propagator.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_rx.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_tx.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/exp_backoff.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/fall_through_register.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v1.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v2.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/fifo_v3.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/find_first_one.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_LFSR_8bit.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo_adv.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/gray_to_binary.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/id_queue.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/isochronous_spill_register.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lfsr.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lfsr_16bit.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/lfsr_8bit.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/max_counter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/mv_filter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/onehot_to_bin.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/plru_tree.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/popcount.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/prioarbiter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync_wedge.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/rrarbiter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rstgen.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/rstgen_bypass.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/serial_deglitch.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/shift_reg.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/spill_register.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/deprecated/sram.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter_flushable.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_delay.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_demux.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_fifo.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_filter.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_fork.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_fork_dynamic.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_join.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_mux.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_omega_net.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_register.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_to_mem.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_xbar.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/sync.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/sync_wedge.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/unread.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/src/stream_intf.sv" ]\
- [file normalize "${origin_dir}/cv32e40p/rtl/vendor/pulp_platform_common_cells/include/common_cells/assertions.svh" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/cb_filter_pkg.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/counter.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/delta_counter.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/sub_per_hash.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/cb_filter.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_register_file_ff.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/addr_decode.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/binary_to_gray.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/cdc_2phase.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_2phase.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/cdc_fifo_gray.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/clk_div.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/clock_divider_counter.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/ecc_pkg.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/ecc_decode.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/ecc_encode.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/edge_detect.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/edge_propagator.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_rx.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/edge_propagator_tx.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/exp_backoff.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/fall_through_register.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v1.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/fifo_v2.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/fifo_v3.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/find_first_one.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_LFSR_8bit.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/generic_fifo_adv.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/gray_to_binary.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/id_queue.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/isochronous_spill_register.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/lfsr.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/lfsr_16bit.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/lfsr_8bit.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/max_counter.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/mv_filter.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/onehot_to_bin.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/plru_tree.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/popcount.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/prioarbiter.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/pulp_sync_wedge.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/rrarbiter.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/rstgen.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/rstgen_bypass.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/serial_deglitch.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/shift_reg.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/spill_register.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/deprecated/sram.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_arbiter_flushable.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_delay.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_demux.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_fifo.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_filter.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_fork.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_fork_dynamic.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_join.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_mux.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_omega_net.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_register.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_to_mem.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_xbar.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/sync.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/sync_wedge.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/unread.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/stream_intf.sv" ]\
+ [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/include/common_cells/assertions.svh" ]\
 ]
 set added_files [add_files -fileset sources_1 $files]
 
@@ -1054,7 +1110,7 @@ set_property -name "file_type" -value "Verilog Header" -objects $file_obj
 
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
-set_property -name "include_dirs" -value "[file normalize "$origin_dir/cv32e40p/rtl/include"] [file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_common_cells/include"] [file normalize "$origin_dir/cv32e40p/rtl/vendor/pulp_platform_fpnew/src/common_cells/include"]" -objects $obj
+set_property -name "include_dirs" -value "[file normalize "$core_dir/rtl/include"] [file normalize "$core_dir/rtl/vendor/pulp_platform_common_cells/include"] [file normalize "$core_dir/rtl/vendor/pulp_platform_fpnew/src/common_cells/include"]" -objects $obj
 set_property -name "top" -value "zedboard_cv32e40p_wrapper" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
 

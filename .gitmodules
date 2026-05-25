@@ -1,3 +1,8 @@
-[submodule "cv32e40p"]
-    path = cv32e40p
-    url = https://github.com/TsiantosD/cv32e40p.git
+[submodule "cv32e40p_baseline"]
+	path = cv32e40p_baseline
+	url = https://github.com/TsiantosD/cv32e40p.git
+	branch = master
+[submodule "cv32e40p_no_mul_forwarding"]
+	path = cv32e40p_no_mul_forwarding
+	url = https://github.com/TsiantosD/cv32e40p.git
+	branch = uth_tsiantosd_20260522

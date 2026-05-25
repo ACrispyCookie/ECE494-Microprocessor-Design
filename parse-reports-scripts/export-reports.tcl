@@ -3,19 +3,20 @@
 #     -tclargs <repo_root> <project_xpr> <experiment> <report_type>
 #
 # report_type:
-#   all
+#   all              utilization + timing-summary + worst-paths + path-csv
+#   utilization
+#   timing           timing-summary + worst-paths + path-csv
 #   timing-summary
 #   worst-paths
 #   path-csv
-#   utilization
-#   power
+#   path-distribution (alias for path-csv)
 
 proc usage {} {
     puts "Usage:"
     puts "  vivado -mode batch -source export-reports.tcl -tclargs <repo_root> <project_xpr> <experiment> <report_type>"
     puts ""
     puts "report_type:"
-    puts "  all | timing-summary | worst-paths | path-csv | utilization | power"
+    puts "  all | utilization | timing | timing-summary | worst-paths | path-csv | path-distribution"
 }
 
 if {$argc != 4} {
@@ -59,19 +60,42 @@ proc csv_clean {s} {
 }
 
 proc should_run {requested name} {
-    return [expr {$requested eq "all" || $requested eq $name}]
+    if {$requested eq $name} { return 1 }
+    if {$requested eq "all" && $name ne "power"} { return 1 }
+    if {$requested eq "timing" && ($name eq "timing-summary" || $name eq "worst-paths" || $name eq "path-csv")} { return 1 }
+    if {$requested eq "path-distribution" && $name eq "path-csv"} { return 1 }
+    return 0
 }
 
 open_project $project_xpr
 
-# Reports below require an implemented design.
-# If impl_1 is not complete, this will fail clearly.
+set report_stage "post_implementation"
+
+# Most reports require an implemented design. For utilization-only comparison,
+# fall back to a direct post-synthesis report when impl_1 is not available;
+# this avoids requiring a prior GUI/manual implementation step and also avoids
+# container crashes seen when launching implementation runs under Vivado 2022.2.
 if {[catch {open_run impl_1} err]} {
-    puts "ERROR: Could not open implementation run impl_1."
-    puts "Make sure implementation has completed successfully."
-    puts "Original error:"
-    puts $err
-    error "Cannot export reports without implemented design"
+    if {[should_run $report_type "utilization"] || [should_run $report_type "timing-summary"] || [should_run $report_type "worst-paths"] || [should_run $report_type "path-csv"]} {
+        puts "Implementation run impl_1 is not openable; generating post-synthesis reports instead."
+        puts "Original open_run message:"
+        puts $err
+
+        set srcset [get_filesets sources_1]
+        set top [get_property top $srcset]
+        set part [get_property part [current_project]]
+        puts "Synthesizing top=$top part=$part"
+
+        update_compile_order -fileset sources_1
+        synth_design -top $top -part $part
+        set report_stage "post_synthesis"
+    } else {
+        puts "ERROR: Could not open implementation run impl_1."
+        puts "Make sure implementation has completed successfully."
+        puts "Original error:"
+        puts $err
+        error "Cannot export reports without implemented design"
+    }
 }
 
 # ------------------------------------------------------------
@@ -184,6 +208,7 @@ set fp [open $meta_file "w"]
 
 puts $fp "experiment=$experiment"
 puts $fp "report_type=$report_type"
+puts $fp "report_stage=$report_stage"
 puts $fp "project_xpr=$project_xpr"
 puts $fp "repo_root=$repo_root"
 puts $fp "vivado_version=[version]"
@@ -194,8 +219,12 @@ if {[file exists [file join $repo_root ".git"]]} {
         puts $fp "repo_commit=$git_hash"
     }
 
-    if {![catch {exec git -C [file join $repo_root "cv32e40p"] rev-parse HEAD} core_hash]} {
-        puts $fp "cv32e40p_commit=$core_hash"
+    if {![catch {exec git -C [file join $repo_root "cv32e40p_baseline"] rev-parse HEAD} baseline_hash]} {
+        puts $fp "cv32e40p_baseline_commit=$baseline_hash"
+    }
+
+    if {![catch {exec git -C [file join $repo_root "cv32e40p_no_mul_forwarding"] rev-parse HEAD} modified_hash]} {
+        puts $fp "cv32e40p_no_mul_forwarding_commit=$modified_hash"
     }
 }
 
