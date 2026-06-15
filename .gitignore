@@ -46,6 +46,10 @@ xsim.dir/
 *.vcd
 *.fst
 *.saif
+dmem_dump.txt
+dmem_dump.mem
+build/rtl-tests/
+build/tools/
 
 # Editor / OS files
 .DS_Store

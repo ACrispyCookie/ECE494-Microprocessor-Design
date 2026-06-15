@@ -1,0 +1,345 @@
+#!/usr/bin/env python3
+"""Compile and run CV32E40P RTL assembly tests with sv2v + iverilog.
+
+The flow is intentionally file-based:
+  1. assemble rtl-tests/asm/<test>.S into program_imem.mem;
+  2. convert the selected CV32E40P SystemVerilog sources to Verilog with sv2v;
+  3. compile the converted RTL + generic testbench with iverilog;
+  4. run vvp in a per-test working directory;
+  5. compare dmem_dump.mem against rtl-tests/golden/<test>.py.
+"""
+from __future__ import annotations
+
+import argparse
+import importlib.util
+import os
+import shutil
+import struct
+import subprocess
+import sys
+import urllib.request
+import zipfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+ASM_DIR = ROOT / "rtl-tests" / "asm"
+GOLDEN_DIR = ROOT / "rtl-tests" / "golden"
+TB = ROOT / "rtl-tests" / "tb" / "tb_cv32e40p_rtl.sv"
+BUILD_ROOT = ROOT / "build" / "rtl-tests"
+TOOLS_DIR = ROOT / "build" / "tools"
+SV2V_VERSION = "v0.0.13"
+SV2V_URL = f"https://github.com/zachjs/sv2v/releases/download/{SV2V_VERSION}/sv2v-Linux.zip"
+DONE_ADDR = 0x0001_FFFC
+DONE_MAGIC = 0x5555_AAAA
+
+VERSIONS = {
+    "baseline": "cv32e40p_baseline",
+    "no_mul_forwarding": "cv32e40p_no_mul_forwarding",
+    "no-mul-forwarding": "cv32e40p_no_mul_forwarding",
+}
+
+CV32_FILES = [
+    "rtl/include/cv32e40p_apu_core_pkg.sv",
+    "rtl/include/cv32e40p_fpu_pkg.sv",
+    "rtl/include/cv32e40p_pkg.sv",
+    "rtl/vendor/pulp_platform_common_cells/src/cf_math_pkg.sv",
+    "rtl/vendor/pulp_platform_common_cells/src/lzc.sv",
+    "rtl/vendor/pulp_platform_common_cells/src/rr_arb_tree.sv",
+    "rtl/cv32e40p_alu.sv",
+    "rtl/cv32e40p_alu_div.sv",
+    "rtl/cv32e40p_ff_one.sv",
+    "rtl/cv32e40p_popcnt.sv",
+    "rtl/cv32e40p_compressed_decoder.sv",
+    "rtl/cv32e40p_controller.sv",
+    "rtl/cv32e40p_cs_registers.sv",
+    "rtl/cv32e40p_decoder.sv",
+    "rtl/cv32e40p_int_controller.sv",
+    "rtl/cv32e40p_ex_stage.sv",
+    "rtl/cv32e40p_hwloop_regs.sv",
+    "rtl/cv32e40p_id_stage.sv",
+    "rtl/cv32e40p_if_stage.sv",
+    "rtl/cv32e40p_load_store_unit.sv",
+    "rtl/cv32e40p_mult.sv",
+    "rtl/cv32e40p_prefetch_buffer.sv",
+    "rtl/cv32e40p_prefetch_controller.sv",
+    "rtl/cv32e40p_obi_interface.sv",
+    "rtl/cv32e40p_aligner.sv",
+    "rtl/cv32e40p_sleep_unit.sv",
+    "rtl/cv32e40p_apu_disp.sv",
+    "rtl/cv32e40p_fifo.sv",
+    "rtl/cv32e40p_register_file_ff.sv",
+    "rtl/cv32e40p_core.sv",
+    "rtl/cv32e40p_top.sv",
+]
+
+WRAPPER_FILES = [
+    "zedboard-wrapper/cv32e40p_clock_gate.sv",
+    "zedboard-wrapper/imem_bram.sv",
+    "zedboard-wrapper/dmem_bram.sv",
+    "zedboard-wrapper/zedboard_cv32e40p_wrapper.sv",
+]
+
+
+def run(cmd: list[str], *, cwd: Path = ROOT, timeout: int = 300, capture: bool = False) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        cmd,
+        cwd=cwd,
+        text=True,
+        stdout=subprocess.PIPE if capture else None,
+        stderr=subprocess.STDOUT if capture else None,
+        timeout=timeout,
+        check=True,
+    )
+
+
+def prepend_known_tool_paths() -> None:
+    extra = [
+        ROOT.parent / ".local-bin",
+        ROOT.parent / "tools" / "xpack-riscv-none-elf-gcc-15.2.0-1" / "bin",
+    ]
+    os.environ["PATH"] = os.pathsep.join(str(p) for p in extra if p.exists()) + os.pathsep + os.environ.get("PATH", "")
+
+
+def path_candidates(name: str) -> list[Path]:
+    seen: set[Path] = set()
+    candidates: list[Path] = []
+    for entry in os.environ.get("PATH", "").split(os.pathsep):
+        if not entry:
+            continue
+        candidate = Path(entry) / name
+        if candidate.exists() and os.access(candidate, os.X_OK) and candidate not in seen:
+            seen.add(candidate)
+            candidates.append(candidate)
+    return candidates
+
+
+def tool_runs(path: Path, probe_args: list[str]) -> bool:
+    try:
+        proc = subprocess.run(
+            [str(path), *probe_args],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            timeout=10,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+    return proc.returncode == 0
+
+
+def find_tool(name: str, *, probe_args: list[str] | None = None) -> str:
+    candidates = path_candidates(name)
+    if not candidates:
+        raise SystemExit(f"Required tool not found in PATH: {name}")
+    if probe_args is None:
+        return str(candidates[0])
+    for candidate in candidates:
+        if tool_runs(candidate, probe_args):
+            return str(candidate)
+    tried = ", ".join(str(c) for c in candidates)
+    raise SystemExit(f"Required tool found but none of the candidates ran successfully: {name}. Tried: {tried}")
+
+
+def find_iverilog_vvp_pair() -> tuple[str, str]:
+    """Find an iverilog/vvp pair from the same installation.
+
+    VVP bytecode is not forward/backward compatible across all Icarus versions.
+    Prefer a sibling `vvp` next to each usable `iverilog`; this avoids compiling
+    with a local iverilog wrapper and running with an older system vvp.
+    """
+    for iverilog in path_candidates("iverilog"):
+        if not tool_runs(iverilog, ["-V"]):
+            continue
+        sibling_vvp = iverilog.parent / "vvp"
+        if sibling_vvp.exists() and os.access(sibling_vvp, os.X_OK) and tool_runs(sibling_vvp, ["-V"]):
+            return str(iverilog), str(sibling_vvp)
+
+    # Fallback: both tools run, but may be from different installations.
+    return (
+        find_tool("iverilog", probe_args=["-V"]),
+        find_tool("vvp", probe_args=["-V"]),
+    )
+
+
+def ensure_sv2v() -> str:
+    path = shutil.which("sv2v")
+    if path:
+        return path
+
+    bundled = ROOT.parent / "tools" / "sv2v-0.0.13" / "sv2v-Linux" / "sv2v"
+    if bundled.exists():
+        return str(bundled)
+
+    target = TOOLS_DIR / "sv2v-0.0.13" / "sv2v-Linux" / "sv2v"
+    if not target.exists():
+        target.parent.parent.mkdir(parents=True, exist_ok=True)
+        archive = target.parent.parent / "sv2v-Linux.zip"
+        print(f"[SETUP] Downloading sv2v {SV2V_VERSION} to {archive}")
+        urllib.request.urlretrieve(SV2V_URL, archive)
+        with zipfile.ZipFile(archive) as zf:
+            zf.extractall(target.parent.parent)
+        target.chmod(0o755)
+    return str(target)
+
+
+def assemble_test(test: str, workdir: Path, gcc: str, objcopy: str) -> Path:
+    asm = ASM_DIR / f"{test}.S"
+    if not asm.exists():
+        raise SystemExit(f"Missing assembly test: {asm}")
+
+    elf = workdir / f"{test}.elf"
+    binary = workdir / f"{test}.bin"
+    mem = workdir / "program_imem.mem"
+    linker = workdir / "link.ld"
+    linker.write_text(
+        "ENTRY(_start)\n"
+        "SECTIONS {\n"
+        "  . = 0x00000000;\n"
+        "  .text : { *(.text*) }\n"
+        "  .rodata : { *(.rodata*) }\n"
+        "}\n"
+    )
+
+    run([
+        gcc, "-march=rv32imc", "-mabi=ilp32", "-nostdlib", "-nostartfiles", "-T", str(linker),
+        "-I", str(ASM_DIR), str(asm), "-o", str(elf),
+    ], timeout=120)
+    run([objcopy, "-O", "binary", str(elf), str(binary)], timeout=120)
+
+    data = binary.read_bytes()
+    if len(data) % 4:
+        data += b"\x00" * (4 - (len(data) % 4))
+    with mem.open("w") as f:
+        f.write("@00000000\n")
+        for (word,) in struct.iter_unpack("<I", data):
+            f.write(f"{word:08x}\n")
+    return mem
+
+
+def load_expected(test: str) -> list[int]:
+    golden = GOLDEN_DIR / f"{test}.py"
+    if not golden.exists():
+        raise SystemExit(f"Missing golden model: {golden}")
+    spec = importlib.util.spec_from_file_location(f"golden_{test}", golden)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)  # type: ignore[union-attr]
+    values = module.expected()
+    return [int(v) & 0xFFFF_FFFF for v in values]
+
+
+def build_sim(version: str, core_dir: Path, sv2v: str, iverilog: str, vvp: str, force: bool) -> Path:
+    outdir = BUILD_ROOT / version
+    outdir.mkdir(parents=True, exist_ok=True)
+    converted = outdir / "cv32e40p_wrapper_iverilog.v"
+    sim = outdir / "tb_cv32e40p_rtl.vvp"
+    meta = outdir / "tb_cv32e40p_rtl.tools"
+    tool_meta = f"iverilog={iverilog}\nvvp={vvp}\n"
+    if sim.exists() and meta.exists() and meta.read_text() == tool_meta and not force:
+        return sim
+
+    sources = [str(core_dir / rel) for rel in CV32_FILES] + [str(ROOT / rel) for rel in WRAPPER_FILES]
+    cmd = [
+        sv2v,
+        "--define=SYNTHESIS",
+        "--define=VERILATOR",
+        "-I", str(core_dir / "rtl" / "include"),
+        "-I", str(core_dir / "rtl" / "vendor" / "pulp_platform_common_cells" / "include"),
+        *sources,
+    ]
+    print(f"[BUILD] sv2v {version}")
+    converted.write_text(run(cmd, capture=True, timeout=300).stdout)
+
+    print(f"[BUILD] iverilog {version}")
+    run([iverilog, "-g2012", "-Wall", "-o", str(sim), str(converted), str(TB)], timeout=300)
+    meta.write_text(tool_meta)
+    return sim
+
+
+def read_dmem_dump(path: Path, limit: int | None = None) -> list[int]:
+    words: list[int] = []
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if "x" in line.lower() or "z" in line.lower():
+            words.append(-1)
+        else:
+            words.append(int(line, 16) & 0xFFFF_FFFF)
+        if limit is not None and len(words) >= limit:
+            break
+    return words
+
+
+def run_one(version: str, sim: Path, test: str, gcc: str, objcopy: str, vvp: str, timeout_cycles: int) -> bool:
+    workdir = BUILD_ROOT / version / test
+    if workdir.exists():
+        shutil.rmtree(workdir)
+    workdir.mkdir(parents=True)
+
+    assemble_test(test, workdir, gcc, objcopy)
+    expected = load_expected(test)
+    dump_words = max(64, len(expected))
+    dump = workdir / "dmem_dump.mem"
+
+    print(f"[RUN] {version}/{test}")
+    proc = subprocess.run(
+        [vvp, str(sim), f"+dump_file={dump}", f"+dump_words={dump_words}", f"+timeout_cycles={timeout_cycles}"],
+        cwd=workdir,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        timeout=120,
+    )
+    (workdir / "sim.log").write_text(proc.stdout)
+    if proc.returncode != 0:
+        print(proc.stdout)
+        print(f"[FAIL] {version}/{test}: simulator returned {proc.returncode}")
+        return False
+
+    actual = read_dmem_dump(dump, len(expected))
+    if actual != expected:
+        print(f"[FAIL] {version}/{test}: DMEM signature mismatch")
+        for idx, (act, exp) in enumerate(zip(actual, expected)):
+            marker = "" if act == exp else "  <-- mismatch"
+            print(f"  word[{idx:02d}] actual=0x{act:08x} expected=0x{exp:08x}{marker}")
+        if len(actual) != len(expected):
+            print(f"  actual length={len(actual)} expected length={len(expected)}")
+        return False
+
+    print(f"[PASS] {version}/{test}")
+    return True
+
+
+def parse_args() -> argparse.Namespace:
+    tests = sorted(p.stem for p in ASM_DIR.glob("*.S") if p.name != "test_macros.S")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--version", "--versions", nargs="+", default=["baseline", "no_mul_forwarding"], choices=sorted(VERSIONS))
+    parser.add_argument("--test", "--tests", nargs="+", default=tests, choices=tests)
+    parser.add_argument("--force-rebuild", action="store_true", help="Re-run sv2v and iverilog even if vvp already exists")
+    parser.add_argument("--timeout-cycles", type=int, default=2000)
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    prepend_known_tool_paths()
+    sv2v = ensure_sv2v()
+    iverilog, vvp = find_iverilog_vvp_pair()
+    gcc = find_tool("riscv-none-elf-gcc", probe_args=["--version"])
+    objcopy = find_tool("riscv-none-elf-objcopy", probe_args=["--version"])
+    print(f"[TOOLS] iverilog={iverilog}")
+    print(f"[TOOLS] vvp={vvp}")
+
+    all_ok = True
+    for requested_version in args.version:
+        version = requested_version.replace("-", "_")
+        core_dir = ROOT / VERSIONS[requested_version]
+        sim = build_sim(version, core_dir, sv2v, iverilog, vvp, args.force_rebuild)
+        for test in args.test:
+            all_ok &= run_one(version, sim, test, gcc, objcopy, vvp, args.timeout_cycles)
+
+    return 0 if all_ok else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
