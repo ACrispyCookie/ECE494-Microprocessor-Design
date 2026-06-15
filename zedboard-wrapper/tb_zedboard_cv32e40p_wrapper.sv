@@ -78,8 +78,8 @@ module tb_zedboard_cv32e40p_wrapper;
                 dut.data_gnt &&
                 dut.data_we &&
                 dut.data_be    == 4'hf &&
-                dut.data_addr  == 32'h0001_0000 &&
-                dut.data_wdata == 32'h1234_5678) begin
+                dut.data_addr  == 32'h0000_0000 &&
+                dut.data_wdata == 32'h0000_0083) begin
 
                 saw_expected_store = 1'b1;
 
@@ -122,8 +122,8 @@ module tb_zedboard_cv32e40p_wrapper;
                 dut.dmem_i.mem0[0]
             };
 
-            if (dmem_word0 !== 32'h1234_5678) begin
-                $display("[FAIL] DMEM[0] = 0x%08h, expected 0x12345678", dmem_word0);
+            if (dmem_word0 !== 32'h0000_0083) begin
+                $display("[FAIL] DMEM[0] = 0x%08h, expected 0x00000083", dmem_word0);
                 $fatal(1);
             end else begin
                 $display("[PASS] DMEM[0] = 0x%08h", dmem_word0);

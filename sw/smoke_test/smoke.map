@@ -1,34 +1,36 @@
 
+There are no discarded input sections
+
 Memory Configuration
 
 Name             Origin             Length             Attributes
-IMEM             0x0000000000000000 0x0000000000004000 xr
-DMEM             0x0000000000010000 0x0000000000004000 xrw
-*default*        0x0000000000000000 0xffffffffffffffff
+IMEM             0x00000000         0x00004000         xr
+DMEM             0x00010000         0x00004000         xrw
+*default*        0x00000000         0xffffffff
 
 Linker script and memory map
 
-LOAD /tmp/cc4pmD4c.o
+LOAD /tmp/ccIJ8Twb.o
 
-.text           0x0000000000000000       0x14
+.text           0x00000000       0x1c
  *(.text*)
- .text          0x0000000000000000       0x14 /tmp/cc4pmD4c.o
-                0x0000000000000000                _start
+ .text          0x00000000       0x1c /tmp/ccIJ8Twb.o
+                0x00000000                _start
 
 .rodata
  *(.rodata*)
 
-.data           0x0000000000010000        0x0
+.data           0x00010000        0x0
  *(.data*)
- .data          0x0000000000010000        0x0 /tmp/cc4pmD4c.o
+ .data          0x00010000        0x0 /tmp/ccIJ8Twb.o
 
-.bss            0x0000000000010000        0x0
+.bss            0x00010000        0x0
  *(.bss*)
- .bss           0x0000000000010000        0x0 /tmp/cc4pmD4c.o
+ .bss           0x00010000        0x0 /tmp/ccIJ8Twb.o
  *(COMMON)
-OUTPUT(/home/tsiantosd/Desktop/TsiantosD/ECE494-Microprocessor-Design/sw/smoke_test/smoke.elf elf32-littleriscv)
+OUTPUT(/home/jason/Desktop/ECE494-Microprocessor-Design/sw/smoke_test/smoke.elf elf32-littleriscv)
 
 .riscv.attributes
-                0x0000000000000000       0x1f
+                0x00000000       0x28
  .riscv.attributes
-                0x0000000000000000       0x1f /tmp/cc4pmD4c.o
+                0x00000000       0x28 /tmp/ccIJ8Twb.o

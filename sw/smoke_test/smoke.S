@@ -4,10 +4,22 @@
 .option norvc
 
 _start:
-    lui  x1, 0x00010        # x1 = 0x00010000, base of DMEM
-    lui  x2, 0x12345        # x2 = 0x12345000
-    addi x2, x2, 0x678      # x2 = 0x12345678
-    sw   x2, 0(x1)          # DMEM[0] = 0x12345678
+    # Producer: exercise the M extension multiplier.
+    addi x2, x0, 7
+    addi x3, x0, 9
+    mul  x4, x2, x3        # x4 = 63
 
-loop:
-    jal  x0, loop
+    # Immediate consumer. This is the hazard the no-MUL-forwarding solution
+    # must handle by stalling one cycle and then using WB forwarding.
+    addi x5, x4, 5         # x5 = 68
+
+    # Second dependent consumer to make sure the result is architecturally
+    # written/forwarded, not only visible for one instruction.
+    add  x6, x5, x4        # x6 = 131 = 0x83
+
+    # Store to DMEM word 0.  Avoid using a separate base register so this smoke
+    # test isolates the multiplier dependency path.
+    sw   x6, 0(x0)
+
+1:
+    j 1b

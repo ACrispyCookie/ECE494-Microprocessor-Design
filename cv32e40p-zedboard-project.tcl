@@ -524,7 +524,7 @@ set files [list \
  [file normalize "${core_dir}/rtl/cv32e40p_popcnt.sv" ]\
  [file normalize "${core_dir}/rtl/cv32e40p_prefetch_buffer.sv" ]\
  [file normalize "${core_dir}/rtl/cv32e40p_prefetch_controller.sv" ]\
- [file normalize "${core_dir}/rtl/cv32e40p_register_file_latch.sv" ]\
+ [file normalize "${core_dir}/rtl/cv32e40p_register_file_ff.sv" ]\
  [file normalize "${core_dir}/rtl/cv32e40p_sleep_unit.sv" ]\
  [file normalize "${core_dir}/rtl/cv32e40p_top.sv" ]\
  [file normalize "${origin_dir}/zedboard-wrapper/dmem_bram.sv" ]\
@@ -551,7 +551,6 @@ set files [list \
  [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/delta_counter.sv" ]\
  [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/sub_per_hash.sv" ]\
  [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/cb_filter.sv" ]\
- [file normalize "${core_dir}/rtl/cv32e40p_register_file_ff.sv" ]\
  [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/addr_decode.sv" ]\
  [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/binary_to_gray.sv" ]\
  [file normalize "${core_dir}/rtl/vendor/pulp_platform_common_cells/src/cdc_2phase.sv" ]\
@@ -739,7 +738,7 @@ set file "rtl/cv32e40p_prefetch_controller.sv"
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
-set file "rtl/cv32e40p_register_file_latch.sv"
+set file "rtl/cv32e40p_register_file_ff.sv"
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 

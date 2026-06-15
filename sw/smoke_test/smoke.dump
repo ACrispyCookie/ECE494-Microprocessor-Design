@@ -1,14 +1,14 @@
 
-/home/tsiantosd/Desktop/TsiantosD/ECE494-Microprocessor-Design/sw/smoke_test/smoke.elf:     file format elf32-littleriscv
+/home/jason/Desktop/ECE494-Microprocessor-Design/sw/smoke_test/smoke.elf:     file format elf32-littleriscv
 
 
 Disassembly of section .text:
 
 00000000 <_start>:
-   0:	000100b7          	lui	x1,0x10
-   4:	12345137          	lui	x2,0x12345
-   8:	67810113          	addi	x2,x2,1656 # 12345678 <loop+0x12345668>
-   c:	0020a023          	sw	x2,0(x1) # 10000 <loop+0xfff0>
-
-00000010 <loop>:
-  10:	0000006f          	jal	x0,10 <loop>
+   0:	00700113          	addi	x2,x0,7
+   4:	00900193          	addi	x3,x0,9
+   8:	02310233          	mul	x4,x2,x3
+   c:	00520293          	addi	x5,x4,5 # 5 <_start+0x5>
+  10:	00428333          	add	x6,x5,x4
+  14:	00602023          	sw	x6,0(x0) # 0 <_start>
+  18:	0000006f          	jal	x0,18 <_start+0x18>
