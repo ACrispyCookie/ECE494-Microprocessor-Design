@@ -1,0 +1,3 @@
+experiment,period_ns,constraint_mhz,wns_ns,achieved_period_ns,estimated_fmax_mhz,lut,ff,bram,dsp,power_w,dynamic_w,route_status,crit_slack_ns,crit_datapath_ns,crit_src,crit_dst
+baseline,15.0,66.667,0.294,14.706,67.99945600435197,4176.0,2058.0,4.5,5.0,0.116,0.009,   ------------------------------------------- : ----------- :,,,,
+no-mul-forwarding,15.0,66.667,0.546,14.454,69.18500069185001,4129.0,2092.0,4.5,5.0,0.115,0.009,   ------------------------------------------- : ----------- :,,,,

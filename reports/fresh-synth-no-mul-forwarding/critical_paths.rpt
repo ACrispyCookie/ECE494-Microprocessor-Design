@@ -1,0 +1,1117 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
+| Date         : Fri Jun 12 16:07:44 2026
+| Host         : main running 64-bit Ubuntu 24.04.4 LTS
+| Command      : report_timing -delay_type max -sort_by slack -max_paths 20 -nworst 1 -path_type full_clock_expanded -file /home/jason/Desktop/ECE494-Microprocessor-Design/reports/fresh-synth-no-mul-forwarding/critical_paths.rpt
+| Design       : zedboard_cv32e40p_wrapper
+| Device       : 7z020-clg484
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Synthesized
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[0]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[0]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[0]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[10]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[10]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[10]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[10]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[11]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[11]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[11]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[11]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[12]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[12]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[12]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[12]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[13]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[13]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[13]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[13]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[14]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[14]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[14]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[14]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[15]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[15]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[15]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[15]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[16]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[16]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[16]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[16]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[17]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[17]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[17]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[17]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[18]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[18]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[18]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[18]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[19]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][19]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[19]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[19]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[19]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][19]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][19]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][19]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][19]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][1]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[1]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[1]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][1]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][1]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][1]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[20]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][20]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[20]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[20]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[20]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][20]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][20]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][20]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][20]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[21]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][21]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[21]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[21]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[21]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][21]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][21]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][21]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][21]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[22]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][22]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[22]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[22]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[22]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][22]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][22]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][22]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][22]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[23]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][23]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[23]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[23]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[23]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][23]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][23]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][23]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][23]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[24]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][24]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[24]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[24]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[24]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][24]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][24]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][24]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][24]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[25]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][25]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[25]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[25]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[25]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][25]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][25]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][25]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][25]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[26]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][26]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[26]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[26]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[26]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][26]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][26]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][26]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][26]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+Slack (MET) :             0.000ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[27]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][27]/D
+                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.709ns
+    Source Clock Delay      (SCD):    2.975ns
+    Clock Pessimism Removal (CPR):    0.121ns
+  Time Borrowing:         
+    Nominal pulse width:              7.500ns
+    Library setup time:               0.048ns
+    Computed max time borrow:         7.548ns
+    Time borrowed from endpoint:      1.753ns
+    Time given to startpoint:         1.753ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/CLK
+                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[27]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[27]/Q
+                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[27]
+                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][27]_i_1/O
+                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][27]_i_1_n_0
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][27]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2193, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/CLK
+                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][27]/G
+                         clock pessimism              0.121     2.830    
+                         time borrowed                1.753     4.583    
+  -------------------------------------------------------------------
+                         required time                          4.583    
+                         arrival time                          -4.583    
+  -------------------------------------------------------------------
+                         slack                                  0.000    
+
+
+
+

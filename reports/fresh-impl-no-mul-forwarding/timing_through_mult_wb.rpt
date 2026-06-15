@@ -1,0 +1,79 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
+| Date         : Fri Jun 12 17:33:28 2026
+| Host         : main running 64-bit Ubuntu 24.04.4 LTS
+| Command      : report_timing -through [get_nets -hier -quiet *mult_wb*] -max_paths 20 -path_type summary -file /home/jason/Desktop/ECE494-Microprocessor-Design/reports/fresh-impl-no-mul-forwarding/timing_through_mult_wb.rpt
+| Design       : zedboard_cv32e40p_wrapper
+| Device       : 7z020-clg484
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Startpoint                     Endpoint                       Slack(ns)     
+----------------------------------------------------------------------------
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[29]/D
+                                                              2.071         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[28]/D
+                                                              2.181         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[30]/D
+                                                              2.181         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[31]/D
+                                                              2.229         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[25]/D
+                                                              2.273         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[24]/D
+                                                              2.298         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[27]/D
+                                                              2.346         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[26]/D
+                                                              2.404         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[21]/D
+                                                              2.424         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[22]/D
+                                                              2.625         
+core_i/core_i/ex_stage_i/mult_wb_valid_q_reg/C
+                               imem_i/rdata_o_reg/ADDRARDADDR[6]
+                                                              2.656         
+core_i/core_i/ex_stage_i/mult_wb_valid_q_reg/C
+                               imem_i/rdata_o_reg/ADDRBWRADDR[6]
+                                                              2.659         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[23]/D
+                                                              2.662         
+core_i/core_i/ex_stage_i/mult_wb_valid_q_reg/C
+                               imem_i/rdata_o_reg/ADDRARDADDR[4]
+                                                              2.733         
+core_i/core_i/ex_stage_i/mult_wb_valid_q_reg/C
+                               imem_i/rdata_o_reg/ADDRBWRADDR[4]
+                                                              2.736         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[20]/D
+                                                              2.738         
+core_i/core_i/ex_stage_i/mult_wb_valid_q_reg/C
+                               imem_i/rdata_o_reg/ADDRARDADDR[5]
+                                                              2.856         
+core_i/core_i/ex_stage_i/mult_wb_valid_q_reg/C
+                               imem_i/rdata_o_reg/ADDRBWRADDR[5]
+                                                              2.859         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[19]/D
+                                                              3.034         
+core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[9]/C
+                               core_i/core_i/ex_stage_i/mult_wb_wdata_q_reg[18]/D
+                                                              3.202         
+
+
+

@@ -1,0 +1,79 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
+| Date         : Fri Jun 12 17:33:28 2026
+| Host         : main running 64-bit Ubuntu 24.04.4 LTS
+| Command      : report_timing -through [get_nets -hier -quiet *regfile_alu_wdata_fw*] -max_paths 20 -path_type summary -file /home/jason/Desktop/ECE494-Microprocessor-Design/reports/fresh-impl-no-mul-forwarding/timing_through_regfile_alu_wdata_fw.rpt
+| Design       : zedboard_cv32e40p_wrapper
+| Device       : 7z020-clg484
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Startpoint                     Endpoint                       Slack(ns)     
+----------------------------------------------------------------------------
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[1]/C
+                               core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[24]/D
+                                                              0.546         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[6]/D
+                                                              0.596         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[1]/C
+                               core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[24]/D
+                                                              0.690         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[1]/C
+                               core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[22]/D
+                                                              0.693         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[25]/D
+                                                              0.717         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[25]/D
+                                                              0.728         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[1]/C
+                               core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[22]/D
+                                                              0.735         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[25]/D
+                                                              0.763         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[5]/D
+                                                              0.763         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[6]/D
+                                                              0.766         
+core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[2]/C
+                               core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[30]/D
+                                                              0.781         
+core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[2]/C
+                               core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[30]/D
+                                                              0.800         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[1]/C
+                               core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[22]/D
+                                                              0.807         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[25]/D
+                                                              0.820         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[19]/D
+                                                              0.837         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[13]/D
+                                                              0.837         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[25]/D
+                                                              0.848         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[5]/D
+                                                              0.850         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[4]/C
+                               core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[5]/D
+                                                              0.853         
+core_i/core_i/id_stage_i/alu_operator_ex_o_reg[5]/C
+                               core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[8]/D
+                                                              0.858         
+
+
+
