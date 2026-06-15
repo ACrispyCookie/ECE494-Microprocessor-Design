@@ -44,6 +44,14 @@ module dmem_bram_be #(
         integer i;
         logic [31:0] tmp [0:DEPTH-1];
 
+        for (i = 0; i < DEPTH; i = i + 1) begin
+            mem0[i] = 8'h00;
+            mem1[i] = 8'h00;
+            mem2[i] = 8'h00;
+            mem3[i] = 8'h00;
+            tmp[i]  = 32'h0000_0000;
+        end
+
         if (INIT_FILE != "") begin
             $readmemh(INIT_FILE, tmp);
 

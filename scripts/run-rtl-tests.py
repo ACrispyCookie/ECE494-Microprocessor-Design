@@ -6,12 +6,12 @@ The flow is intentionally file-based:
   2. convert the selected CV32E40P SystemVerilog sources to Verilog with sv2v;
   3. compile the converted RTL + generic testbench with iverilog;
   4. run vvp in a per-test working directory;
-  5. compare dmem_dump.mem against rtl-tests/golden/<test>.py.
+  5. generate expected_dmem.mem/expected_regfile.mem from the assembled program;
+  6. let the RTL testbench compare final DMEM and regfile against those dumps.
 """
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import os
 import shutil
 import struct
@@ -31,6 +31,7 @@ SV2V_VERSION = "v0.0.13"
 SV2V_URL = f"https://github.com/zachjs/sv2v/releases/download/{SV2V_VERSION}/sv2v-Linux.zip"
 DONE_ADDR = 0x0001_FFFC
 DONE_MAGIC = 0x5555_AAAA
+DMEM_WORDS = 4096
 
 VERSIONS = {
     "baseline": "cv32e40p_baseline",
@@ -200,7 +201,7 @@ def assemble_test(test: str, workdir: Path, gcc: str, objcopy: str) -> Path:
     )
 
     run([
-        gcc, "-march=rv32imc", "-mabi=ilp32", "-nostdlib", "-nostartfiles", "-T", str(linker),
+        gcc, "-march=rv32im", "-mabi=ilp32", "-nostdlib", "-nostartfiles", "-T", str(linker),
         "-I", str(ASM_DIR), str(asm), "-o", str(elf),
     ], timeout=120)
     run([objcopy, "-O", "binary", str(elf), str(binary)], timeout=120)
@@ -212,19 +213,24 @@ def assemble_test(test: str, workdir: Path, gcc: str, objcopy: str) -> Path:
         f.write("@00000000\n")
         for (word,) in struct.iter_unpack("<I", data):
             f.write(f"{word:08x}\n")
-    return mem
+    return elf
 
 
-def load_expected(test: str) -> list[int]:
-    golden = GOLDEN_DIR / f"{test}.py"
-    if not golden.exists():
-        raise SystemExit(f"Missing golden model: {golden}")
-    spec = importlib.util.spec_from_file_location(f"golden_{test}", golden)
-    assert spec and spec.loader
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)  # type: ignore[union-attr]
-    values = module.expected()
-    return [int(v) & 0xFFFF_FFFF for v in values]
+def generate_expected(elf: Path, workdir: Path, objdump: str) -> tuple[Path, Path]:
+    generator = GOLDEN_DIR / "generate_expected.py"
+    if not generator.exists():
+        raise SystemExit(f"Missing golden generator: {generator}")
+    run([
+        sys.executable, str(generator),
+        "--elf", str(elf),
+        "--objdump", objdump,
+        "--out-dir", str(workdir),
+    ], timeout=120)
+    expected_dmem = workdir / "expected_dmem.mem"
+    expected_regfile = workdir / "expected_regfile.mem"
+    if not expected_dmem.exists() or not expected_regfile.exists():
+        raise SystemExit(f"Golden generator did not write expected dumps in {workdir}")
+    return expected_dmem, expected_regfile
 
 
 def build_sim(version: str, core_dir: Path, sv2v: str, iverilog: str, vvp: str, force: bool) -> Path:
@@ -255,35 +261,29 @@ def build_sim(version: str, core_dir: Path, sv2v: str, iverilog: str, vvp: str, 
     return sim
 
 
-def read_dmem_dump(path: Path, limit: int | None = None) -> list[int]:
-    words: list[int] = []
-    for line in path.read_text().splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        if "x" in line.lower() or "z" in line.lower():
-            words.append(-1)
-        else:
-            words.append(int(line, 16) & 0xFFFF_FFFF)
-        if limit is not None and len(words) >= limit:
-            break
-    return words
-
-
-def run_one(version: str, sim: Path, test: str, gcc: str, objcopy: str, vvp: str, timeout_cycles: int) -> bool:
+def run_one(version: str, sim: Path, test: str, gcc: str, objcopy: str, objdump: str, vvp: str, timeout_cycles: int) -> bool:
     workdir = BUILD_ROOT / version / test
     if workdir.exists():
         shutil.rmtree(workdir)
     workdir.mkdir(parents=True)
 
-    assemble_test(test, workdir, gcc, objcopy)
-    expected = load_expected(test)
-    dump_words = max(64, len(expected))
+    elf = assemble_test(test, workdir, gcc, objcopy)
+    expected_dmem, expected_regfile = generate_expected(elf, workdir, objdump)
     dump = workdir / "dmem_dump.mem"
+    reg_dump = workdir / "regfile_dump.mem"
 
     print(f"[RUN] {version}/{test}")
     proc = subprocess.run(
-        [vvp, str(sim), f"+dump_file={dump}", f"+dump_words={dump_words}", f"+timeout_cycles={timeout_cycles}"],
+        [
+            vvp, str(sim),
+            f"+dump_file={dump}",
+            f"+regfile_dump_file={reg_dump}",
+            f"+expected_dmem_file={expected_dmem}",
+            f"+expected_regfile_file={expected_regfile}",
+            f"+dump_words={DMEM_WORDS}",
+            f"+dmem_check_words={DMEM_WORDS}",
+            f"+timeout_cycles={timeout_cycles}",
+        ],
         cwd=workdir,
         text=True,
         stdout=subprocess.PIPE,
@@ -294,16 +294,6 @@ def run_one(version: str, sim: Path, test: str, gcc: str, objcopy: str, vvp: str
     if proc.returncode != 0:
         print(proc.stdout)
         print(f"[FAIL] {version}/{test}: simulator returned {proc.returncode}")
-        return False
-
-    actual = read_dmem_dump(dump, len(expected))
-    if actual != expected:
-        print(f"[FAIL] {version}/{test}: DMEM signature mismatch")
-        for idx, (act, exp) in enumerate(zip(actual, expected)):
-            marker = "" if act == exp else "  <-- mismatch"
-            print(f"  word[{idx:02d}] actual=0x{act:08x} expected=0x{exp:08x}{marker}")
-        if len(actual) != len(expected):
-            print(f"  actual length={len(actual)} expected length={len(expected)}")
         return False
 
     print(f"[PASS] {version}/{test}")
@@ -327,6 +317,7 @@ def main() -> int:
     iverilog, vvp = find_iverilog_vvp_pair()
     gcc = find_tool("riscv-none-elf-gcc", probe_args=["--version"])
     objcopy = find_tool("riscv-none-elf-objcopy", probe_args=["--version"])
+    objdump = find_tool("riscv-none-elf-objdump", probe_args=["--version"])
     print(f"[TOOLS] iverilog={iverilog}")
     print(f"[TOOLS] vvp={vvp}")
 
@@ -336,7 +327,7 @@ def main() -> int:
         core_dir = ROOT / VERSIONS[requested_version]
         sim = build_sim(version, core_dir, sv2v, iverilog, vvp, args.force_rebuild)
         for test in args.test:
-            all_ok &= run_one(version, sim, test, gcc, objcopy, vvp, args.timeout_cycles)
+            all_ok &= run_one(version, sim, test, gcc, objcopy, objdump, vvp, args.timeout_cycles)
 
     return 0 if all_ok else 1
 
