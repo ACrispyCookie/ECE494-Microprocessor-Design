@@ -99,6 +99,18 @@ def hierarchy_category(pin: str) -> str:
     return parts[0]
 
 
+def parse_metadata(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    metadata: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        metadata[key.strip()] = value.strip()
+    return metadata
+
+
 def parse_timing_summary(path: Path) -> dict[str, float | None]:
     """Extract top-level timing numbers from Vivado timing_summary_1000_paths.rpt."""
     result: dict[str, float | None] = {
@@ -138,6 +150,7 @@ def metric_rows(paths_by_exp: dict[str, list[TimingPath]], reports_dir: Path) ->
         valid_slack = [p for p in paths if p.slack is not None]
         crit = min(valid_slack, key=lambda p: p.slack if p.slack is not None else float("inf")) if valid_slack else paths[0]
         summary = parse_timing_summary(reports_dir / exp / "timing_summary_1000_paths.rpt")
+        metadata = parse_metadata(reports_dir / exp / "metadata.txt")
         wns = summary["summary_wns"] if summary["summary_wns"] is not None else crit.slack
         clock_period = summary["clock_period"]
         clock_freq = summary["clock_frequency_mhz"]
@@ -154,6 +167,7 @@ def metric_rows(paths_by_exp: dict[str, list[TimingPath]], reports_dir: Path) ->
         rows.append(
             {
                 "experiment": exp,
+                "report_stage": metadata.get("report_stage", ""),
                 "num_paths": str(len(paths)),
                 "wns_ns": "" if wns is None else f"{wns:.3f}",
                 "critical_requirement_ns": "" if requirement is None else f"{requirement:.3f}",
@@ -178,6 +192,7 @@ def write_metrics(rows: list[dict[str, str]], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fields = [
         "experiment",
+        "report_stage",
         "num_paths",
         "wns_ns",
         "critical_requirement_ns",

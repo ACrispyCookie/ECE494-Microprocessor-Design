@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import math
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -36,6 +37,7 @@ RESOURCE_ORDER = ("Slice LUTs", "Slice Registers", "DSPs", "Block RAM Tile")
 @dataclass(frozen=True)
 class UtilRow:
     experiment: str
+    report_stage: str
     resource: str
     label: str
     used: float
@@ -53,10 +55,24 @@ def parse_number(value: str) -> float | None:
         return None
 
 
+def parse_metadata(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    metadata: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        metadata[key.strip()] = value.strip()
+    return metadata
+
+
 def parse_utilization_report(path: Path, experiment: str) -> list[UtilRow]:
     if not path.exists():
         raise FileNotFoundError(f"missing utilization report for {experiment}: {path}")
 
+    metadata = parse_metadata(path.parent / "metadata.txt")
+    report_stage = metadata.get("report_stage", "")
     found: dict[str, UtilRow] = {}
     for line in path.read_text(errors="replace").splitlines():
         if not line.startswith("|"):
@@ -76,6 +92,7 @@ def parse_utilization_report(path: Path, experiment: str) -> list[UtilRow]:
             continue
         found[site_type] = UtilRow(
             experiment=experiment,
+            report_stage=report_stage,
             resource=site_type,
             label=RESOURCE_LABELS[site_type],
             used=used_num,
@@ -92,11 +109,12 @@ def parse_utilization_report(path: Path, experiment: str) -> list[UtilRow]:
 def write_csv(rows: Iterable[UtilRow], csv_path: Path) -> None:
     csv_path.parent.mkdir(parents=True, exist_ok=True)
     with csv_path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        writer.writerow(["experiment", "resource", "label", "used", "available", "util_percent"])
+        writer = csv.writer(f, lineterminator="\n")
+        writer.writerow(["experiment", "report_stage", "resource", "label", "used", "available", "util_percent"])
         for row in rows:
             writer.writerow([
                 row.experiment,
+                row.report_stage,
                 row.resource,
                 row.label,
                 f"{row.used:g}",
@@ -107,6 +125,18 @@ def write_csv(rows: Iterable[UtilRow], csv_path: Path) -> None:
 
 def fmt_num(value: float) -> str:
     return str(int(value)) if value.is_integer() else f"{value:g}"
+
+
+def fmt_percent(value: float) -> str:
+    return f"{value:.2f}".rstrip("0").rstrip(".") + "%"
+
+
+def utilization_percent(row: UtilRow) -> float:
+    if row.util_percent is not None:
+        return row.util_percent
+    if row.available and row.available > 0:
+        return 100.0 * row.used / row.available
+    raise ValueError(f"missing utilization percentage/available count for {row.experiment} {row.resource}")
 
 
 def svg_escape(text: str) -> str:
@@ -134,10 +164,11 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
     plot_w = width - margin_left - margin_right
     plot_h = height - margin_top - margin_bottom
 
-    max_used = max(row.used for row in rows) if rows else 1.0
-    max_used = max(max_used, 1.0)
-    # Add some headroom for labels.
-    y_max = max_used * 1.15
+    utilization_values = [utilization_percent(row) for row in rows]
+    max_util = max(utilization_values) if utilization_values else 1.0
+    max_util = max(max_util, 1.0)
+    # Add headroom for labels and round up to a readable percent tick.
+    y_max = max(10.0, math.ceil(max_util * 1.15))
 
     colors = {
         "baseline": "#2563eb",
@@ -167,16 +198,16 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
     parts.append('<rect width="100%" height="100%" fill="#ffffff"/>')
     parts.append('<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:28px;font-weight:700}.subtitle{font-size:14px;fill:#4b5563}.axis{font-size:13px;fill:#374151}.tick{font-size:12px;fill:#6b7280}.label{font-size:12px;fill:#111827}.legend{font-size:14px}.grid{stroke:#e5e7eb;stroke-width:1}.axisline{stroke:#374151;stroke-width:1.5}</style>')
     parts.append(f'<text class="title" x="{width/2}" y="38" text-anchor="middle">Vivado Utilization Comparison</text>')
-    parts.append(f'<text class="subtitle" x="{width/2}" y="62" text-anchor="middle">Resource usage parsed from reports/*/utilization.rpt</text>')
+    parts.append(f'<text class="subtitle" x="{width/2}" y="62" text-anchor="middle">Resource utilization percentage parsed from reports/*/utilization.rpt</text>')
 
     # Grid and y-axis.
     for tick in ticks:
         y = y_for(tick)
         parts.append(f'<line class="grid" x1="{margin_left}" y1="{y:.1f}" x2="{width-margin_right}" y2="{y:.1f}"/>')
-        parts.append(f'<text class="tick" x="{margin_left-10}" y="{y+4:.1f}" text-anchor="end">{fmt_num(tick)}</text>')
+        parts.append(f'<text class="tick" x="{margin_left-10}" y="{y+4:.1f}" text-anchor="end">{fmt_percent(tick)}</text>')
     parts.append(f'<line class="axisline" x1="{margin_left}" y1="{margin_top}" x2="{margin_left}" y2="{margin_top+plot_h}"/>')
     parts.append(f'<line class="axisline" x1="{margin_left}" y1="{margin_top+plot_h}" x2="{width-margin_right}" y2="{margin_top+plot_h}"/>')
-    parts.append(f'<text class="axis" x="28" y="{margin_top+plot_h/2}" text-anchor="middle" transform="rotate(-90 28 {margin_top+plot_h/2})">Used resources</text>')
+    parts.append(f'<text class="axis" x="28" y="{margin_top+plot_h/2}" text-anchor="middle" transform="rotate(-90 28 {margin_top+plot_h/2})">Utilization (%)</text>')
 
     # Bars.
     for i, resource in enumerate(resources):
@@ -187,12 +218,12 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
             if row is None:
                 continue
             x = x_for(i, j)
-            y = y_for(row.used)
+            util_pct = utilization_percent(row)
+            y = y_for(util_pct)
             h = margin_top + plot_h - y
             color = colors.get(experiment, fallback_colors[j % len(fallback_colors)])
             parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}" rx="3"/>')
-            pct = "" if row.util_percent is None else f" ({row.util_percent:g}%)"
-            parts.append(f'<text class="label" x="{x+bar_w/2:.1f}" y="{y-7:.1f}" text-anchor="middle">{fmt_num(row.used)}{svg_escape(pct)}</text>')
+            parts.append(f'<text class="label" x="{x+bar_w/2:.1f}" y="{y-7:.1f}" text-anchor="middle">{fmt_percent(util_pct)}</text>')
 
     # Legend.
     legend_x = margin_left
