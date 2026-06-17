@@ -7,11 +7,14 @@ CORE_DIR_no-mul-forwarding := cv32e40p_no_mul_forwarding
 CORE_DIR ?= $(CORE_DIR_$(EXPERIMENT))
 BUILD_DIR ?= build/vivado-$(EXPERIMENT)
 PROJECT_NAME ?= cv32e40p-zedboard-project
+CLOCK_PERIOD_baseline := 15.000
+CLOCK_PERIOD_no-mul-forwarding := 14.000
+CLOCK_PERIOD ?= $(CLOCK_PERIOD_$(EXPERIMENT))
 
 .PHONY: all baseline no-mul-forwarding rtl-tests rtl-tests-baseline rtl-tests-no-mul-forwarding reports utilization-reports utilization-plots timing-reports timing-plots clean
 
 all:
-	$(VIVADO) -mode batch -source cv32e40p-zedboard-project.tcl -tclargs --experiment $(EXPERIMENT) --core_dir $(CORE_DIR) --build_dir $(BUILD_DIR) --project_name $(PROJECT_NAME)
+	$(VIVADO) -mode batch -source cv32e40p-zedboard-project.tcl -tclargs --experiment $(EXPERIMENT) --core_dir $(CORE_DIR) --build_dir $(BUILD_DIR) --project_name $(PROJECT_NAME) --clock_period $(CLOCK_PERIOD)
 
 baseline:
 	$(MAKE) EXPERIMENT=baseline all

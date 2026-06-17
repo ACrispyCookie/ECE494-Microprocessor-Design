@@ -1,36 +1,35 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
-| Date         : Mon May 25 15:02:44 2026
-| Host         : 65371a248dc7 running 64-bit unknown
-| Command      : report_timing -delay_type max -sort_by slack -max_paths 10 -nworst 1 -path_type full_clock_expanded -file /workspace/ECE494-Microprocessor-Design/reports/baseline/critical_paths_top10.rpt
+| Date         : Wed Jun 17 13:24:37 2026
+| Host         : TsiantosDPC running 64-bit Ubuntu 22.04.5 LTS
+| Command      : report_timing -delay_type max -sort_by slack -max_paths 10 -nworst 1 -path_type full_clock_expanded -file /home/tsiantosd/Desktop/TsiantosD/HERMES/workspace/ECE494-Microprocessor-Design/reports/baseline/critical_paths_top10.rpt
 | Design       : zedboard_cv32e40p_wrapper
 | Device       : 7z020-clg484
 | Speed File   : -1  PRODUCTION 1.12 2019-11-22
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Timing Report
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[0]/C
+Slack (MET) :             0.467ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[31]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[8]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.397ns  (logic 2.385ns (16.566%)  route 12.012ns (83.434%))
+  Logic Levels:           14  (LUT4=1 LUT5=3 LUT6=10)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -40,52 +39,78 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[0]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[31]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[0]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[0]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[31]/Q
+                         net (fo=92, unplaced)        1.062     4.515    core_i/core_i/id_stage_i/Q[31]
+                         LUT6 (Prop_lut6_I0_O)        0.295     4.810 f  core_i/core_i/id_stage_i/Cnt_DP[5]_i_38/O
+                         net (fo=2, unplaced)         1.122     5.932    core_i/core_i/id_stage_i/register_file_i/Cnt_DP[4]_i_11
+                         LUT5 (Prop_lut5_I0_O)        0.124     6.056 f  core_i/core_i/id_stage_i/register_file_i/Cnt_DP[5]_i_18/O
+                         net (fo=5, unplaced)         1.139     7.195    core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o_reg[31]_0
+                         LUT5 (Prop_lut5_I0_O)        0.124     7.319 r  core_i/core_i/id_stage_i/register_file_i/Cnt_DP[5]_i_10/O
+                         net (fo=8, unplaced)         0.940     8.259    core_i/core_i/id_stage_i/ex_stage_i/alu_i/ff1_result[4]
+                         LUT6 (Prop_lut6_I3_O)        0.124     8.383 r  core_i/core_i/id_stage_i/Cnt_DP[4]_i_6/O
+                         net (fo=13, unplaced)        0.952     9.335    core_i/core_i/id_stage_i/register_file_i/ff1_result[0]
+                         LUT6 (Prop_lut6_I2_O)        0.124     9.459 r  core_i/core_i/id_stage_i/register_file_i/Cnt_DP[4]_i_3/O
+                         net (fo=47, unplaced)        0.530     9.989    core_i/core_i/id_stage_i/register_file_i/Cnt_DP[5]_i_10_0
+                         LUT6 (Prop_lut6_I1_O)        0.124    10.113 r  core_i/core_i/id_stage_i/register_file_i/BReg_DP[31]_i_23/O
+                         net (fo=41, unplaced)        1.188    11.301    core_i/core_i/id_stage_i/register_file_i/BReg_DP[31]_i_23_n_0
+                         LUT6 (Prop_lut6_I4_O)        0.124    11.425 f  core_i/core_i/id_stage_i/register_file_i/BReg_DP[27]_i_3/O
+                         net (fo=5, unplaced)         0.930    12.355    core_i/core_i/id_stage_i/register_file_i/BReg_DP[27]_i_3_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124    12.479 r  core_i/core_i/id_stage_i/register_file_i/BReg_DP[23]_i_3/O
+                         net (fo=5, unplaced)         0.930    13.409    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[2]_1
+                         LUT5 (Prop_lut5_I0_O)        0.124    13.533 f  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][8]_i_15/O
+                         net (fo=4, unplaced)         0.443    13.976    core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][8]_i_15_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124    14.100 f  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][8]_i_8/O
+                         net (fo=1, unplaced)         0.902    15.002    core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][8]_i_8_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124    15.126 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][8]_i_4/O
+                         net (fo=1, unplaced)         0.449    15.575    core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][8]_i_4_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124    15.699 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][8]_i_2/O
+                         net (fo=36, unplaced)        0.523    16.222    core_i/core_i/id_stage_i/csr_access_ex_o_reg_7[7]
+                         LUT4 (Prop_lut4_I2_O)        0.124    16.346 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[8]_i_2/O
+                         net (fo=1, unplaced)         0.902    17.248    core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o_reg[8]
+                         LUT6 (Prop_lut6_I0_O)        0.124    17.372 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[8]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.372    core_i/core_i/id_stage_i/p_1_in__0[8]
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[8]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][0]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[8]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[8]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.372    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.467    
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[10]/C
+Slack (MET) :             0.648ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[30]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.215ns  (logic 9.119ns (64.149%)  route 5.096ns (35.851%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT3=1 LUT6=4)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -95,52 +120,82 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[10]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[10]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[10]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/Q
+                         net (fo=3, unplaced)         0.488     3.941    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_0[15]
+                         LUT2 (Prop_lut2_I0_O)        0.295     4.236 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, unplaced)         0.800     5.036    core_i/core_i/ex_stage_i/mult_i/__0_1[15]
+                         DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.036     9.072 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, unplaced)         0.055     9.127    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+                         DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    10.645 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, unplaced)         0.800    11.445    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    11.569 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, unplaced)         0.000    11.569    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    12.102 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, unplaced)         0.009    12.111    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    12.442 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[3]
+                         net (fo=3, unplaced)         0.636    13.078    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[3]
+                         LUT3 (Prop_lut3_I0_O)        0.299    13.377 r  core_i/core_i/id_stage_i/i___0_carry__5_i_4/O
+                         net (fo=1, unplaced)         0.000    13.377    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_5_0[0]
+                         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.576    13.953 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    13.953    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+                         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.256    14.209 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[2]
+                         net (fo=1, unplaced)         0.452    14.661    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_5
+                         LUT6 (Prop_lut6_I5_O)        0.301    14.962 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][30]_i_5/O
+                         net (fo=2, unplaced)         0.913    15.875    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[30]_4
+                         LUT6 (Prop_lut6_I5_O)        0.124    15.999 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[30]_i_6/O
+                         net (fo=3, unplaced)         0.467    16.466    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[30]_1
+                         LUT6 (Prop_lut6_I2_O)        0.124    16.590 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[30]_i_2/O
+                         net (fo=5, unplaced)         0.477    17.067    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_41
+                         LUT6 (Prop_lut6_I5_O)        0.124    17.191 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o[30]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.191    core_i/core_i/id_stage_i/operand_c[30]
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[30]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][10]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[30]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[30]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.191    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.648    
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[11]/C
+Slack (MET) :             0.648ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[30]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.215ns  (logic 9.119ns (64.149%)  route 5.096ns (35.851%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT3=1 LUT5=1 LUT6=3)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -150,52 +205,82 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[11]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[11]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[11]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/Q
+                         net (fo=3, unplaced)         0.488     3.941    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_0[15]
+                         LUT2 (Prop_lut2_I0_O)        0.295     4.236 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, unplaced)         0.800     5.036    core_i/core_i/ex_stage_i/mult_i/__0_1[15]
+                         DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.036     9.072 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, unplaced)         0.055     9.127    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+                         DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    10.645 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, unplaced)         0.800    11.445    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    11.569 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, unplaced)         0.000    11.569    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    12.102 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, unplaced)         0.009    12.111    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    12.442 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[3]
+                         net (fo=3, unplaced)         0.636    13.078    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[3]
+                         LUT3 (Prop_lut3_I0_O)        0.299    13.377 r  core_i/core_i/id_stage_i/i___0_carry__5_i_4/O
+                         net (fo=1, unplaced)         0.000    13.377    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_5_0[0]
+                         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.576    13.953 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    13.953    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+                         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.256    14.209 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[2]
+                         net (fo=1, unplaced)         0.452    14.661    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_5
+                         LUT6 (Prop_lut6_I5_O)        0.301    14.962 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][30]_i_5/O
+                         net (fo=2, unplaced)         0.913    15.875    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[30]_4
+                         LUT6 (Prop_lut6_I5_O)        0.124    15.999 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[30]_i_6/O
+                         net (fo=3, unplaced)         0.467    16.466    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[30]_1
+                         LUT6 (Prop_lut6_I2_O)        0.124    16.590 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[30]_i_2/O
+                         net (fo=5, unplaced)         0.477    17.067    core_i/core_i/if_stage_i/mult_operand_b_ex_o_reg[30]_0
+                         LUT5 (Prop_lut5_I4_O)        0.124    17.191 r  core_i/core_i/if_stage_i/mult_operand_b_ex_o[30]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.191    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_2[30]
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[30]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][11]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[30]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[30]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.191    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.648    
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[12]/C
+Slack (MET) :             0.658ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[30]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.205ns  (logic 9.119ns (64.194%)  route 5.086ns (35.806%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT3=1 LUT6=4)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -205,52 +290,82 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[12]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[12]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[12]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/Q
+                         net (fo=3, unplaced)         0.488     3.941    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_0[15]
+                         LUT2 (Prop_lut2_I0_O)        0.295     4.236 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, unplaced)         0.800     5.036    core_i/core_i/ex_stage_i/mult_i/__0_1[15]
+                         DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.036     9.072 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, unplaced)         0.055     9.127    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+                         DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    10.645 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, unplaced)         0.800    11.445    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    11.569 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, unplaced)         0.000    11.569    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    12.102 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, unplaced)         0.009    12.111    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    12.442 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[3]
+                         net (fo=3, unplaced)         0.636    13.078    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[3]
+                         LUT3 (Prop_lut3_I0_O)        0.299    13.377 r  core_i/core_i/id_stage_i/i___0_carry__5_i_4/O
+                         net (fo=1, unplaced)         0.000    13.377    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_5_0[0]
+                         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.576    13.953 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    13.953    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+                         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.256    14.209 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[2]
+                         net (fo=1, unplaced)         0.452    14.661    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_5
+                         LUT6 (Prop_lut6_I5_O)        0.301    14.962 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][30]_i_5/O
+                         net (fo=2, unplaced)         0.913    15.875    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[30]_4
+                         LUT6 (Prop_lut6_I5_O)        0.124    15.999 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[30]_i_6/O
+                         net (fo=3, unplaced)         0.467    16.466    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[30]_1
+                         LUT6 (Prop_lut6_I2_O)        0.124    16.590 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[30]_i_3/O
+                         net (fo=3, unplaced)         0.467    17.057    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_42
+                         LUT6 (Prop_lut6_I3_O)        0.124    17.181 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[30]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.181    core_i/core_i/id_stage_i/p_1_in__0[30]
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[30]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][12]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[30]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[30]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.181    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.658    
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[13]/C
+Slack (MET) :             0.658ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[30]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.205ns  (logic 9.119ns (64.194%)  route 5.086ns (35.806%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT3=1 LUT6=4)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -260,52 +375,82 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[13]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[13]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[13]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/Q
+                         net (fo=3, unplaced)         0.488     3.941    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_0[15]
+                         LUT2 (Prop_lut2_I0_O)        0.295     4.236 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, unplaced)         0.800     5.036    core_i/core_i/ex_stage_i/mult_i/__0_1[15]
+                         DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.036     9.072 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, unplaced)         0.055     9.127    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+                         DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    10.645 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, unplaced)         0.800    11.445    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    11.569 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, unplaced)         0.000    11.569    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    12.102 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, unplaced)         0.009    12.111    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    12.442 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[3]
+                         net (fo=3, unplaced)         0.636    13.078    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[3]
+                         LUT3 (Prop_lut3_I0_O)        0.299    13.377 r  core_i/core_i/id_stage_i/i___0_carry__5_i_4/O
+                         net (fo=1, unplaced)         0.000    13.377    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_5_0[0]
+                         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.576    13.953 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    13.953    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+                         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.256    14.209 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[2]
+                         net (fo=1, unplaced)         0.452    14.661    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_5
+                         LUT6 (Prop_lut6_I5_O)        0.301    14.962 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][30]_i_5/O
+                         net (fo=2, unplaced)         0.913    15.875    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[30]_4
+                         LUT6 (Prop_lut6_I5_O)        0.124    15.999 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[30]_i_6/O
+                         net (fo=3, unplaced)         0.467    16.466    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[30]_1
+                         LUT6 (Prop_lut6_I2_O)        0.124    16.590 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[30]_i_3/O
+                         net (fo=3, unplaced)         0.467    17.057    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_42
+                         LUT6 (Prop_lut6_I3_O)        0.124    17.181 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o[30]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.181    core_i/core_i/id_stage_i/register_file_i_n_1
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[30]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][13]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[30]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[30]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.181    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.658    
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[14]/C
+Slack (MET) :             0.678ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[30]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.185ns  (logic 9.119ns (64.284%)  route 5.066ns (35.716%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT3=1 LUT6=4)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -315,52 +460,82 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[14]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[14]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[14]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/Q
+                         net (fo=3, unplaced)         0.488     3.941    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_0[15]
+                         LUT2 (Prop_lut2_I0_O)        0.295     4.236 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, unplaced)         0.800     5.036    core_i/core_i/ex_stage_i/mult_i/__0_1[15]
+                         DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.036     9.072 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, unplaced)         0.055     9.127    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+                         DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    10.645 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, unplaced)         0.800    11.445    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    11.569 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, unplaced)         0.000    11.569    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    12.102 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, unplaced)         0.009    12.111    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    12.442 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[3]
+                         net (fo=3, unplaced)         0.636    13.078    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[3]
+                         LUT3 (Prop_lut3_I0_O)        0.299    13.377 r  core_i/core_i/id_stage_i/i___0_carry__5_i_4/O
+                         net (fo=1, unplaced)         0.000    13.377    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_5_0[0]
+                         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.576    13.953 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    13.953    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+                         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.256    14.209 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[2]
+                         net (fo=1, unplaced)         0.452    14.661    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_5
+                         LUT6 (Prop_lut6_I5_O)        0.301    14.962 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][30]_i_5/O
+                         net (fo=2, unplaced)         0.913    15.875    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[30]_4
+                         LUT6 (Prop_lut6_I5_O)        0.124    15.999 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[30]_i_6/O
+                         net (fo=3, unplaced)         0.467    16.466    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[30]_1
+                         LUT6 (Prop_lut6_I2_O)        0.124    16.590 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[30]_i_2/O
+                         net (fo=5, unplaced)         0.447    17.037    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_41
+                         LUT6 (Prop_lut6_I0_O)        0.124    17.161 r  core_i/core_i/id_stage_i/register_file_i/mult_operand_c_ex_o[30]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.161    core_i/core_i/id_stage_i/register_file_i_n_259
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[30]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][14]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[30]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[30]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.161    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.678    
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[15]/C
+Slack (MET) :             0.709ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[29]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.154ns  (logic 9.205ns (65.033%)  route 4.949ns (34.967%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT3=1 LUT5=1 LUT6=3)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -370,52 +545,82 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[15]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[15]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[15]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/Q
+                         net (fo=3, unplaced)         0.488     3.941    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_0[15]
+                         LUT2 (Prop_lut2_I0_O)        0.295     4.236 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, unplaced)         0.800     5.036    core_i/core_i/ex_stage_i/mult_i/__0_1[15]
+                         DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.036     9.072 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, unplaced)         0.055     9.127    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+                         DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    10.645 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, unplaced)         0.800    11.445    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    11.569 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, unplaced)         0.000    11.569    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    12.102 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, unplaced)         0.009    12.111    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    12.442 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[3]
+                         net (fo=3, unplaced)         0.636    13.078    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[3]
+                         LUT3 (Prop_lut3_I0_O)        0.299    13.377 r  core_i/core_i/id_stage_i/i___0_carry__5_i_4/O
+                         net (fo=1, unplaced)         0.000    13.377    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_5_0[0]
+                         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.576    13.953 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    13.953    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+                         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.337    14.290 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[1]
+                         net (fo=1, unplaced)         0.312    14.602    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_6
+                         LUT6 (Prop_lut6_I5_O)        0.306    14.908 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][29]_i_5/O
+                         net (fo=2, unplaced)         0.913    15.821    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[29]_1
+                         LUT6 (Prop_lut6_I5_O)        0.124    15.945 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[29]_i_6/O
+                         net (fo=2, unplaced)         0.460    16.405    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[29]_1
+                         LUT6 (Prop_lut6_I2_O)        0.124    16.529 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[29]_i_2/O
+                         net (fo=5, unplaced)         0.477    17.006    core_i/core_i/if_stage_i/mult_operand_b_ex_o_reg[29]_0
+                         LUT5 (Prop_lut5_I4_O)        0.124    17.130 r  core_i/core_i/if_stage_i/mult_operand_b_ex_o[29]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.130    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_2[29]
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[29]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][15]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[29]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[29]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.130    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.709    
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[16]/C
+Slack (MET) :             0.709ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[29]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.154ns  (logic 9.205ns (65.033%)  route 4.949ns (34.967%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT3=1 LUT6=4)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -425,52 +630,82 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[16]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[16]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[16]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/Q
+                         net (fo=3, unplaced)         0.488     3.941    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_0[15]
+                         LUT2 (Prop_lut2_I0_O)        0.295     4.236 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, unplaced)         0.800     5.036    core_i/core_i/ex_stage_i/mult_i/__0_1[15]
+                         DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.036     9.072 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, unplaced)         0.055     9.127    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+                         DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    10.645 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, unplaced)         0.800    11.445    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    11.569 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, unplaced)         0.000    11.569    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    12.102 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, unplaced)         0.009    12.111    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    12.442 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[3]
+                         net (fo=3, unplaced)         0.636    13.078    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[3]
+                         LUT3 (Prop_lut3_I0_O)        0.299    13.377 r  core_i/core_i/id_stage_i/i___0_carry__5_i_4/O
+                         net (fo=1, unplaced)         0.000    13.377    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_5_0[0]
+                         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.576    13.953 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    13.953    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+                         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.337    14.290 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[1]
+                         net (fo=1, unplaced)         0.312    14.602    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_6
+                         LUT6 (Prop_lut6_I5_O)        0.306    14.908 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][29]_i_5/O
+                         net (fo=2, unplaced)         0.913    15.821    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[29]_1
+                         LUT6 (Prop_lut6_I5_O)        0.124    15.945 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[29]_i_6/O
+                         net (fo=2, unplaced)         0.460    16.405    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[29]_1
+                         LUT6 (Prop_lut6_I2_O)        0.124    16.529 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[29]_i_2/O
+                         net (fo=5, unplaced)         0.477    17.006    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_39
+                         LUT6 (Prop_lut6_I2_O)        0.124    17.130 r  core_i/core_i/id_stage_i/register_file_i/mult_operand_c_ex_o[29]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.130    core_i/core_i/id_stage_i/register_file_i_n_260
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[29]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][16]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[29]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[29]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.130    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.709    
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[17]/C
+Slack (MET) :             0.719ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[29]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.144ns  (logic 9.205ns (65.079%)  route 4.939ns (34.921%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT3=1 LUT6=4)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -480,52 +715,82 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[17]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[17]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[17]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/Q
+                         net (fo=3, unplaced)         0.488     3.941    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_0[15]
+                         LUT2 (Prop_lut2_I0_O)        0.295     4.236 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, unplaced)         0.800     5.036    core_i/core_i/ex_stage_i/mult_i/__0_1[15]
+                         DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.036     9.072 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, unplaced)         0.055     9.127    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+                         DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    10.645 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, unplaced)         0.800    11.445    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    11.569 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, unplaced)         0.000    11.569    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    12.102 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, unplaced)         0.009    12.111    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    12.442 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[3]
+                         net (fo=3, unplaced)         0.636    13.078    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[3]
+                         LUT3 (Prop_lut3_I0_O)        0.299    13.377 r  core_i/core_i/id_stage_i/i___0_carry__5_i_4/O
+                         net (fo=1, unplaced)         0.000    13.377    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_5_0[0]
+                         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.576    13.953 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    13.953    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+                         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.337    14.290 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[1]
+                         net (fo=1, unplaced)         0.312    14.602    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_6
+                         LUT6 (Prop_lut6_I5_O)        0.306    14.908 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][29]_i_5/O
+                         net (fo=2, unplaced)         0.913    15.821    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[29]_1
+                         LUT6 (Prop_lut6_I5_O)        0.124    15.945 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[29]_i_6/O
+                         net (fo=2, unplaced)         0.460    16.405    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[29]_1
+                         LUT6 (Prop_lut6_I2_O)        0.124    16.529 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[29]_i_3/O
+                         net (fo=3, unplaced)         0.467    16.996    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_40
+                         LUT6 (Prop_lut6_I3_O)        0.124    17.120 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[29]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.120    core_i/core_i/id_stage_i/p_1_in__0[29]
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[29]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][17]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[29]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/alu_operand_a_ex_o_reg[29]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.120    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.719    
 
-Slack (MET) :             0.000ns  (required time - arrival time)
-  Source:                 core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[18]/C
+Slack (MET) :             0.719ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
                             (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
-  Destination:            core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]/D
-                            (positive level-sensitive latch clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[29]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
   Path Group:             clk_i
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            0.000ns  (clk_i rise@0.000ns - clk_i rise@0.000ns)
-  Data Path Delay:        1.608ns  (logic 0.797ns (49.565%)  route 0.811ns (50.435%))
-  Logic Levels:           1  (LUT3=1)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.144ns  (logic 9.205ns (65.079%)  route 4.939ns (34.921%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT3=1 LUT6=4)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.709ns
+    Destination Clock Delay (DCD):    2.709ns = ( 17.709 - 15.000 ) 
     Source Clock Delay      (SCD):    2.975ns
     Clock Pessimism Removal (CPR):    0.121ns
-  Time Borrowing:         
-    Nominal pulse width:              7.500ns
-    Library setup time:               0.048ns
-    Computed max time borrow:         7.548ns
-    Time borrowed from endpoint:      1.753ns
-    Time given to startpoint:         1.753ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -535,31 +800,62 @@ Slack (MET) :             0.000ns  (required time - arrival time)
     Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
                          net (fo=1, unplaced)         0.800     2.290    clk_i_IBUF
                          BUFG (Prop_bufg_I_O)         0.101     2.391 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[18]/C
+                         net (fo=2063, unplaced)      0.584     2.975    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/register_file_i/wdata_b_q_reg[18]/Q
-                         net (fo=31, unplaced)        0.811     4.264    core_i/core_i/id_stage_i/register_file_i/wdata_b_q[18]
-                         LUT3 (Prop_lut3_I0_O)        0.319     4.583 r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]_i_1/O
-                         net (fo=1, unplaced)         0.000     4.583    core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]_i_1_n_0
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]/D
+                         FDCE (Prop_fdce_C_Q)         0.478     3.453 r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[15]/Q
+                         net (fo=3, unplaced)         0.488     3.941    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_0[15]
+                         LUT2 (Prop_lut2_I0_O)        0.295     4.236 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, unplaced)         0.800     5.036    core_i/core_i/ex_stage_i/mult_i/__0_1[15]
+                         DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.036     9.072 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, unplaced)         0.055     9.127    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+                         DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    10.645 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, unplaced)         0.800    11.445    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+                         LUT2 (Prop_lut2_I0_O)        0.124    11.569 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, unplaced)         0.000    11.569    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+                         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    12.102 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, unplaced)         0.009    12.111    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.331    12.442 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[3]
+                         net (fo=3, unplaced)         0.636    13.078    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[3]
+                         LUT3 (Prop_lut3_I0_O)        0.299    13.377 r  core_i/core_i/id_stage_i/i___0_carry__5_i_4/O
+                         net (fo=1, unplaced)         0.000    13.377    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_5_0[0]
+                         CARRY4 (Prop_carry4_DI[0]_CO[3])
+                                                      0.576    13.953 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, unplaced)         0.000    13.953    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+                         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.337    14.290 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[1]
+                         net (fo=1, unplaced)         0.312    14.602    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_6
+                         LUT6 (Prop_lut6_I5_O)        0.306    14.908 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][29]_i_5/O
+                         net (fo=2, unplaced)         0.913    15.821    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[29]_1
+                         LUT6 (Prop_lut6_I5_O)        0.124    15.945 r  core_i/core_i/id_stage_i/alu_operand_a_ex_o[29]_i_6/O
+                         net (fo=2, unplaced)         0.460    16.405    core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o_reg[29]_1
+                         LUT6 (Prop_lut6_I2_O)        0.124    16.529 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[29]_i_3/O
+                         net (fo=3, unplaced)         0.467    16.996    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_40
+                         LUT6 (Prop_lut6_I3_O)        0.124    17.120 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o[29]_i_1/O
+                         net (fo=1, unplaced)         0.000    17.120    core_i/core_i/id_stage_i/register_file_i_n_2
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[29]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock clk_i rise edge)      0.000     0.000 r  
-    Y9                                                0.000     0.000 r  clk_i (IN)
-                         net (fo=0)                   0.000     0.000    clk_i
-    Y9                   IBUF (Prop_ibuf_I_O)         1.420     1.420 r  clk_i_IBUF_inst/O
-                         net (fo=1, unplaced)         0.760     2.179    clk_i_IBUF
-                         BUFG (Prop_bufg_I_O)         0.091     2.270 r  clk_i_IBUF_BUFG_inst/O
-                         net (fo=2157, unplaced)      0.439     2.709    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
-                         LDCE                                         r  core_i/core_i/id_stage_i/register_file_i/mem_reg[12][18]/G
-                         clock pessimism              0.121     2.830    
-                         time borrowed                1.753     4.583    
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, unplaced)         0.760    17.179    clk_i_IBUF
+                         BUFG (Prop_bufg_I_O)         0.091    17.270 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2063, unplaced)      0.439    17.709    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+                         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[29]/C
+                         clock pessimism              0.121    17.830    
+                         clock uncertainty           -0.035    17.795    
+                         FDCE (Setup_fdce_C_D)        0.044    17.839    core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[29]
   -------------------------------------------------------------------
-                         required time                          4.583    
-                         arrival time                          -4.583    
+                         required time                         17.839    
+                         arrival time                         -17.120    
   -------------------------------------------------------------------
-                         slack                                  0.000    
+                         slack                                  0.719    
 
 
 

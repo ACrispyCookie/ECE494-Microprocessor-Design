@@ -64,7 +64,6 @@
 #    "$core_dir/rtl/cv32e40p_popcnt.sv"
 #    "$core_dir/rtl/cv32e40p_prefetch_buffer.sv"
 #    "$core_dir/rtl/cv32e40p_prefetch_controller.sv"
-#    "$core_dir/rtl/cv32e40p_register_file_latch.sv"
 #    "$core_dir/rtl/cv32e40p_sleep_unit.sv"
 #    "$core_dir/rtl/cv32e40p_top.sv"
 #    "$origin_dir/zedboard-wrapper/dmem_bram.sv"
@@ -210,7 +209,6 @@ proc checkRequiredFiles { origin_dir} {
  "[file normalize "$core_dir/rtl/cv32e40p_popcnt.sv"]"\
  "[file normalize "$core_dir/rtl/cv32e40p_prefetch_buffer.sv"]"\
  "[file normalize "$core_dir/rtl/cv32e40p_prefetch_controller.sv"]"\
- "[file normalize "$core_dir/rtl/cv32e40p_register_file_latch.sv"]"\
  "[file normalize "$core_dir/rtl/cv32e40p_sleep_unit.sv"]"\
  "[file normalize "$core_dir/rtl/cv32e40p_top.sv"]"\
  "[file normalize "$origin_dir/zedboard-wrapper/dmem_bram.sv"]"\
@@ -330,6 +328,7 @@ if { [info exists ::origin_dir_loc] } {
 set experiment "baseline"
 set core_dir ""
 set user_build_dir ""
+set clock_period ""
 
 # Set the project name
 set _xil_proj_name_ "cv32e40p-zedboard-project"
@@ -357,6 +356,7 @@ proc print_help {} {
   puts "$script_file -tclargs \[--core_dir <path-to-cv32e40p-checkout>\]"
   puts "$script_file -tclargs \[--build_dir <path>\]"
   puts "$script_file -tclargs \[--project_name <name>\]"
+  puts "$script_file -tclargs \[--clock_period <period-ns>\]"
   puts "$script_file -tclargs \[--help\]\n"
   puts "Usage:"
   puts "Name                   Description"
@@ -374,6 +374,8 @@ proc print_help {} {
   puts "\[--project_name <name>\] Create project with the specified name. Default"
   puts "                       name is the name of the project from where this"
   puts "                       script was generated.\n"
+  puts "\[--clock_period <ns>\] Override clk_i target period in ns. Default:"
+  puts "                       15.000 for baseline, 10.000 for no-mul-forwarding.\n"
   puts "\[--help\]               Print help information for this script"
   puts "-------------------------------------------------------------------------\n"
   exit 0
@@ -388,6 +390,7 @@ if { $::argc > 0 } {
       "--core_dir"     { incr i; set core_dir [lindex $::argv $i] }
       "--build_dir"    { incr i; set user_build_dir [lindex $::argv $i] }
       "--project_name" { incr i; set _xil_proj_name_ [lindex $::argv $i] }
+      "--clock_period" { incr i; set clock_period [lindex $::argv $i] }
       "--help"         { print_help }
       default {
         if { [regexp {^-} $option] } {
@@ -442,6 +445,13 @@ if { $user_build_dir eq "" } {
 }
 file mkdir $build_dir
 
+if { $clock_period eq "" } {
+  switch -- $experiment {
+    "no-mul-forwarding" { set clock_period "10.000" }
+    default { set clock_period "15.000" }
+  }
+}
+
 puts "========================================"
 puts "cv32e40p ZedBoard project generation"
 puts "========================================"
@@ -450,6 +460,7 @@ puts "experiment  = $experiment"
 puts "core_dir    = $core_dir"
 puts "build_dir   = $build_dir"
 puts "project     = ${_xil_proj_name_}"
+puts "clk_i period= $clock_period ns"
 puts "========================================"
 
 # Create project
@@ -524,7 +535,6 @@ set files [list \
  [file normalize "${core_dir}/rtl/cv32e40p_popcnt.sv" ]\
  [file normalize "${core_dir}/rtl/cv32e40p_prefetch_buffer.sv" ]\
  [file normalize "${core_dir}/rtl/cv32e40p_prefetch_controller.sv" ]\
- [file normalize "${core_dir}/rtl/cv32e40p_register_file_latch.sv" ]\
  [file normalize "${core_dir}/rtl/cv32e40p_sleep_unit.sv" ]\
  [file normalize "${core_dir}/rtl/cv32e40p_top.sv" ]\
  [file normalize "${origin_dir}/zedboard-wrapper/dmem_bram.sv" ]\
@@ -736,10 +746,6 @@ set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
 set file "rtl/cv32e40p_prefetch_controller.sv"
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
-
-set file "rtl/cv32e40p_register_file_latch.sv"
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "SystemVerilog" -objects $file_obj
 
@@ -1122,11 +1128,23 @@ if {[string equal [get_filesets -quiet constrs_1] ""]} {
 # Set 'constrs_1' fileset object
 set obj [get_filesets constrs_1]
 
-# Add/Import constrs file and set constrs file properties
-set file "[file normalize "$origin_dir/zedboard-wrapper/constraints.xdc"]"
-set file_added [add_files -norecurse -fileset $obj [list $file]]
-set file "zedboard-wrapper/constraints.xdc"
-set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
+# Add/Import constrs file and set constrs file properties. The baseline keeps
+# the board default 15 ns target; the modified experiment uses its own generated
+# XDC so its clock target can be swept independently without changing baseline.
+set base_constraints_file "[file normalize "$origin_dir/zedboard-wrapper/constraints.xdc"]"
+set constraints_file $base_constraints_file
+if { $experiment eq "no-mul-forwarding" || $clock_period ne "15.000" } {
+  set constraints_file [file normalize [file join $build_dir "constraints-${experiment}-${clock_period}ns.xdc"]]
+  set in_fp [open $base_constraints_file r]
+  set constraints_text [read $in_fp]
+  close $in_fp
+  regsub {create_clock -period [0-9.]+ -name clk_i \[get_ports clk_i\]} $constraints_text "create_clock -period $clock_period -name clk_i \[get_ports clk_i\]" constraints_text
+  set out_fp [open $constraints_file w]
+  puts -nonewline $out_fp $constraints_text
+  close $out_fp
+}
+set file_added [add_files -norecurse -fileset $obj [list $constraints_file]]
+set file_obj [get_files -of_objects [get_filesets constrs_1] [list $constraints_file]]
 set_property -name "file_type" -value "XDC" -objects $file_obj
 
 # Set 'constrs_1' fileset properties
