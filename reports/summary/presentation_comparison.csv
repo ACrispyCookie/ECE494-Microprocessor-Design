@@ -1,0 +1,13 @@
+category,metric,unit,baseline,no-mul-forwarding,delta,delta_percent,direction,interpretation
+Frequency,Target clock frequency,MHz,66.667,71.429,4.762,7.14296,better,higher target frequency
+Frequency,Estimated Fmax from WNS,MHz,66.8,73.201,6.401,9.58234,better,higher estimated Fmax
+Timing,Worst negative slack (WNS),ns,0.03,0.339,0.309,1030,better,more timing margin
+Timing,Critical datapath delay,ns,14.871,13.44,-1.431,-9.62276,better,shorter critical path
+Utilization,LUTs used,count,4171,4314,143,3.42843,cost,lower resource cost is better
+Utilization,LUTs utilization,%,7.84,8.11,0.27,3.44388,cost,lower FPGA occupancy is better
+Utilization,FFs / Regs used,count,2057,2100,43,2.09042,cost,lower resource cost is better
+Utilization,FFs / Regs utilization,%,1.93,1.97,0.04,2.07254,cost,lower FPGA occupancy is better
+Utilization,DSPs used,count,5,5,0,0,same,lower resource cost is better
+Utilization,DSPs utilization,%,2.27,2.27,0,0,same,lower FPGA occupancy is better
+Utilization,BRAM Tiles used,count,4.5,4.5,0,0,same,lower resource cost is better
+Utilization,BRAM Tiles utilization,%,3.21,3.21,0,0,same,lower FPGA occupancy is better

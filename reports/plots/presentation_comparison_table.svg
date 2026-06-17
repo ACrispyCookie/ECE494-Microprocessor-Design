@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="744" viewBox="0 0 1500 744">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:30px;font-weight:800}.subtitle{font-size:15px;fill:#4b5563}.head{font-size:14px;font-weight:700;fill:#374151}.cell{font-size:14px}.metric{font-size:14px;font-weight:650}.small{font-size:12px;fill:#6b7280}.num{font-size:14px;font-variant-numeric:tabular-nums}.badge{font-size:12px;font-weight:700}.grid{stroke:#e5e7eb;stroke-width:1}.strong{font-weight:800}</style>
+<text class="title" x="750.0" y="38" text-anchor="middle">Post-Implementation Comparison Summary</text>
+<text class="subtitle" x="750.0" y="64" text-anchor="middle">baseline vs no-mul-forwarding — frequency, timing margin, utilization, and deltas</text>
+<rect x="30" y="86" width="1440" height="46" fill="#f8fafc" rx="8"/>
+<text class="head" x="40" y="115">Category</text>
+<text class="head" x="190" y="115">Metric</text>
+<text class="head" x="560" y="115">baseline</text>
+<text class="head" x="760" y="115">no-mul-forwarding</text>
+<text class="head" x="970" y="115">Delta</text>
+<text class="head" x="1160" y="115">Meaning</text>
+<text class="head" x="1320" y="115">Result</text>
+<line class="grid" x1="30" y1="132" x2="1470" y2="132"/>
+<rect x="30" y="132" width="1440" height="46" fill="#ffffff"/>
+<line class="grid" x1="30" y1="178" x2="1470" y2="178"/>
+<text class="cell strong" x="40" y="161">Frequency</text>
+<text class="metric" x="190" y="161">Target clock frequency</text>
+<text class="num" x="560" y="161">66.667 MHz</text>
+<text class="num strong" x="760" y="161">71.429 MHz</text>
+<text class="num strong" x="970" y="161" fill="#166534">+4.762 MHz (+7.1%)</text>
+<text class="cell" x="1160" y="161">higher target frequency</text>
+<rect x="1320" y="142" width="92" height="26" rx="13" fill="#dcfce7"/>
+<text class="badge" x="1366" y="160" text-anchor="middle" fill="#166534">Improved</text>
+<rect x="30" y="178" width="1440" height="46" fill="#fbfdff"/>
+<line class="grid" x1="30" y1="224" x2="1470" y2="224"/>
+<text class="metric" x="190" y="207">Estimated Fmax from WNS</text>
+<text class="num" x="560" y="207">66.8 MHz</text>
+<text class="num strong" x="760" y="207">73.201 MHz</text>
+<text class="num strong" x="970" y="207" fill="#166534">+6.401 MHz (+9.6%)</text>
+<text class="cell" x="1160" y="207">higher estimated Fmax</text>
+<rect x="1320" y="188" width="92" height="26" rx="13" fill="#dcfce7"/>
+<text class="badge" x="1366" y="206" text-anchor="middle" fill="#166534">Improved</text>
+<rect x="30" y="224" width="1440" height="46" fill="#ffffff"/>
+<line class="grid" x1="30" y1="270" x2="1470" y2="270"/>
+<text class="cell strong" x="40" y="253">Timing</text>
+<text class="metric" x="190" y="253">Worst negative slack (WNS)</text>
+<text class="num" x="560" y="253">0.03 ns</text>
+<text class="num strong" x="760" y="253">0.339 ns</text>
+<text class="num strong" x="970" y="253" fill="#166534">+0.309 ns (+1030.0%)</text>
+<text class="cell" x="1160" y="253">more timing margin</text>
+<rect x="1320" y="234" width="92" height="26" rx="13" fill="#dcfce7"/>
+<text class="badge" x="1366" y="252" text-anchor="middle" fill="#166534">Improved</text>
+<rect x="30" y="270" width="1440" height="46" fill="#fbfdff"/>
+<line class="grid" x1="30" y1="316" x2="1470" y2="316"/>
+<text class="metric" x="190" y="299">Critical datapath delay</text>
+<text class="num" x="560" y="299">14.871 ns</text>
+<text class="num strong" x="760" y="299">13.44 ns</text>
+<text class="num strong" x="970" y="299" fill="#166534">-1.431 ns (-9.6%)</text>
+<text class="cell" x="1160" y="299">shorter critical path</text>
+<rect x="1320" y="280" width="92" height="26" rx="13" fill="#dcfce7"/>
+<text class="badge" x="1366" y="298" text-anchor="middle" fill="#166534">Improved</text>
+<rect x="30" y="316" width="1440" height="46" fill="#ffffff"/>
+<line class="grid" x1="30" y1="362" x2="1470" y2="362"/>
+<text class="cell strong" x="40" y="345">Utilization</text>
+<text class="metric" x="190" y="345">LUTs used</text>
+<text class="num" x="560" y="345">4171 count</text>
+<text class="num strong" x="760" y="345">4314 count</text>
+<text class="num strong" x="970" y="345" fill="#92400e">+143 count (+3.4%)</text>
+<text class="cell" x="1160" y="345">lower resource cost is better</text>
+<rect x="1320" y="326" width="92" height="26" rx="13" fill="#fef3c7"/>
+<text class="badge" x="1366" y="344" text-anchor="middle" fill="#92400e">Cost</text>
+<rect x="30" y="362" width="1440" height="46" fill="#fbfdff"/>
+<line class="grid" x1="30" y1="408" x2="1470" y2="408"/>
+<text class="metric" x="190" y="391">LUTs utilization</text>
+<text class="num" x="560" y="391">7.84 %</text>
+<text class="num strong" x="760" y="391">8.11 %</text>
+<text class="num strong" x="970" y="391" fill="#92400e">+0.27 pp</text>
+<text class="cell" x="1160" y="391">lower FPGA occupancy is better</text>
+<rect x="1320" y="372" width="92" height="26" rx="13" fill="#fef3c7"/>
+<text class="badge" x="1366" y="390" text-anchor="middle" fill="#92400e">Cost</text>
+<rect x="30" y="408" width="1440" height="46" fill="#ffffff"/>
+<line class="grid" x1="30" y1="454" x2="1470" y2="454"/>
+<text class="metric" x="190" y="437">FFs / Regs used</text>
+<text class="num" x="560" y="437">2057 count</text>
+<text class="num strong" x="760" y="437">2100 count</text>
+<text class="num strong" x="970" y="437" fill="#92400e">+43 count (+2.1%)</text>
+<text class="cell" x="1160" y="437">lower resource cost is better</text>
+<rect x="1320" y="418" width="92" height="26" rx="13" fill="#fef3c7"/>
+<text class="badge" x="1366" y="436" text-anchor="middle" fill="#92400e">Cost</text>
+<rect x="30" y="454" width="1440" height="46" fill="#fbfdff"/>
+<line class="grid" x1="30" y1="500" x2="1470" y2="500"/>
+<text class="metric" x="190" y="483">FFs / Regs utilization</text>
+<text class="num" x="560" y="483">1.93 %</text>
+<text class="num strong" x="760" y="483">1.97 %</text>
+<text class="num strong" x="970" y="483" fill="#92400e">+0.04 pp</text>
+<text class="cell" x="1160" y="483">lower FPGA occupancy is better</text>
+<rect x="1320" y="464" width="92" height="26" rx="13" fill="#fef3c7"/>
+<text class="badge" x="1366" y="482" text-anchor="middle" fill="#92400e">Cost</text>
+<rect x="30" y="500" width="1440" height="46" fill="#ffffff"/>
+<line class="grid" x1="30" y1="546" x2="1470" y2="546"/>
+<text class="metric" x="190" y="529">DSPs used</text>
+<text class="num" x="560" y="529">5 count</text>
+<text class="num strong" x="760" y="529">5 count</text>
+<text class="num strong" x="970" y="529" fill="#374151">0 count (+0.0%)</text>
+<text class="cell" x="1160" y="529">lower resource cost is better</text>
+<rect x="1320" y="510" width="92" height="26" rx="13" fill="#e5e7eb"/>
+<text class="badge" x="1366" y="528" text-anchor="middle" fill="#374151">Same</text>
+<rect x="30" y="546" width="1440" height="46" fill="#fbfdff"/>
+<line class="grid" x1="30" y1="592" x2="1470" y2="592"/>
+<text class="metric" x="190" y="575">DSPs utilization</text>
+<text class="num" x="560" y="575">2.27 %</text>
+<text class="num strong" x="760" y="575">2.27 %</text>
+<text class="num strong" x="970" y="575" fill="#374151">0 pp</text>
+<text class="cell" x="1160" y="575">lower FPGA occupancy is better</text>
+<rect x="1320" y="556" width="92" height="26" rx="13" fill="#e5e7eb"/>
+<text class="badge" x="1366" y="574" text-anchor="middle" fill="#374151">Same</text>
+<rect x="30" y="592" width="1440" height="46" fill="#ffffff"/>
+<line class="grid" x1="30" y1="638" x2="1470" y2="638"/>
+<text class="metric" x="190" y="621">BRAM Tiles used</text>
+<text class="num" x="560" y="621">4.5 count</text>
+<text class="num strong" x="760" y="621">4.5 count</text>
+<text class="num strong" x="970" y="621" fill="#374151">0 count (+0.0%)</text>
+<text class="cell" x="1160" y="621">lower resource cost is better</text>
+<rect x="1320" y="602" width="92" height="26" rx="13" fill="#e5e7eb"/>
+<text class="badge" x="1366" y="620" text-anchor="middle" fill="#374151">Same</text>
+<rect x="30" y="638" width="1440" height="46" fill="#fbfdff"/>
+<line class="grid" x1="30" y1="684" x2="1470" y2="684"/>
+<text class="metric" x="190" y="667">BRAM Tiles utilization</text>
+<text class="num" x="560" y="667">3.21 %</text>
+<text class="num strong" x="760" y="667">3.21 %</text>
+<text class="num strong" x="970" y="667" fill="#374151">0 pp</text>
+<text class="cell" x="1160" y="667">lower FPGA occupancy is better</text>
+<rect x="1320" y="648" width="92" height="26" rx="13" fill="#e5e7eb"/>
+<text class="badge" x="1366" y="666" text-anchor="middle" fill="#374151">Same</text>
+<line class="grid" x1="178" y1="86" x2="178" y2="684"/>
+<line class="grid" x1="548" y1="86" x2="548" y2="684"/>
+<line class="grid" x1="748" y1="86" x2="748" y2="684"/>
+<line class="grid" x1="958" y1="86" x2="958" y2="684"/>
+<line class="grid" x1="1148" y1="86" x2="1148" y2="684"/>
+<line class="grid" x1="1308" y1="86" x2="1308" y2="684"/>
+<text class="small" x="40" y="712">Generated from reports/summary/timing_metrics.csv and utilization_compare.csv. Positive timing/frequency deltas are improvements; positive utilization deltas are resource cost.</text>
+</svg>

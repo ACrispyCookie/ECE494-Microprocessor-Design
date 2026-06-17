@@ -296,6 +296,10 @@ run_plots() {
             python3 "${REPO_ROOT}/scripts/plot-timing.py"
             ;;
     esac
+
+    if [[ "${report_type}" == "all" ]]; then
+        python3 "${REPO_ROOT}/scripts/plot-presentation-summary.py"
+    fi
 }
 
 # ------------------------------------------------------------
