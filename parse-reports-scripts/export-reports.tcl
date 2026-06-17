@@ -3,20 +3,21 @@
 #     -tclargs <repo_root> <project_xpr> <experiment> <report_type> ?report_stage? ?run_implementation?
 #
 # report_type:
-#   all              utilization + timing-summary + worst-paths + path-csv
+#   all              utilization + timing-summary + worst-paths + path-csv + power
 #   utilization
 #   timing           timing-summary + worst-paths + path-csv
 #   timing-summary
 #   worst-paths
 #   path-csv
 #   path-distribution (alias for path-csv)
+#   power            report_power output
 
 proc usage {} {
     puts "Usage:"
     puts "  vivado -mode batch -source export-reports.tcl -tclargs <repo_root> <project_xpr> <experiment> <report_type> ?report_stage? ?run_implementation?"
     puts ""
     puts "report_type:"
-    puts "  all | utilization | timing | timing-summary | worst-paths | path-csv | path-distribution"
+    puts "  all | utilization | timing | timing-summary | worst-paths | path-csv | path-distribution | power"
     puts ""
     puts "report_stage:"
     puts "  auto | post-synthesis | post-implementation"
@@ -74,7 +75,7 @@ proc csv_clean {s} {
 
 proc should_run {requested name} {
     if {$requested eq $name} { return 1 }
-    if {$requested eq "all" && $name ne "power"} { return 1 }
+    if {$requested eq "all"} { return 1 }
     if {$requested eq "timing" && ($name eq "timing-summary" || $name eq "worst-paths" || $name eq "path-csv")} { return 1 }
     if {$requested eq "path-distribution" && $name eq "path-csv"} { return 1 }
     return 0

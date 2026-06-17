@@ -8,6 +8,7 @@ set -euo pipefail
 #   ./report.sh -e baseline -r utilization -y
 #   ./report.sh -e no-mul-forwarding -r timing -y
 #   ./report.sh --comparison -r all -y
+#   ./report.sh --comparison -r power -y
 #   ./report.sh --comparison -r timing --stage post-implementation -y
 #   VIVADO=/path/to/vivado ./report.sh --comparison -r path-distribution -y
 # ------------------------------------------------------------
@@ -29,7 +30,7 @@ NO_CREATE_PROJECTS=0
 RUN_IMPLEMENTATION=0
 
 VALID_EXPERIMENTS=("baseline" "no-mul-forwarding")
-VALID_REPORT_TYPES=("all" "utilization" "timing" "timing-summary" "worst-paths" "path-csv" "path-distribution")
+VALID_REPORT_TYPES=("all" "utilization" "timing" "timing-summary" "worst-paths" "path-csv" "path-distribution" "power")
 VALID_REPORT_STAGES=("auto" "post-synthesis" "post-implementation")
 
 print_help() {
@@ -52,8 +53,9 @@ Options:
                                worst-paths        worst_1000_paths.rpt + critical_paths_top10.rpt
                                path-csv           timing_paths.csv for histograms/distributions
                                path-distribution  alias for path-csv + timing plots
+                               power              power.rpt + power_metrics.csv + power plot
                                timing             timing-summary + worst-paths + path-csv
-                               all                utilization + timing + path-csv
+                               all                utilization + timing + path-csv + power
 
   -s, --stage STAGE          Timing/utilization report stage. Valid values:
                                auto                 open impl_1 if available, otherwise
@@ -96,6 +98,7 @@ Examples:
   ./report.sh -e no-mul-forwarding -r timing --stage post-implementation -y
   ./report.sh -e no-mul-forwarding -r path-distribution -y
   ./report.sh --comparison -r all -y
+  ./report.sh --comparison -r power -y
 
 Outputs:
   reports/<experiment>/                  raw Vivado reports/CSVs/metadata
@@ -174,8 +177,9 @@ prompt_report_type() {
     echo "  4) timing-summary"
     echo "  5) worst-paths"
     echo "  6) path-distribution"
+    echo "  7) power"
     echo
-    read -rp "Report type [1-6]: " report_choice
+    read -rp "Report type [1-7]: " report_choice
     case "${report_choice}" in
         1) REPORT_TYPE="all" ;;
         2) REPORT_TYPE="utilization" ;;
@@ -183,6 +187,7 @@ prompt_report_type() {
         4) REPORT_TYPE="timing-summary" ;;
         5) REPORT_TYPE="worst-paths" ;;
         6) REPORT_TYPE="path-distribution" ;;
+        7) REPORT_TYPE="power" ;;
         *) echo "ERROR: Invalid report type." >&2; exit 1 ;;
     esac
 }
@@ -275,6 +280,25 @@ run_report_for_experiment() {
         -source "${REPORT_TCL}" \
         -tclargs "${REPO_ROOT}" "${project_xpr}" "${experiment}" "${REPORT_TYPE}" "${REPORT_STAGE}" "${RUN_IMPLEMENTATION}"
 
+    if [[ "${REPORT_TYPE}" == "all" || "${REPORT_TYPE}" == "power" ]]; then
+        echo
+        echo "Post-processing power report for ${experiment}..."
+        if [[ "${RUN_PLOTS}" -eq 1 ]]; then
+            python3 "${REPO_ROOT}/scripts/plot-power.py" \
+                --reports-dir "${REPO_ROOT}/reports" \
+                --experiments "${experiment}" \
+                --summary-csv "${report_dir}/power_metrics_summary.csv" \
+                --svg "${report_dir}/power_compare.svg"
+        else
+            python3 "${REPO_ROOT}/scripts/plot-power.py" \
+                --reports-dir "${REPO_ROOT}/reports" \
+                --experiments "${experiment}" \
+                --summary-csv "${report_dir}/power_metrics_summary.csv" \
+                --svg "${report_dir}/power_compare.svg" \
+                --no-svg
+        fi
+    fi
+
     echo
     echo "Done. Reports written to:"
     echo "  ${report_dir}"
@@ -294,6 +318,9 @@ run_plots() {
             ;;&
         all|timing|path-csv|path-distribution)
             python3 "${REPO_ROOT}/scripts/plot-timing.py"
+            ;;&
+        all|power)
+            python3 "${REPO_ROOT}/scripts/plot-power.py"
             ;;
     esac
 
