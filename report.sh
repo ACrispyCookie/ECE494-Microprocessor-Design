@@ -8,6 +8,7 @@ set -euo pipefail
 #   ./report.sh -e baseline -r utilization -y
 #   ./report.sh -e no-mul-forwarding -r timing -y
 #   ./report.sh --comparison -r all -y
+#   ./report.sh --comparison -r timing --stage post-implementation -y
 #   VIVADO=/path/to/vivado ./report.sh --comparison -r path-distribution -y
 # ------------------------------------------------------------
 
@@ -20,13 +21,16 @@ REPORT_TCL="${DEFAULT_REPORT_TCL}"
 PROJECT_XPR=""
 EXPERIMENT=""
 REPORT_TYPE=""
+REPORT_STAGE="auto"
 ASSUME_YES=0
 RUN_PLOTS=1
 CREATE_PROJECTS=0
 NO_CREATE_PROJECTS=0
+RUN_IMPLEMENTATION=0
 
 VALID_EXPERIMENTS=("baseline" "no-mul-forwarding")
 VALID_REPORT_TYPES=("all" "utilization" "timing" "timing-summary" "worst-paths" "path-csv" "path-distribution")
+VALID_REPORT_STAGES=("auto" "post-synthesis" "post-implementation")
 
 print_help() {
     cat <<EOF
@@ -51,6 +55,14 @@ Options:
                                timing             timing-summary + worst-paths + path-csv
                                all                utilization + timing + path-csv
 
+  -s, --stage STAGE          Timing/utilization report stage. Valid values:
+                               auto                 open impl_1 if available, otherwise
+                                                    generate post-synthesis reports (default)
+                               post-synthesis       always synthesize current design and report
+                                                    the post-synthesis netlist
+                               post-implementation  report implemented impl_1 design; fail if
+                                                    implementation has not completed
+
   -p, --project PATH         Path to Vivado .xpr project. Only valid for a
                              single experiment. Default:
                                build/vivado-<experiment>/cv32e40p-zedboard-project.xpr
@@ -61,6 +73,8 @@ Options:
       --vivado PATH          Vivado executable. Default: \${VIVADO:-vivado}
 
       --create-projects      Recreate/update Vivado projects before reporting.
+                             If --stage post-implementation is selected, also
+                             run an in-memory implementation before exporting reports.
                              If omitted, missing built-in projects are created
                              automatically.
 
@@ -78,6 +92,8 @@ Options:
 Examples:
   ./report.sh -e baseline -r utilization -y
   ./report.sh -e baseline -r timing-summary -y
+  ./report.sh -e no-mul-forwarding -r timing --stage post-synthesis -y
+  ./report.sh -e no-mul-forwarding -r timing --stage post-implementation -y
   ./report.sh -e no-mul-forwarding -r path-distribution -y
   ./report.sh --comparison -r all -y
 
@@ -109,6 +125,20 @@ is_valid_report_type() {
         [[ "${value}" == "${item}" ]] && return 0
     done
     return 1
+}
+
+normalize_report_stage() {
+    local value="$1"
+    case "${value}" in
+        auto) printf 'auto' ;;
+        post-synthesis|post_synthesis|synthesis|synth) printf 'post-synthesis' ;;
+        post-implementation|post_implementation|implementation|impl) printf 'post-implementation' ;;
+        *) return 1 ;;
+    esac
+}
+
+is_valid_report_stage() {
+    normalize_report_stage "$1" >/dev/null
 }
 
 prompt_experiment() {
@@ -154,6 +184,22 @@ prompt_report_type() {
         5) REPORT_TYPE="worst-paths" ;;
         6) REPORT_TYPE="path-distribution" ;;
         *) echo "ERROR: Invalid report type." >&2; exit 1 ;;
+    esac
+}
+
+prompt_report_stage() {
+    echo
+    echo "Select report stage:"
+    echo "  1) auto (implementation if available, otherwise post-synthesis)"
+    echo "  2) post-synthesis"
+    echo "  3) post-implementation"
+    echo
+    read -rp "Report stage [1-3, default 1]: " stage_choice
+    case "${stage_choice:-1}" in
+        1) REPORT_STAGE="auto" ;;
+        2) REPORT_STAGE="post-synthesis" ;;
+        3) REPORT_STAGE="post-implementation" ;;
+        *) echo "ERROR: Invalid report stage." >&2; exit 1 ;;
     esac
 }
 
@@ -219,13 +265,15 @@ run_report_for_experiment() {
     echo "========================================"
     echo "Experiment  : ${experiment}"
     echo "Report type : ${REPORT_TYPE}"
+    echo "Report stage: ${REPORT_STAGE}"
+    echo "Run impl.   : ${RUN_IMPLEMENTATION}"
     echo "Project     : ${project_xpr}"
     echo "Output dir  : ${report_dir}"
     echo
 
     "${VIVADO_BIN}" -mode batch \
         -source "${REPORT_TCL}" \
-        -tclargs "${REPO_ROOT}" "${project_xpr}" "${experiment}" "${REPORT_TYPE}"
+        -tclargs "${REPO_ROOT}" "${project_xpr}" "${experiment}" "${REPORT_TYPE}" "${REPORT_STAGE}" "${RUN_IMPLEMENTATION}"
 
     echo
     echo "Done. Reports written to:"
@@ -267,6 +315,11 @@ while [[ $# -gt 0 ]]; do
         -r|--report)
             [[ $# -ge 2 ]] || { echo "ERROR: Missing value for $1" >&2; exit 1; }
             REPORT_TYPE="$2"
+            shift 2
+            ;;
+        -s|--stage)
+            [[ $# -ge 2 ]] || { echo "ERROR: Missing value for $1" >&2; exit 1; }
+            REPORT_STAGE="$2"
             shift 2
             ;;
         -p|--project)
@@ -319,11 +372,24 @@ done
 
 [[ -n "${EXPERIMENT}" ]] || prompt_experiment
 [[ -n "${REPORT_TYPE}" ]] || prompt_report_type
+[[ -n "${REPORT_STAGE}" ]] || prompt_report_stage
 
 if ! is_valid_report_type "${REPORT_TYPE}"; then
     echo "ERROR: Invalid report type: ${REPORT_TYPE}" >&2
     printf "Valid report types:\n  %s\n" "${VALID_REPORT_TYPES[@]}" >&2
     exit 1
+fi
+
+if ! normalized_stage="$(normalize_report_stage "${REPORT_STAGE}")"; then
+    echo "ERROR: Invalid report stage: ${REPORT_STAGE}" >&2
+    printf "Valid report stages:\n  %s\n" "${VALID_REPORT_STAGES[@]}" >&2
+    echo "Aliases accepted: synth, synthesis, impl, implementation, post_synthesis, post_implementation" >&2
+    exit 1
+fi
+REPORT_STAGE="${normalized_stage}"
+
+if [[ "${REPORT_STAGE}" == "post-implementation" && "${CREATE_PROJECTS}" -eq 1 ]]; then
+    RUN_IMPLEMENTATION=1
 fi
 
 if [[ "${EXPERIMENT}" == "all" && -n "${PROJECT_XPR}" ]]; then
@@ -363,6 +429,8 @@ if [[ "${ASSUME_YES}" -ne 1 ]]; then
     echo "Tcl script  : ${REPORT_TCL}"
     echo "Experiments : ${experiments[*]}"
     echo "Report type : ${REPORT_TYPE}"
+    echo "Report stage: ${REPORT_STAGE}"
+    echo "Run impl.   : ${RUN_IMPLEMENTATION}"
     echo "Plots       : ${RUN_PLOTS}"
     read -rp "Continue? [y/N]: " confirm
     case "${confirm}" in

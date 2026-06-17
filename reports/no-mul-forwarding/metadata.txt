@@ -1,6 +1,6 @@
 experiment=no-mul-forwarding
 report_type=all
-report_stage=post_synthesis
+report_stage=post_implementation
 project_xpr=/home/tsiantosd/Desktop/TsiantosD/HERMES/workspace/ECE494-Microprocessor-Design/build/vivado-no-mul-forwarding/cv32e40p-zedboard-project.xpr
 repo_root=/home/tsiantosd/Desktop/TsiantosD/HERMES/workspace/ECE494-Microprocessor-Design
 vivado_version=Vivado v2022.2 (64-bit)
@@ -8,7 +8,7 @@ SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
 IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
 Tool Version Limit: 2022.10
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
-date=2026-06-17 13:26:13
-repo_commit=28ae8cd6e04805b97686c1e5b6e63aea295a4e0c
+date=2026-06-17 15:19:32
+repo_commit=5938c53961c389f66e60f663d4f93b776be45e0d
 cv32e40p_baseline_commit=6033d2b1be3295ec774d17ac4cf226faacfdeb08
-cv32e40p_no_mul_forwarding_commit=e26c78f24084537d2999a30362eeff2b5525f85f
+cv32e40p_no_mul_forwarding_commit=687d3af6cff5c18ea9ea5af965585f8d6f0d1d38

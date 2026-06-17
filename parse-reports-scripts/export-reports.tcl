@@ -1,6 +1,6 @@
 # Called by report.sh:
 #   vivado -mode batch -source parse-reports-scripts/export-reports.tcl \
-#     -tclargs <repo_root> <project_xpr> <experiment> <report_type>
+#     -tclargs <repo_root> <project_xpr> <experiment> <report_type> ?report_stage? ?run_implementation?
 #
 # report_type:
 #   all              utilization + timing-summary + worst-paths + path-csv
@@ -13,13 +13,16 @@
 
 proc usage {} {
     puts "Usage:"
-    puts "  vivado -mode batch -source export-reports.tcl -tclargs <repo_root> <project_xpr> <experiment> <report_type>"
+    puts "  vivado -mode batch -source export-reports.tcl -tclargs <repo_root> <project_xpr> <experiment> <report_type> ?report_stage? ?run_implementation?"
     puts ""
     puts "report_type:"
     puts "  all | utilization | timing | timing-summary | worst-paths | path-csv | path-distribution"
+    puts ""
+    puts "report_stage:"
+    puts "  auto | post-synthesis | post-implementation"
 }
 
-if {$argc != 4} {
+if {$argc < 4 || $argc > 6} {
     usage
     error "Invalid number of arguments"
 }
@@ -28,6 +31,14 @@ set repo_root   [file normalize [lindex $argv 0]]
 set project_xpr [file normalize [lindex $argv 1]]
 set experiment  [lindex $argv 2]
 set report_type [lindex $argv 3]
+set requested_stage "auto"
+set run_implementation 0
+if {$argc >= 5} {
+    set requested_stage [lindex $argv 4]
+}
+if {$argc >= 6} {
+    set run_implementation [lindex $argv 5]
+}
 
 set report_dir [file join $repo_root "reports" $experiment]
 file mkdir $report_dir
@@ -39,6 +50,8 @@ puts "repo_root   = $repo_root"
 puts "project_xpr = $project_xpr"
 puts "experiment  = $experiment"
 puts "report_type = $report_type"
+puts "report_stage= $requested_stage"
+puts "run_impl    = $run_implementation"
 puts "report_dir  = $report_dir"
 puts "========================================"
 
@@ -67,34 +80,91 @@ proc should_run {requested name} {
     return 0
 }
 
+proc normalize_report_stage {stage} {
+    switch -- $stage {
+        "auto" { return "auto" }
+        "post-synthesis" - "post_synthesis" - "synthesis" - "synth" { return "post-synthesis" }
+        "post-implementation" - "post_implementation" - "implementation" - "impl" { return "post-implementation" }
+        default { error "Invalid report_stage '$stage'. Use auto, post-synthesis, or post-implementation." }
+    }
+}
+
+proc synthesize_current_design {} {
+    set srcset [get_filesets sources_1]
+    set top [get_property top $srcset]
+    set part [get_property part [current_project]]
+    puts "Synthesizing top=$top part=$part"
+
+    update_compile_order -fileset sources_1
+    synth_design -top $top -part $part
+}
+
+proc normalize_boolean {value} {
+    set normalized [string tolower $value]
+    switch -- $normalized {
+        "1" - "true" - "yes" - "y" { return 1 }
+        "0" - "false" - "no" - "n" - "" { return 0 }
+        default { error "Invalid boolean value '$value'. Use 0/1, true/false, or yes/no." }
+    }
+}
+
+proc implement_current_design {} {
+    puts "Running in-memory post-implementation flow..."
+    synthesize_current_design
+    puts "Optimizing design..."
+    opt_design
+    puts "Placing design..."
+    place_design
+    puts "Routing design..."
+    route_design
+}
+
+set requested_stage [normalize_report_stage $requested_stage]
+set run_implementation [normalize_boolean $run_implementation]
+
 open_project $project_xpr
 
-set report_stage "post_implementation"
+set report_stage ""
 
-# Most reports require an implemented design. For utilization-only comparison,
-# fall back to a direct post-synthesis report when impl_1 is not available;
-# this avoids requiring a prior GUI/manual implementation step and also avoids
-# container crashes seen when launching implementation runs under Vivado 2022.2.
-if {[catch {open_run impl_1} err]} {
-    if {[should_run $report_type "utilization"] || [should_run $report_type "timing-summary"] || [should_run $report_type "worst-paths"] || [should_run $report_type "path-csv"]} {
+# Stage selection:
+#   auto                 preserves the historical behavior: use impl_1 when it is
+#                        openable, otherwise synthesize and report post-synthesis.
+#   post-synthesis       always synthesizes the current project sources and reports
+#                        that netlist.
+#   post-implementation  opens an implemented impl_1 run. When report.sh passes
+#                        run_implementation=1 (currently --create-projects with
+#                        --stage post-implementation), run synth/opt/place/route
+#                        in memory if impl_1 is not openable yet.
+if {$requested_stage eq "post-synthesis"} {
+    puts "Generating explicitly requested post-synthesis reports."
+    synthesize_current_design
+    set report_stage "post_synthesis"
+} elseif {$requested_stage eq "post-implementation"} {
+    if {[catch {open_run impl_1} err]} {
+        if {$run_implementation} {
+            puts "Implementation run impl_1 is not openable; running in-memory implementation because run_impl=1."
+            puts "Original open_run message:"
+            puts $err
+            implement_current_design
+        } else {
+            puts "ERROR: Could not open implementation run impl_1."
+            puts "Run implementation first, or retry with --create-projects --stage post-implementation to let report.sh run it."
+            puts "Original error:"
+            puts $err
+            error "Cannot export post-implementation reports without implemented design"
+        }
+    }
+    set report_stage "post_implementation"
+} else {
+    if {[catch {open_run impl_1} err]} {
         puts "Implementation run impl_1 is not openable; generating post-synthesis reports instead."
         puts "Original open_run message:"
         puts $err
 
-        set srcset [get_filesets sources_1]
-        set top [get_property top $srcset]
-        set part [get_property part [current_project]]
-        puts "Synthesizing top=$top part=$part"
-
-        update_compile_order -fileset sources_1
-        synth_design -top $top -part $part
+        synthesize_current_design
         set report_stage "post_synthesis"
     } else {
-        puts "ERROR: Could not open implementation run impl_1."
-        puts "Make sure implementation has completed successfully."
-        puts "Original error:"
-        puts $err
-        error "Cannot export reports without implemented design"
+        set report_stage "post_implementation"
     }
 }
 
