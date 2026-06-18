@@ -61,7 +61,7 @@ rtl-tests-no-alu-mul-forwarding:
 	python3 scripts/run-rtl-tests.py --version no_alu_mul_forwarding $(RTL_TEST_ARGS)
 
 reports:
-	./report.sh --comparison --report all --yes
+	./report.sh --comparison --report all --create-projects --yes --stage post-implementation
 
 utilization-reports:
 	./report.sh --comparison --report utilization --yes

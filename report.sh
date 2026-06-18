@@ -9,7 +9,7 @@ set -euo pipefail
 #   ./report.sh -e no-mul-forwarding -r timing -y
 #   ./report.sh -e no-alu-forwarding -r utilization -y
 #   ./report.sh -e no-alu-mul-forwarding -r timing -y
-#   ./report.sh --comparison -r all -y
+#   ./report.sh --comparison -r all --create-projects --stage post-implementation -y
 #   ./report.sh --comparison -r power -y
 #   ./report.sh --comparison -r timing --stage post-implementation -y
 #   VIVADO=/path/to/vivado ./report.sh --comparison -r path-distribution -y
@@ -103,7 +103,7 @@ Examples:
   ./report.sh -e no-mul-forwarding -r path-distribution -y
   ./report.sh -e no-alu-forwarding -r utilization -y
   ./report.sh -e no-alu-mul-forwarding -r timing -y
-  ./report.sh --comparison -r all -y
+  ./report.sh --comparison -r all --create-projects --stage post-implementation -y
   ./report.sh --comparison -r power -y
 
 Outputs:

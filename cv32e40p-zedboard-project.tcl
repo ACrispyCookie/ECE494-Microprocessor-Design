@@ -377,7 +377,7 @@ proc print_help {} {
   puts "                       name is the name of the project from where this"
   puts "                       script was generated.\n"
   puts "\[--clock_period <ns>\] Override clk_i target period in ns. Default:"
-  puts "                       15.000 for baseline/no-alu-forwarding/no-alu-mul-forwarding, 10.000 for no-mul-forwarding.\n"
+  puts "                       15.000 for baseline/no-alu-forwarding/no-alu-mul-forwarding, 14.000 for no-mul-forwarding.\n"
   puts "\[--help\]               Print help information for this script"
   puts "-------------------------------------------------------------------------\n"
   exit 0
@@ -451,7 +451,7 @@ file mkdir $build_dir
 
 if { $clock_period eq "" } {
   switch -- $experiment {
-    "no-mul-forwarding" { set clock_period "10.000" }
+    "no-mul-forwarding" { set clock_period "14.000" }
     default { set clock_period "15.000" }
   }
 }
