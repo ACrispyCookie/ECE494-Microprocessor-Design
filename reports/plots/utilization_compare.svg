@@ -23,43 +23,43 @@
 <text class="label" x="167.5" y="181.3" text-anchor="middle">7.84%</text>
 <rect x="196.0" y="176.0" width="33.0" height="369.0" fill="#dc2626" rx="3"/>
 <text class="label" x="212.5" y="169.0" text-anchor="middle">8.11%</text>
-<rect x="241.0" y="186.0" width="33.0" height="359.0" fill="#ea580c" rx="3"/>
+<rect x="241.0" y="186.0" width="33.0" height="359.0" fill="#16a34a" rx="3"/>
 <text class="label" x="257.5" y="179.0" text-anchor="middle">7.89%</text>
-<rect x="286.0" y="186.9" width="33.0" height="358.1" fill="#16a34a" rx="3"/>
+<rect x="286.0" y="186.9" width="33.0" height="358.1" fill="#9333ea" rx="3"/>
 <text class="label" x="302.5" y="179.9" text-anchor="middle">7.87%</text>
 <text class="axis" x="465.0" y="580" text-anchor="middle">FFs/Regs</text>
 <rect x="381.0" y="457.2" width="33.0" height="87.8" fill="#2563eb" rx="3"/>
 <text class="label" x="397.5" y="450.2" text-anchor="middle">1.93%</text>
 <rect x="426.0" y="455.4" width="33.0" height="89.6" fill="#dc2626" rx="3"/>
 <text class="label" x="442.5" y="448.4" text-anchor="middle">1.97%</text>
-<rect x="471.0" y="455.4" width="33.0" height="89.6" fill="#ea580c" rx="3"/>
+<rect x="471.0" y="455.4" width="33.0" height="89.6" fill="#16a34a" rx="3"/>
 <text class="label" x="487.5" y="448.4" text-anchor="middle">1.97%</text>
-<rect x="516.0" y="455.4" width="33.0" height="89.6" fill="#16a34a" rx="3"/>
+<rect x="516.0" y="455.4" width="33.0" height="89.6" fill="#9333ea" rx="3"/>
 <text class="label" x="532.5" y="448.4" text-anchor="middle">1.97%</text>
 <text class="axis" x="695.0" y="580" text-anchor="middle">DSPs</text>
 <rect x="611.0" y="441.7" width="33.0" height="103.3" fill="#2563eb" rx="3"/>
 <text class="label" x="627.5" y="434.7" text-anchor="middle">2.27%</text>
 <rect x="656.0" y="441.7" width="33.0" height="103.3" fill="#dc2626" rx="3"/>
 <text class="label" x="672.5" y="434.7" text-anchor="middle">2.27%</text>
-<rect x="701.0" y="441.7" width="33.0" height="103.3" fill="#ea580c" rx="3"/>
+<rect x="701.0" y="441.7" width="33.0" height="103.3" fill="#16a34a" rx="3"/>
 <text class="label" x="717.5" y="434.7" text-anchor="middle">2.27%</text>
-<rect x="746.0" y="441.7" width="33.0" height="103.3" fill="#16a34a" rx="3"/>
+<rect x="746.0" y="441.7" width="33.0" height="103.3" fill="#9333ea" rx="3"/>
 <text class="label" x="762.5" y="434.7" text-anchor="middle">2.27%</text>
 <text class="axis" x="925.0" y="580" text-anchor="middle">BRAM Tiles</text>
 <rect x="841.0" y="398.9" width="33.0" height="146.1" fill="#2563eb" rx="3"/>
 <text class="label" x="857.5" y="391.9" text-anchor="middle">3.21%</text>
 <rect x="886.0" y="398.9" width="33.0" height="146.1" fill="#dc2626" rx="3"/>
 <text class="label" x="902.5" y="391.9" text-anchor="middle">3.21%</text>
-<rect x="931.0" y="398.9" width="33.0" height="146.1" fill="#ea580c" rx="3"/>
+<rect x="931.0" y="398.9" width="33.0" height="146.1" fill="#16a34a" rx="3"/>
 <text class="label" x="947.5" y="391.9" text-anchor="middle">3.21%</text>
-<rect x="976.0" y="398.9" width="33.0" height="146.1" fill="#16a34a" rx="3"/>
+<rect x="976.0" y="398.9" width="33.0" height="146.1" fill="#9333ea" rx="3"/>
 <text class="label" x="992.5" y="391.9" text-anchor="middle">3.21%</text>
 <rect x="120" y="602" width="16" height="16" fill="#2563eb" rx="2"/>
 <text class="legend" x="144" y="615">baseline</text>
 <rect x="370" y="602" width="16" height="16" fill="#dc2626" rx="2"/>
 <text class="legend" x="394" y="615">no-mul-forwarding</text>
-<rect x="620" y="602" width="16" height="16" fill="#ea580c" rx="2"/>
+<rect x="620" y="602" width="16" height="16" fill="#16a34a" rx="2"/>
 <text class="legend" x="644" y="615">no-alu-forwarding</text>
-<rect x="870" y="602" width="16" height="16" fill="#16a34a" rx="2"/>
+<rect x="870" y="602" width="16" height="16" fill="#9333ea" rx="2"/>
 <text class="legend" x="894" y="615">no-alu-mul-forwarding</text>
 </svg>

@@ -31,6 +31,10 @@ DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding", "no
 COLORS = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a", "no-alu-mul-forwarding": "#9333ea"}
 FALLBACK_COLORS = ["#16a34a", "#9333ea", "#ea580c"]
 
+# Horizontal space, in SVG pixels, left empty between adjacent histogram bins.
+# Increase this if grouped bars look too crowded; decrease it for wider bars.
+HISTOGRAM_BIN_GAP_PX = 8
+
 
 @dataclass(frozen=True)
 class TimingPath:
@@ -283,13 +287,19 @@ def write_hist_svg(paths_by_exp: dict[str, list[TimingPath]], metric: str, outpu
         counts_by_exp[exp] = counts
         max_count = max(max_count, max(counts) if counts else 0)
 
-    width_svg, height_svg = 1100, 620
-    ml, mr, mt, mb = 90, 40, 85, 105
+    width_svg = 1100
+    height_svg = 700 if metric == "datapath_delay" else 620
+    ml, mr, mt = 90, 40, 85
+    # The datapath-delay plot shows one tick label for every histogram bin, so
+    # give the bottom area enough room for rotated labels plus the legend.
+    mb = 180 if metric == "datapath_delay" else 105
     plot_w = width_svg - ml - mr
     plot_h = height_svg - mt - mb
     group_w = plot_w / 24
+    bin_gap = min(max(0, HISTOGRAM_BIN_GAP_PX), max(0, group_w - 12))
     bar_gap = 2
-    bar_w = max(5, (group_w - 8) / max(1, len(experiments)) - bar_gap)
+    bar_area_w = group_w - bin_gap
+    bar_w = max(3, (bar_area_w - 8) / max(1, len(experiments)) - bar_gap)
 
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width_svg}" height="{height_svg}" viewBox="0 0 {width_svg} {height_svg}">',
@@ -310,12 +320,23 @@ def write_hist_svg(paths_by_exp: dict[str, list[TimingPath]], metric: str, outpu
 
     for i, (start, end) in enumerate(bin_edges):
         gx = ml + i * group_w
-        if i % 3 == 0:
-            parts.append(f'<text class="tick" x="{gx+group_w/2:.1f}" y="{mt+plot_h+22}" text-anchor="middle">{start:.2f}</text>')
+        tick_x = gx + group_w / 2
+        if metric == "datapath_delay":
+            # Label every datapath-delay group.  Use the bin center because the
+            # bars represent a delay range; this puts the delay value directly
+            # below each grouped set of bars without the labels colliding.
+            label = f"{(start + end) / 2:.2f}"
+            label_y = mt + plot_h + 38
+            parts.append(
+                f'<text class="tick" x="{tick_x:.1f}" y="{label_y:.1f}" '
+                f'text-anchor="end" transform="rotate(-45 {tick_x:.1f} {label_y:.1f})">{label}</text>'
+            )
+        elif i % 3 == 0:
+            parts.append(f'<text class="tick" x="{tick_x:.1f}" y="{mt+plot_h+22}" text-anchor="middle">{start:.2f}</text>')
         for j, exp in enumerate(experiments):
             count = counts_by_exp[exp][i]
             h = (count / max_count) * plot_h if max_count else 0
-            x = gx + 4 + j * (bar_w + bar_gap)
+            x = gx + bin_gap / 2 + 4 + j * (bar_w + bar_gap)
             y = mt + plot_h - h
             color = COLORS.get(exp, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
             parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}" rx="1"/>')

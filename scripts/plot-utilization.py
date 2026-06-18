@@ -172,10 +172,7 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
     # Add headroom for labels and round up to a readable percent tick.
     y_max = max(10.0, math.ceil(max_util * 1.15))
 
-    colors = {
-        "baseline": "#2563eb",
-        "no-mul-forwarding": "#dc2626",
-    }
+    colors = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a", "no-alu-mul-forwarding": "#9333ea"}
     fallback_colors = ["#16a34a", "#9333ea", "#ea580c"]
 
     group_w = plot_w / len(resources)
