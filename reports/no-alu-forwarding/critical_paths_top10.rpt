@@ -1,0 +1,845 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Thu Jun 18 12:02:22 2026
+| Host         : TsiantosDPC running 64-bit Ubuntu 22.04.5 LTS
+| Command      : report_timing -delay_type max -sort_by slack -max_paths 10 -nworst 1 -path_type full_clock_expanded -file /home/tsiantosd/Desktop/TsiantosD/HERMES/workspace/ECE494-Microprocessor-Design/reports/no-alu-forwarding/critical_paths_top10.rpt
+| Design       : zedboard_cv32e40p_wrapper
+| Device       : 7z020-clg484
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.114ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[26]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.769ns  (logic 9.186ns (62.200%)  route 5.583ns (37.800%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT5=2 LUT6=3)
+  Clock Path Skew:        -0.114ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.033ns = ( 20.033 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    14.765 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, routed)           0.000    14.765    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+    SLICE_X94Y31         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219    14.984 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[0]
+                         net (fo=3, routed)           0.934    15.918    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[0]
+    SLICE_X94Y27         LUT5 (Prop_lut5_I1_O)        0.295    16.213 r  core_i/core_i/id_stage_i/i___0_carry__4_i_7/O
+                         net (fo=1, routed)           0.000    16.213    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][20]_i_2_0[1]
+    SLICE_X94Y27         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    16.746 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__4/CO[3]
+                         net (fo=1, routed)           0.000    16.746    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__4_n_0
+    SLICE_X94Y28         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.239    16.985 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/O[2]
+                         net (fo=1, routed)           0.287    17.272    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_5
+    SLICE_X97Y28         LUT6 (Prop_lut6_I5_O)        0.301    17.573 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][26]_i_4/O
+                         net (fo=1, routed)           0.511    18.084    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[26]
+    SLICE_X93Y31         LUT6 (Prop_lut6_I0_O)        0.124    18.208 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][26]_i_2/O
+                         net (fo=36, routed)          1.132    19.340    core_i/core_i/ex_stage_i/mult_i/regfile_alu_wdata_fw[23]
+    SLICE_X84Y32         LUT5 (Prop_lut5_I0_O)        0.149    19.489 r  core_i/core_i/ex_stage_i/mult_i/mult_operand_c_ex_o[26]_i_2/O
+                         net (fo=1, routed)           0.488    19.978    core_i/core_i/ex_stage_i/mult_i/mult_operand_c_ex_o[26]_i_2_n_0
+    SLICE_X76Y32         LUT6 (Prop_lut6_I0_O)        0.332    20.310 r  core_i/core_i/ex_stage_i/mult_i/mult_operand_c_ex_o[26]_i_1/O
+                         net (fo=1, routed)           0.000    20.310    core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[31]_2[24]
+    SLICE_X76Y32         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[26]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.550    20.033    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X76Y32         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[26]/C
+                         clock pessimism              0.394    20.427    
+                         clock uncertainty           -0.035    20.392    
+    SLICE_X76Y32         FDCE (Setup_fdce_C_D)        0.032    20.424    core_i/core_i/id_stage_i/mult_operand_c_ex_o_reg[26]
+  -------------------------------------------------------------------
+                         required time                         20.424    
+                         arrival time                         -20.310    
+  -------------------------------------------------------------------
+                         slack                                  0.114    
+
+Slack (MET) :             0.250ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[25]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.688ns  (logic 9.042ns (61.561%)  route 5.646ns (38.439%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT5=2 LUT6=3)
+  Clock Path Skew:        -0.059ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.088ns = ( 20.088 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    14.765 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, routed)           0.000    14.765    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+    SLICE_X94Y31         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219    14.984 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[0]
+                         net (fo=3, routed)           0.934    15.918    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[0]
+    SLICE_X94Y27         LUT5 (Prop_lut5_I1_O)        0.295    16.213 r  core_i/core_i/id_stage_i/i___0_carry__4_i_7/O
+                         net (fo=1, routed)           0.000    16.213    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][20]_i_2_0[1]
+    SLICE_X94Y27         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    16.746 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__4/CO[3]
+                         net (fo=1, routed)           0.000    16.746    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__4_n_0
+    SLICE_X94Y28         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.323    17.069 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/O[1]
+                         net (fo=1, routed)           0.429    17.499    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_6
+    SLICE_X97Y27         LUT6 (Prop_lut6_I5_O)        0.306    17.805 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][25]_i_4/O
+                         net (fo=1, routed)           0.490    18.295    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[25]
+    SLICE_X92Y28         LUT6 (Prop_lut6_I0_O)        0.124    18.419 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][25]_i_2/O
+                         net (fo=36, routed)          0.494    18.913    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_17
+    SLICE_X93Y30         LUT5 (Prop_lut5_I3_O)        0.124    19.037 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[25]_i_2/O
+                         net (fo=6, routed)           1.069    20.105    core_i/core_i/id_stage_i/register_file_i/instr_rdata_id_o_reg[24]_13
+    SLICE_X99Y24         LUT6 (Prop_lut6_I3_O)        0.124    20.229 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o[25]_i_1/O
+                         net (fo=1, routed)           0.000    20.229    core_i/core_i/id_stage_i/register_file_i_n_6
+    SLICE_X99Y24         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[25]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.605    20.088    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X99Y24         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[25]/C
+                         clock pessimism              0.394    20.482    
+                         clock uncertainty           -0.035    20.447    
+    SLICE_X99Y24         FDCE (Setup_fdce_C_D)        0.032    20.479    core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[25]
+  -------------------------------------------------------------------
+                         required time                         20.479    
+                         arrival time                         -20.229    
+  -------------------------------------------------------------------
+                         slack                                  0.250    
+
+Slack (MET) :             0.289ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[18]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.589ns  (logic 8.263ns (56.638%)  route 6.326ns (43.362%))
+  Logic Levels:           11  (CARRY4=2 DSP48E1=2 LUT2=2 LUT5=2 LUT6=3)
+  Clock Path Skew:        -0.118ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.029ns = ( 20.029 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_O[2])
+                                                      0.578    14.810 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/O[2]
+                         net (fo=3, routed)           0.895    15.705    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__4[2]
+    SLICE_X94Y26         LUT5 (Prop_lut5_I4_O)        0.301    16.006 r  core_i/core_i/id_stage_i/i___0_carry__3_i_6/O
+                         net (fo=1, routed)           0.000    16.006    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][16]_i_4_1[2]
+    SLICE_X94Y26         CARRY4 (Prop_carry4_S[2]_O[2])
+                                                      0.250    16.256 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__3/O[2]
+                         net (fo=1, routed)           0.473    16.729    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__3_n_5
+    SLICE_X95Y23         LUT6 (Prop_lut6_I5_O)        0.301    17.030 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][18]_i_4/O
+                         net (fo=1, routed)           1.043    18.073    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[18]_0
+    SLICE_X85Y27         LUT6 (Prop_lut6_I0_O)        0.124    18.197 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][18]_i_2/O
+                         net (fo=36, routed)          0.888    19.085    core_i/core_i/id_stage_i/register_file_i/gen_trigger_regs.tmatch_value_q_reg[18]
+    SLICE_X73Y25         LUT5 (Prop_lut5_I3_O)        0.124    19.209 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[18]_i_4/O
+                         net (fo=6, routed)           0.798    20.006    core_i/core_i/if_stage_i/mult_operand_a_ex_o_reg[18]_0
+    SLICE_X76Y28         LUT6 (Prop_lut6_I2_O)        0.124    20.130 r  core_i/core_i/if_stage_i/mult_operand_b_ex_o[18]_i_1/O
+                         net (fo=1, routed)           0.000    20.130    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[31]_2[18]
+    SLICE_X76Y28         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[18]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.546    20.029    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X76Y28         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[18]/C
+                         clock pessimism              0.394    20.423    
+                         clock uncertainty           -0.035    20.388    
+    SLICE_X76Y28         FDCE (Setup_fdce_C_D)        0.031    20.419    core_i/core_i/id_stage_i/mult_operand_b_ex_o_reg[18]
+  -------------------------------------------------------------------
+                         required time                         20.419    
+                         arrival time                         -20.130    
+  -------------------------------------------------------------------
+                         slack                                  0.289    
+
+Slack (MET) :             0.357ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[18]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.519ns  (logic 8.263ns (56.912%)  route 6.256ns (43.088%))
+  Logic Levels:           11  (CARRY4=2 DSP48E1=2 LUT2=2 LUT5=2 LUT6=3)
+  Clock Path Skew:        -0.120ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.027ns = ( 20.027 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_O[2])
+                                                      0.578    14.810 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/O[2]
+                         net (fo=3, routed)           0.895    15.705    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__4[2]
+    SLICE_X94Y26         LUT5 (Prop_lut5_I4_O)        0.301    16.006 r  core_i/core_i/id_stage_i/i___0_carry__3_i_6/O
+                         net (fo=1, routed)           0.000    16.006    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][16]_i_4_1[2]
+    SLICE_X94Y26         CARRY4 (Prop_carry4_S[2]_O[2])
+                                                      0.250    16.256 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__3/O[2]
+                         net (fo=1, routed)           0.473    16.729    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__3_n_5
+    SLICE_X95Y23         LUT6 (Prop_lut6_I5_O)        0.301    17.030 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][18]_i_4/O
+                         net (fo=1, routed)           1.043    18.073    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[18]_0
+    SLICE_X85Y27         LUT6 (Prop_lut6_I0_O)        0.124    18.197 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][18]_i_2/O
+                         net (fo=36, routed)          0.888    19.085    core_i/core_i/id_stage_i/register_file_i/gen_trigger_regs.tmatch_value_q_reg[18]
+    SLICE_X73Y25         LUT5 (Prop_lut5_I3_O)        0.124    19.209 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[18]_i_4/O
+                         net (fo=6, routed)           0.727    19.936    core_i/core_i/id_stage_i/register_file_i/instr_rdata_id_o_reg[24]_6
+    SLICE_X75Y28         LUT6 (Prop_lut6_I3_O)        0.124    20.060 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o[18]_i_1/O
+                         net (fo=1, routed)           0.000    20.060    core_i/core_i/id_stage_i/register_file_i_n_13
+    SLICE_X75Y28         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[18]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.544    20.027    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X75Y28         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[18]/C
+                         clock pessimism              0.394    20.421    
+                         clock uncertainty           -0.035    20.386    
+    SLICE_X75Y28         FDCE (Setup_fdce_C_D)        0.031    20.417    core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[18]
+  -------------------------------------------------------------------
+                         required time                         20.417    
+                         arrival time                         -20.060    
+  -------------------------------------------------------------------
+                         slack                                  0.357    
+
+Slack (MET) :             0.412ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[27]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.462ns  (logic 9.035ns (62.473%)  route 5.427ns (37.527%))
+  Logic Levels:           13  (CARRY4=4 DSP48E1=2 LUT2=2 LUT5=2 LUT6=3)
+  Clock Path Skew:        -0.119ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.028ns = ( 20.028 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    14.765 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, routed)           0.000    14.765    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+    SLICE_X94Y31         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219    14.984 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/O[0]
+                         net (fo=3, routed)           0.934    15.918    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5[0]
+    SLICE_X94Y27         LUT5 (Prop_lut5_I1_O)        0.295    16.213 r  core_i/core_i/id_stage_i/i___0_carry__4_i_7/O
+                         net (fo=1, routed)           0.000    16.213    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][20]_i_2_0[1]
+    SLICE_X94Y27         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    16.746 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__4/CO[3]
+                         net (fo=1, routed)           0.000    16.746    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__4_n_0
+    SLICE_X94Y28         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.315    17.061 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/O[3]
+                         net (fo=1, routed)           0.334    17.395    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_4
+    SLICE_X92Y28         LUT6 (Prop_lut6_I5_O)        0.307    17.702 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][27]_i_4/O
+                         net (fo=1, routed)           0.306    18.008    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[27]_0
+    SLICE_X92Y29         LUT6 (Prop_lut6_I0_O)        0.124    18.132 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][27]_i_2/O
+                         net (fo=36, routed)          0.519    18.651    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_19
+    SLICE_X93Y30         LUT5 (Prop_lut5_I3_O)        0.124    18.775 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[27]_i_2/O
+                         net (fo=6, routed)           1.104    19.880    core_i/core_i/id_stage_i/register_file_i/instr_rdata_id_o_reg[24]_15
+    SLICE_X75Y30         LUT6 (Prop_lut6_I3_O)        0.124    20.004 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_b_ex_o[27]_i_1/O
+                         net (fo=1, routed)           0.000    20.004    core_i/core_i/id_stage_i/register_file_i_n_4
+    SLICE_X75Y30         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[27]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.545    20.028    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X75Y30         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[27]/C
+                         clock pessimism              0.394    20.422    
+                         clock uncertainty           -0.035    20.387    
+    SLICE_X75Y30         FDCE (Setup_fdce_C_D)        0.029    20.416    core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[27]
+  -------------------------------------------------------------------
+                         required time                         20.416    
+                         arrival time                         -20.004    
+  -------------------------------------------------------------------
+                         slack                                  0.412    
+
+Slack (MET) :             0.417ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[18]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.459ns  (logic 8.263ns (57.148%)  route 6.196ns (42.852%))
+  Logic Levels:           11  (CARRY4=2 DSP48E1=2 LUT2=2 LUT5=2 LUT6=3)
+  Clock Path Skew:        -0.118ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.029ns = ( 20.029 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_O[2])
+                                                      0.578    14.810 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/O[2]
+                         net (fo=3, routed)           0.895    15.705    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__4[2]
+    SLICE_X94Y26         LUT5 (Prop_lut5_I4_O)        0.301    16.006 r  core_i/core_i/id_stage_i/i___0_carry__3_i_6/O
+                         net (fo=1, routed)           0.000    16.006    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][16]_i_4_1[2]
+    SLICE_X94Y26         CARRY4 (Prop_carry4_S[2]_O[2])
+                                                      0.250    16.256 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__3/O[2]
+                         net (fo=1, routed)           0.473    16.729    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__3_n_5
+    SLICE_X95Y23         LUT6 (Prop_lut6_I5_O)        0.301    17.030 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][18]_i_4/O
+                         net (fo=1, routed)           1.043    18.073    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[18]_0
+    SLICE_X85Y27         LUT6 (Prop_lut6_I0_O)        0.124    18.197 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][18]_i_2/O
+                         net (fo=36, routed)          0.897    19.094    core_i/core_i/id_stage_i/register_file_i/gen_trigger_regs.tmatch_value_q_reg[18]
+    SLICE_X72Y28         LUT5 (Prop_lut5_I3_O)        0.124    19.218 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[18]_i_3/O
+                         net (fo=3, routed)           0.658    19.876    core_i/core_i/if_stage_i/mult_operand_a_ex_o_reg[18]
+    SLICE_X76Y28         LUT6 (Prop_lut6_I3_O)        0.124    20.000 r  core_i/core_i/if_stage_i/mult_operand_a_ex_o[18]_i_1/O
+                         net (fo=1, routed)           0.000    20.000    core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[31]_2[18]
+    SLICE_X76Y28         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[18]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.546    20.029    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X76Y28         FDCE                                         r  core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[18]/C
+                         clock pessimism              0.394    20.423    
+                         clock uncertainty           -0.035    20.388    
+    SLICE_X76Y28         FDCE (Setup_fdce_C_D)        0.029    20.417    core_i/core_i/id_stage_i/mult_operand_a_ex_o_reg[18]
+  -------------------------------------------------------------------
+                         required time                         20.417    
+                         arrival time                         -20.000    
+  -------------------------------------------------------------------
+                         slack                                  0.417    
+
+Slack (MET) :             0.423ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/gen_rf[14].mem_reg[14][31]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.498ns  (logic 9.054ns (62.451%)  route 5.444ns (37.549%))
+  Logic Levels:           13  (CARRY4=5 DSP48E1=2 LUT2=2 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.119ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.028ns = ( 20.028 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    14.765 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, routed)           0.000    14.765    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+    SLICE_X94Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    14.882 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000    14.882    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0_n_0
+    SLICE_X94Y32         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219    15.101 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__1/O[0]
+                         net (fo=3, routed)           0.934    16.035    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5_0[0]
+    SLICE_X94Y28         LUT5 (Prop_lut5_I1_O)        0.295    16.330 r  core_i/core_i/id_stage_i/i___0_carry__5_i_7/O
+                         net (fo=1, routed)           0.000    16.330    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_4_1[1]
+    SLICE_X94Y28         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    16.863 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, routed)           0.000    16.863    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+    SLICE_X94Y29         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.315    17.178 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[3]
+                         net (fo=1, routed)           0.300    17.478    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_4
+    SLICE_X95Y30         LUT6 (Prop_lut6_I5_O)        0.307    17.785 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][31]_i_11/O
+                         net (fo=1, routed)           0.304    18.089    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[31]_3
+    SLICE_X96Y30         LUT6 (Prop_lut6_I0_O)        0.124    18.213 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][31]_i_6/O
+                         net (fo=35, routed)          1.676    19.889    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_20
+    SLICE_X73Y30         LUT3 (Prop_lut3_I0_O)        0.150    20.039 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[14].mem[14][31]_i_2/O
+                         net (fo=1, routed)           0.000    20.039    core_i/core_i/id_stage_i/register_file_i/gen_rf[14].mem[14][31]_i_2_n_0
+    SLICE_X73Y30         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/gen_rf[14].mem_reg[14][31]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.545    20.028    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
+    SLICE_X73Y30         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/gen_rf[14].mem_reg[14][31]/C
+                         clock pessimism              0.394    20.422    
+                         clock uncertainty           -0.035    20.387    
+    SLICE_X73Y30         FDCE (Setup_fdce_C_D)        0.075    20.462    core_i/core_i/id_stage_i/register_file_i/gen_rf[14].mem_reg[14][31]
+  -------------------------------------------------------------------
+                         required time                         20.462    
+                         arrival time                         -20.039    
+  -------------------------------------------------------------------
+                         slack                                  0.423    
+
+Slack (MET) :             0.431ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/gen_rf[28].mem_reg[28][31]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.490ns  (logic 9.056ns (62.500%)  route 5.434ns (37.500%))
+  Logic Levels:           13  (CARRY4=5 DSP48E1=2 LUT2=2 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.119ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.028ns = ( 20.028 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    14.765 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, routed)           0.000    14.765    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+    SLICE_X94Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    14.882 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000    14.882    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0_n_0
+    SLICE_X94Y32         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219    15.101 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__1/O[0]
+                         net (fo=3, routed)           0.934    16.035    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5_0[0]
+    SLICE_X94Y28         LUT5 (Prop_lut5_I1_O)        0.295    16.330 r  core_i/core_i/id_stage_i/i___0_carry__5_i_7/O
+                         net (fo=1, routed)           0.000    16.330    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_4_1[1]
+    SLICE_X94Y28         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    16.863 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, routed)           0.000    16.863    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+    SLICE_X94Y29         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.315    17.178 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[3]
+                         net (fo=1, routed)           0.300    17.478    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_4
+    SLICE_X95Y30         LUT6 (Prop_lut6_I5_O)        0.307    17.785 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][31]_i_11/O
+                         net (fo=1, routed)           0.304    18.089    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[31]_3
+    SLICE_X96Y30         LUT6 (Prop_lut6_I0_O)        0.124    18.213 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][31]_i_6/O
+                         net (fo=35, routed)          1.666    19.879    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_20
+    SLICE_X68Y31         LUT3 (Prop_lut3_I0_O)        0.152    20.031 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[28].mem[28][31]_i_2/O
+                         net (fo=1, routed)           0.000    20.031    core_i/core_i/id_stage_i/register_file_i/gen_rf[28].mem[28][31]_i_2_n_0
+    SLICE_X68Y31         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/gen_rf[28].mem_reg[28][31]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.545    20.028    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
+    SLICE_X68Y31         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/gen_rf[28].mem_reg[28][31]/C
+                         clock pessimism              0.394    20.422    
+                         clock uncertainty           -0.035    20.387    
+    SLICE_X68Y31         FDCE (Setup_fdce_C_D)        0.075    20.462    core_i/core_i/id_stage_i/register_file_i/gen_rf[28].mem_reg[28][31]
+  -------------------------------------------------------------------
+                         required time                         20.462    
+                         arrival time                         -20.031    
+  -------------------------------------------------------------------
+                         slack                                  0.431    
+
+Slack (MET) :             0.440ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/register_file_i/gen_rf[12].mem_reg[12][31]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.482ns  (logic 9.056ns (62.532%)  route 5.426ns (37.468%))
+  Logic Levels:           13  (CARRY4=5 DSP48E1=2 LUT2=2 LUT3=1 LUT5=1 LUT6=2)
+  Clock Path Skew:        -0.118ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.029ns = ( 20.029 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    14.765 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/CO[3]
+                         net (fo=1, routed)           0.000    14.765    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry_n_0
+    SLICE_X94Y31         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.117    14.882 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0/CO[3]
+                         net (fo=1, routed)           0.000    14.882    core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__0_n_0
+    SLICE_X94Y32         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.219    15.101 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry__1/O[0]
+                         net (fo=3, routed)           0.934    16.035    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__5_0[0]
+    SLICE_X94Y28         LUT5 (Prop_lut5_I1_O)        0.295    16.330 r  core_i/core_i/id_stage_i/i___0_carry__5_i_7/O
+                         net (fo=1, routed)           0.000    16.330    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][24]_i_4_1[1]
+    SLICE_X94Y28         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.533    16.863 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5/CO[3]
+                         net (fo=1, routed)           0.000    16.863    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__5_n_0
+    SLICE_X94Y29         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.315    17.178 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6/O[3]
+                         net (fo=1, routed)           0.300    17.478    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__6_n_4
+    SLICE_X95Y30         LUT6 (Prop_lut6_I5_O)        0.307    17.785 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][31]_i_11/O
+                         net (fo=1, routed)           0.304    18.089    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[31]_3
+    SLICE_X96Y30         LUT6 (Prop_lut6_I0_O)        0.124    18.213 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][31]_i_6/O
+                         net (fo=35, routed)          1.658    19.871    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_20
+    SLICE_X75Y31         LUT3 (Prop_lut3_I0_O)        0.152    20.023 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[12].mem[12][31]_i_2/O
+                         net (fo=1, routed)           0.000    20.023    core_i/core_i/id_stage_i/register_file_i/gen_rf[12].mem[12][31]_i_2_n_0
+    SLICE_X75Y31         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/gen_rf[12].mem_reg[12][31]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.546    20.029    core_i/core_i/id_stage_i/register_file_i/clk_i_IBUF_BUFG
+    SLICE_X75Y31         FDCE                                         r  core_i/core_i/id_stage_i/register_file_i/gen_rf[12].mem_reg[12][31]/C
+                         clock pessimism              0.394    20.423    
+                         clock uncertainty           -0.035    20.388    
+    SLICE_X75Y31         FDCE (Setup_fdce_C_D)        0.075    20.463    core_i/core_i/id_stage_i/register_file_i/gen_rf[12].mem_reg[12][31]
+  -------------------------------------------------------------------
+                         required time                         20.463    
+                         arrival time                         -20.024    
+  -------------------------------------------------------------------
+                         slack                                  0.440    
+
+Slack (MET) :             0.449ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[18]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.425ns  (logic 8.263ns (57.281%)  route 6.162ns (42.719%))
+  Logic Levels:           11  (CARRY4=2 DSP48E1=2 LUT2=2 LUT5=2 LUT6=3)
+  Clock Path Skew:        -0.119ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    5.028ns = ( 20.028 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.541ns
+    Clock Pessimism Removal (CPR):    0.394ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.779     5.541    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X95Y25         FDCE                                         r  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y25         FDCE (Prop_fdce_C_Q)         0.456     5.997 f  core_i/core_i/id_stage_i/mult_operator_ex_o_reg[2]/Q
+                         net (fo=127, routed)         0.894     6.891    core_i/core_i/id_stage_i/mult_operator_ex[2]
+    SLICE_X93Y28         LUT2 (Prop_lut2_I1_O)        0.119     7.010 r  core_i/core_i/id_stage_i/__0_i_2/O
+                         net (fo=1, routed)           0.523     7.534    core_i/core_i/ex_stage_i/mult_i/__0_5[15]
+    DSP48_X3Y11          DSP48E1 (Prop_dsp48e1_A[15]_PCOUT[47])
+                                                      4.244    11.778 r  core_i/core_i/ex_stage_i/mult_i/__0/PCOUT[47]
+                         net (fo=1, routed)           0.002    11.780    core_i/core_i/ex_stage_i/mult_i/__0_n_106
+    DSP48_X3Y12          DSP48E1 (Prop_dsp48e1_PCIN[47]_P[0])
+                                                      1.518    13.298 r  core_i/core_i/ex_stage_i/mult_i/__1/P[0]
+                         net (fo=2, routed)           0.810    14.108    core_i/core_i/ex_stage_i/mult_i/__1_n_105
+    SLICE_X94Y30         LUT2 (Prop_lut2_I0_O)        0.124    14.232 r  core_i/core_i/ex_stage_i/mult_i/i__carry_i_3/O
+                         net (fo=1, routed)           0.000    14.232    core_i/core_i/ex_stage_i/mult_i/i__carry_i_3_n_0
+    SLICE_X94Y30         CARRY4 (Prop_carry4_S[1]_O[2])
+                                                      0.578    14.810 r  core_i/core_i/ex_stage_i/mult_i/_inferred__2/i__carry/O[2]
+                         net (fo=3, routed)           0.895    15.705    core_i/core_i/id_stage_i/_inferred__7/i___0_carry__4[2]
+    SLICE_X94Y26         LUT5 (Prop_lut5_I4_O)        0.301    16.006 r  core_i/core_i/id_stage_i/i___0_carry__3_i_6/O
+                         net (fo=1, routed)           0.000    16.006    core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][16]_i_4_1[2]
+    SLICE_X94Y26         CARRY4 (Prop_carry4_S[2]_O[2])
+                                                      0.250    16.256 r  core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__3/O[2]
+                         net (fo=1, routed)           0.473    16.729    core_i/core_i/ex_stage_i/mult_i/_inferred__7/i___0_carry__3_n_5
+    SLICE_X95Y23         LUT6 (Prop_lut6_I5_O)        0.301    17.030 r  core_i/core_i/ex_stage_i/mult_i/gen_rf[31].mem[31][18]_i_4/O
+                         net (fo=1, routed)           1.043    18.073    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[18]_0
+    SLICE_X85Y27         LUT6 (Prop_lut6_I0_O)        0.124    18.197 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][18]_i_2/O
+                         net (fo=36, routed)          0.888    19.085    core_i/core_i/id_stage_i/register_file_i/gen_trigger_regs.tmatch_value_q_reg[18]
+    SLICE_X73Y25         LUT5 (Prop_lut5_I3_O)        0.124    19.209 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[18]_i_4/O
+                         net (fo=6, routed)           0.634    19.843    core_i/core_i/id_stage_i/register_file_i/instr_rdata_id_o_reg[24]_6
+    SLICE_X75Y29         LUT6 (Prop_lut6_I2_O)        0.124    19.967 r  core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o[18]_i_1/O
+                         net (fo=1, routed)           0.000    19.967    core_i/core_i/id_stage_i/operand_c[18]
+    SLICE_X75Y29         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[18]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2102, routed)        1.545    20.028    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X75Y29         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[18]/C
+                         clock pessimism              0.394    20.422    
+                         clock uncertainty           -0.035    20.387    
+    SLICE_X75Y29         FDCE (Setup_fdce_C_D)        0.029    20.416    core_i/core_i/id_stage_i/alu_operand_c_ex_o_reg[18]
+  -------------------------------------------------------------------
+                         required time                         20.416    
+                         arrival time                         -19.967    
+  -------------------------------------------------------------------
+                         slack                                  0.449    
+
+
+
+

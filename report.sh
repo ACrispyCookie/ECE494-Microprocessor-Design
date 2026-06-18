@@ -7,6 +7,7 @@ set -euo pipefail
 # Examples:
 #   ./report.sh -e baseline -r utilization -y
 #   ./report.sh -e no-mul-forwarding -r timing -y
+#   ./report.sh -e no-alu-forwarding -r utilization -y
 #   ./report.sh --comparison -r all -y
 #   ./report.sh --comparison -r power -y
 #   ./report.sh --comparison -r timing --stage post-implementation -y
@@ -29,7 +30,7 @@ CREATE_PROJECTS=0
 NO_CREATE_PROJECTS=0
 RUN_IMPLEMENTATION=0
 
-VALID_EXPERIMENTS=("baseline" "no-mul-forwarding")
+VALID_EXPERIMENTS=("baseline" "no-mul-forwarding" "no-alu-forwarding")
 VALID_REPORT_TYPES=("all" "utilization" "timing" "timing-summary" "worst-paths" "path-csv" "path-distribution" "power")
 VALID_REPORT_STAGES=("auto" "post-synthesis" "post-implementation")
 
@@ -42,9 +43,10 @@ Options:
   -e, --experiment NAME      Experiment to report. Valid built-ins:
                                baseline
                                no-mul-forwarding
+                               no-alu-forwarding
                              Use 'all' as shorthand for --comparison.
 
-      --comparison           Run the selected report flow for both built-in
+      --comparison           Run the selected report flow for all built-in
                              experiments and regenerate comparison plots.
 
   -r, --report TYPE          Report type. Valid values:
@@ -97,6 +99,7 @@ Examples:
   ./report.sh -e no-mul-forwarding -r timing --stage post-synthesis -y
   ./report.sh -e no-mul-forwarding -r timing --stage post-implementation -y
   ./report.sh -e no-mul-forwarding -r path-distribution -y
+  ./report.sh -e no-alu-forwarding -r utilization -y
   ./report.sh --comparison -r all -y
   ./report.sh --comparison -r power -y
 
@@ -152,15 +155,17 @@ prompt_experiment() {
     echo "Select experiment:"
     echo "  1) baseline"
     echo "  2) no-mul-forwarding"
-    echo "  3) both / comparison"
-    echo "  4) custom"
+    echo "  3) no-alu-forwarding"
+    echo "  4) all / comparison"
+    echo "  5) custom"
     echo
-    read -rp "Experiment [1-4]: " exp_choice
+    read -rp "Experiment [1-5]: " exp_choice
     case "${exp_choice}" in
         1) EXPERIMENT="baseline" ;;
         2) EXPERIMENT="no-mul-forwarding" ;;
-        3) EXPERIMENT="all" ;;
-        4)
+        3) EXPERIMENT="no-alu-forwarding" ;;
+        4) EXPERIMENT="all" ;;
+        5)
             read -rp "Custom experiment name: " EXPERIMENT
             [[ -n "${EXPERIMENT}" ]] || { echo "ERROR: Experiment cannot be empty." >&2; exit 1; }
             ;;

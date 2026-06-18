@@ -37,6 +37,8 @@ VERSIONS = {
     "baseline": "cv32e40p_baseline",
     "no_mul_forwarding": "cv32e40p_no_mul_forwarding",
     "no-mul-forwarding": "cv32e40p_no_mul_forwarding",
+    "no_alu_forwarding": "cv32e40p_no_alu_forwarding",
+    "no-alu-forwarding": "cv32e40p_no_alu_forwarding",
 }
 
 CV32_FILES = [
@@ -303,7 +305,7 @@ def run_one(version: str, sim: Path, test: str, gcc: str, objcopy: str, objdump:
 def parse_args() -> argparse.Namespace:
     tests = sorted(p.stem for p in ASM_DIR.glob("*.S") if p.name != "test_macros.S")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", "--versions", nargs="+", default=["baseline", "no_mul_forwarding"], choices=sorted(VERSIONS))
+    parser.add_argument("--version", "--versions", nargs="+", default=["baseline", "no_mul_forwarding", "no_alu_forwarding"], choices=sorted(VERSIONS))
     parser.add_argument("--test", "--tests", nargs="+", default=tests, choices=tests)
     parser.add_argument("--force-rebuild", action="store_true", help="Re-run sv2v and iverilog even if vvp already exists")
     parser.add_argument("--timeout-cycles", type=int, default=2000)

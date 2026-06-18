@@ -4,6 +4,7 @@
 Inputs by default:
   reports/baseline/timing_paths.csv
   reports/no-mul-forwarding/timing_paths.csv
+  reports/no-alu-forwarding/timing_paths.csv
 
 Outputs by default:
   reports/summary/timing_metrics.csv
@@ -25,8 +26,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding")
-COLORS = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626"}
+DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding")
+COLORS = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a"}
 FALLBACK_COLORS = ["#16a34a", "#9333ea", "#ea580c"]
 
 

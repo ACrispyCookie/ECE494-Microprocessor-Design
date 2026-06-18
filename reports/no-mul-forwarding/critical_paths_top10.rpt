@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
-| Date         : Wed Jun 17 15:19:30 2026
+| Date         : Thu Jun 18 12:00:08 2026
 | Host         : TsiantosDPC running 64-bit Ubuntu 22.04.5 LTS
 | Command      : report_timing -delay_type max -sort_by slack -max_paths 10 -nworst 1 -path_type full_clock_expanded -file /home/tsiantosd/Desktop/TsiantosD/HERMES/workspace/ECE494-Microprocessor-Design/reports/no-mul-forwarding/critical_paths_top10.rpt
 | Design       : zedboard_cv32e40p_wrapper
