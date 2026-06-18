@@ -71,3 +71,6 @@ venv/
 !reports/**/*.rpt
 !reports/**/*.csv
 !reports/**/*.png
+
+*.tex
+*.bib
