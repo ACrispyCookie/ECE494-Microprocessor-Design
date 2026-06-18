@@ -225,5 +225,3 @@ make -n no-alu-forwarding
 make -n no-alu-mul-forwarding
 make -n reports
 ```
-
-No commits are required by the flow; review the working-tree diff before committing any documentation, script, report, or submodule-pointer updates.
