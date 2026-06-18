@@ -24,6 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ASM_DIR = ROOT / "rtl-tests" / "asm"
 GOLDEN_DIR = ROOT / "rtl-tests" / "golden"
+PREBUILT_DIR = ROOT / "rtl-tests" / "prebuilt"
 TB = ROOT / "rtl-tests" / "tb" / "tb_cv32e40p_rtl.sv"
 BUILD_ROOT = ROOT / "build" / "rtl-tests"
 TOOLS_DIR = ROOT / "build" / "tools"
@@ -142,6 +143,13 @@ def find_tool(name: str, *, probe_args: list[str] | None = None) -> str:
             return str(candidate)
     tried = ", ".join(str(c) for c in candidates)
     raise SystemExit(f"Required tool found but none of the candidates ran successfully: {name}. Tried: {tried}")
+
+
+def find_optional_tool(name: str, *, probe_args: list[str] | None = None) -> str | None:
+    try:
+        return find_tool(name, probe_args=probe_args)
+    except SystemExit:
+        return None
 
 
 def find_iverilog_vvp_pair() -> tuple[str, str]:
@@ -273,6 +281,48 @@ def run_one(version: str, sim: Path, test: str, gcc: str, objcopy: str, objdump:
 
     elf = assemble_test(test, workdir, gcc, objcopy)
     expected_dmem, expected_regfile = generate_expected(elf, workdir, objdump)
+    program_mem = workdir / "program_imem.mem"
+    return run_sim(version, sim, test, workdir, program_mem, expected_dmem, expected_regfile, vvp, timeout_cycles)
+
+
+def run_one_prebuilt(version: str, sim: Path, test: str, vvp: str, timeout_cycles: int) -> bool:
+    source_dir = PREBUILT_DIR / test
+    required = ["program_imem.mem", "expected_dmem.mem", "expected_regfile.mem"]
+    missing = [name for name in required if not (source_dir / name).exists()]
+    if missing:
+        raise SystemExit(
+            "RISC-V compiler tools were not found and this test has no prebuilt files: "
+            f"{test} (missing: {', '.join(missing)}). Install riscv-none-elf-gcc/binutils "
+            "or regenerate rtl-tests/prebuilt/."
+        )
+
+    workdir = BUILD_ROOT / version / test
+    if workdir.exists():
+        shutil.rmtree(workdir)
+    workdir.mkdir(parents=True)
+    program_mem = workdir / "program_imem.mem"
+    expected_dmem = workdir / "expected_dmem.mem"
+    expected_regfile = workdir / "expected_regfile.mem"
+    shutil.copy2(source_dir / "program_imem.mem", program_mem)
+    shutil.copy2(source_dir / "expected_dmem.mem", expected_dmem)
+    shutil.copy2(source_dir / "expected_regfile.mem", expected_regfile)
+    print(f"[PREBUILT] Using prebuilt program/golden files for {test}")
+    return run_sim(version, sim, test, workdir, program_mem, expected_dmem, expected_regfile, vvp, timeout_cycles)
+
+
+def run_sim(
+    version: str,
+    sim: Path,
+    test: str,
+    workdir: Path,
+    program_mem: Path,
+    expected_dmem: Path,
+    expected_regfile: Path,
+    vvp: str,
+    timeout_cycles: int,
+) -> bool:
+    if not program_mem.exists():
+        raise SystemExit(f"Missing program memory image: {program_mem}")
     dump = workdir / "dmem_dump.mem"
     reg_dump = workdir / "regfile_dump.mem"
 
@@ -331,11 +381,16 @@ def main() -> int:
     prepend_known_tool_paths()
     sv2v = ensure_sv2v()
     iverilog, vvp = find_iverilog_vvp_pair()
-    gcc = find_tool("riscv-none-elf-gcc", probe_args=["--version"])
-    objcopy = find_tool("riscv-none-elf-objcopy", probe_args=["--version"])
-    objdump = find_tool("riscv-none-elf-objdump", probe_args=["--version"])
+    gcc = find_optional_tool("riscv-none-elf-gcc", probe_args=["--version"])
+    objcopy = find_optional_tool("riscv-none-elf-objcopy", probe_args=["--version"])
+    objdump = find_optional_tool("riscv-none-elf-objdump", probe_args=["--version"])
+    have_riscv_tools = bool(gcc and objcopy and objdump)
     print(f"[TOOLS] iverilog={iverilog}")
     print(f"[TOOLS] vvp={vvp}")
+    if have_riscv_tools:
+        print(f"[TOOLS] riscv-gcc={gcc}")
+    else:
+        print("[TOOLS] riscv-none-elf-gcc/binutils not found; using rtl-tests/prebuilt/*.mem")
 
     all_ok = True
     for requested_version in args.version:
@@ -344,7 +399,10 @@ def main() -> int:
         ensure_core_submodules(core_dir)
         sim = build_sim(version, core_dir, sv2v, iverilog, vvp, args.force_rebuild)
         for test in args.test:
-            all_ok &= run_one(version, sim, test, gcc, objcopy, objdump, vvp, args.timeout_cycles)
+            if have_riscv_tools:
+                all_ok &= run_one(version, sim, test, gcc, objcopy, objdump, vvp, args.timeout_cycles)
+            else:
+                all_ok &= run_one_prebuilt(version, sim, test, vvp, args.timeout_cycles)
 
     return 0 if all_ok else 1
 

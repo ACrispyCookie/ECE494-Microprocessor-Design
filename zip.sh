@@ -90,6 +90,10 @@ if missing:
 for rel in root_files:
     if not rel.parts:
         continue
+    if rel.parts[0] == "build":
+        # Vivado/simulation/tool build output is generated and should never be
+        # part of the submission archive.
+        continue
     if rel.parts[0].startswith("cv32e40p_"):
         # The superproject entry is only a gitlink; actual source files are
         # copied from each initialized submodule below.

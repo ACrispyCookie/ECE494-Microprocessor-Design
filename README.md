@@ -16,11 +16,7 @@ The experiment name is the value passed to `make EXPERIMENT=...`, `report.sh --e
 
 ## One-time setup
 
-Initialize the CV32E40P submodules and their nested vendor submodules:
-
-```bash
-git submodule update --init --recursive
-```
+The submission ZIP already contains the CV32E40P RTL variant directories (`cv32e40p_*`) as normal source folders.  After unzipping the submission, **do not run** `git submodule update --init --recursive`; the ZIP is intentionally not a git repository.
 
 If Vivado is not on `PATH`, set `VIVADO` explicitly:
 
@@ -30,7 +26,9 @@ export VIVADO=/path/to/Vivado/2022.2/bin/vivado
 
 ## RTL testbench flow
 
-The RTL tests live under `rtl-tests/` and are run by `scripts/run-rtl-tests.py`.  The runner assembles the test program, converts CV32E40P SystemVerilog with `sv2v`, compiles with `iverilog`, runs `vvp`, and compares final DMEM/register-file state against generated golden dumps.
+The RTL tests live under `rtl-tests/` and are run by `scripts/run-rtl-tests.py`.  The runner converts CV32E40P SystemVerilog with `sv2v`, compiles with `iverilog`, runs `vvp`, and compares final DMEM/register-file state against golden dumps.
+
+The submission includes prebuilt files under `rtl-tests/prebuilt/` (`program_imem.mem`, `expected_dmem.mem`, `expected_regfile.mem`) for every provided assembly test.  Therefore `make rtl-tests` does **not** require a 1GB RISC-V GCC toolchain just to run the delivered tests.  If `riscv-none-elf-gcc`, `riscv-none-elf-objcopy`, and `riscv-none-elf-objdump` are available on `PATH`, the runner regenerates the memories from `rtl-tests/asm/*.S`; otherwise it uses the prebuilt `.mem` files.
 
 Run the full RTL regression for all variants:
 

@@ -25,12 +25,14 @@ init-core-submodules:
 		echo "ERROR: Unknown EXPERIMENT=$(EXPERIMENT); CORE_DIR is empty" >&2; \
 		exit 1; \
 	fi
-	@if [ ! -e "$(CORE_DIR)/.git" ]; then \
-		echo "Initializing submodule $(CORE_DIR)..."; \
-		git submodule update --init --recursive -- "$(CORE_DIR)"; \
-	else \
+	@if [ -d "$(CORE_DIR)/rtl" ] && [ -f "$(CORE_DIR)/rtl/cv32e40p_core.sv" ]; then \
+		echo "Using packaged CV32E40P sources in $(CORE_DIR)"; \
+	elif [ -e "$(CORE_DIR)/.git" ]; then \
 		echo "Initializing nested submodules under $(CORE_DIR)..."; \
 		git -C "$(CORE_DIR)" submodule update --init --recursive; \
+	else \
+		echo "Initializing submodule $(CORE_DIR)..."; \
+		git submodule update --init --recursive -- "$(CORE_DIR)"; \
 	fi
 
 baseline:
