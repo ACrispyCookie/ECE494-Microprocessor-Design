@@ -8,8 +8,9 @@ SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
 IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
 Tool Version Limit: 2022.10
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
-date=2026-06-18 12:00:10
-repo_commit=fc4bc7018d3e1aec0a12e2fe6a859850db5dc034
+date=2026-06-18 15:38:36
+repo_commit=b7b89647a6da3c92214d827f967bc86bf1a671b3
 cv32e40p_baseline_commit=6033d2b1be3295ec774d17ac4cf226faacfdeb08
 cv32e40p_no_mul_forwarding_commit=687d3af6cff5c18ea9ea5af965585f8d6f0d1d38
-cv32e40p_no_alu_forwarding_commit=6033d2b1be3295ec774d17ac4cf226faacfdeb08
+cv32e40p_no_alu_forwarding_commit=9de1e96390fbec2b0979084fcb8042db9ad4efd1
+cv32e40p_no_alu_mul_forwarding_commit=6033d2b1be3295ec774d17ac4cf226faacfdeb08

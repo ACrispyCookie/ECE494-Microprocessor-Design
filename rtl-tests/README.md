@@ -5,6 +5,7 @@ This directory contains a fully automated RTL regression flow for the local CV32
 - `baseline` -> `cv32e40p_baseline`
 - `no_mul_forwarding` -> `cv32e40p_no_mul_forwarding`
 - `no_alu_forwarding` -> `cv32e40p_no_alu_forwarding`
+- `no_alu_mul_forwarding` -> `cv32e40p_no_alu_mul_forwarding`
 
 The flow is file-based and mirrors the style of the `/workspace/ECE338-Parallel-Computer-Architecture/test` pipeline: assembly is compiled into an instruction-memory file, a Python reference program generates final-state golden dumps, and the RTL testbench loads those dumps and compares them against the CPU final state.
 
@@ -32,8 +33,10 @@ Useful focused runs:
 make rtl-tests-baseline
 make rtl-tests-no-mul-forwarding
 make rtl-tests-no-alu-forwarding
+make rtl-tests-no-alu-mul-forwarding
 python3 scripts/run-rtl-tests.py --version baseline --test alu_load_store
 python3 scripts/run-rtl-tests.py --version no_alu_forwarding --test alu_load_store
+python3 scripts/run-rtl-tests.py --version no_alu_mul_forwarding --test alu_dependency_matrix
 python3 scripts/run-rtl-tests.py --force-rebuild
 ```
 

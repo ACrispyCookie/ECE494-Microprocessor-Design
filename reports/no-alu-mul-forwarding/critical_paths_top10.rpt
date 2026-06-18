@@ -1,0 +1,982 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Thu Jun 18 15:43:09 2026
+| Host         : TsiantosDPC running 64-bit Ubuntu 22.04.5 LTS
+| Command      : report_timing -delay_type max -sort_by slack -max_paths 10 -nworst 1 -path_type full_clock_expanded -file /home/tsiantosd/Desktop/TsiantosD/HERMES/workspace/ECE494-Microprocessor-Design/reports/no-alu-mul-forwarding/critical_paths_top10.rpt
+| Design       : zedboard_cv32e40p_wrapper
+| Device       : 7z020-clg484
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.630ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[29]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.154ns  (logic 4.525ns (31.969%)  route 9.629ns (68.031%))
+  Logic Levels:           19  (CARRY4=8 LUT3=1 LUT4=1 LUT5=2 LUT6=6 MUXF7=1)
+  Clock Path Skew:        -0.210ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.969ns = ( 19.969 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.710     5.472    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X69Y25         FDCE                                         r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X69Y25         FDCE (Prop_fdce_C_Q)         0.419     5.891 r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/Q
+                         net (fo=68, routed)          2.117     8.009    core_i/core_i/id_stage_i/alu_operator_ex[3]
+    SLICE_X48Y44         LUT4 (Prop_lut4_I0_O)        0.327     8.336 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73/O
+                         net (fo=32, routed)          0.861     9.197    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73_n_0
+    SLICE_X48Y40         LUT6 (Prop_lut6_I4_O)        0.332     9.529 r  core_i/core_i/id_stage_i/BReg_DP[31]_i_98/O
+                         net (fo=1, routed)           0.623    10.151    core_i/core_i/id_stage_i/BReg_DP[31]_i_98_n_0
+    SLICE_X49Y40         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    10.807 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57/CO[3]
+                         net (fo=1, routed)           0.000    10.807    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57_n_0
+    SLICE_X49Y41         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.921 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19/CO[3]
+                         net (fo=1, routed)           0.000    10.921    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19_n_0
+    SLICE_X49Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.035 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55/CO[3]
+                         net (fo=1, routed)           0.000    11.035    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55_n_0
+    SLICE_X49Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.149 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53/CO[3]
+                         net (fo=1, routed)           0.000    11.149    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53_n_0
+    SLICE_X49Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.263 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56/CO[3]
+                         net (fo=1, routed)           0.000    11.263    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56_n_0
+    SLICE_X49Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.377 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    11.377    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23_n_0
+    SLICE_X49Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.491 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54/CO[3]
+                         net (fo=1, routed)           0.000    11.491    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54_n_0
+    SLICE_X49Y47         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    11.804 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[31]_i_30/O[3]
+                         net (fo=3, routed)           0.464    12.268    core_i/core_i/id_stage_i/ex_stage_i/alu_i/data0[31]
+    SLICE_X45Y47         LUT6 (Prop_lut6_I1_O)        0.306    12.574 f  core_i/core_i/id_stage_i/BReg_DP[30]_i_5/O
+                         net (fo=31, routed)          1.041    13.615    core_i/core_i/id_stage_i/BReg_DP[30]_i_5_n_0
+    SLICE_X38Y50         LUT3 (Prop_lut3_I0_O)        0.148    13.763 f  core_i/core_i/id_stage_i/BReg_DP[26]_i_4/O
+                         net (fo=6, routed)           0.515    14.278    core_i/core_i/id_stage_i/BReg_DP[26]_i_4_n_0
+    SLICE_X38Y50         LUT6 (Prop_lut6_I5_O)        0.328    14.606 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95/O
+                         net (fo=3, routed)           0.849    15.455    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95_n_0
+    SLICE_X39Y49         LUT6 (Prop_lut6_I1_O)        0.124    15.579 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58/O
+                         net (fo=3, routed)           0.689    16.268    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58_n_0
+    SLICE_X42Y49         LUT6 (Prop_lut6_I1_O)        0.124    16.392 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_34/O
+                         net (fo=18, routed)          0.696    17.087    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_34_n_0
+    SLICE_X45Y42         LUT5 (Prop_lut5_I0_O)        0.124    17.211 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[29]_i_11/O
+                         net (fo=1, routed)           0.713    17.925    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[29]_i_11_n_0
+    SLICE_X48Y46         LUT6 (Prop_lut6_I1_O)        0.124    18.049 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[29]_i_7/O
+                         net (fo=1, routed)           0.000    18.049    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[29]_i_7_n_0
+    SLICE_X48Y46         MUXF7 (Prop_muxf7_I1_O)      0.217    18.266 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[29]_i_3/O
+                         net (fo=1, routed)           1.062    19.328    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[29]_i_3_n_0
+    SLICE_X35Y33         LUT5 (Prop_lut5_I2_O)        0.299    19.627 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[29]_i_1/O
+                         net (fo=1, routed)           0.000    19.627    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[31]_1[29]
+    SLICE_X35Y33         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[29]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.486    19.969    core_i/core_i/ex_stage_i/clk_i_IBUF_BUFG
+    SLICE_X35Y33         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[29]/C
+                         clock pessimism              0.294    20.263    
+                         clock uncertainty           -0.035    20.227    
+    SLICE_X35Y33         FDCE (Setup_fdce_C_D)        0.029    20.256    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[29]
+  -------------------------------------------------------------------
+                         required time                         20.256    
+                         arrival time                         -19.627    
+  -------------------------------------------------------------------
+                         slack                                  0.630    
+
+Slack (MET) :             0.722ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[25]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.065ns  (logic 4.522ns (32.152%)  route 9.543ns (67.848%))
+  Logic Levels:           19  (CARRY4=8 LUT3=1 LUT4=1 LUT5=1 LUT6=7 MUXF7=1)
+  Clock Path Skew:        -0.207ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.972ns = ( 19.972 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.710     5.472    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X69Y25         FDCE                                         r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X69Y25         FDCE (Prop_fdce_C_Q)         0.419     5.891 r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/Q
+                         net (fo=68, routed)          2.117     8.009    core_i/core_i/id_stage_i/alu_operator_ex[3]
+    SLICE_X48Y44         LUT4 (Prop_lut4_I0_O)        0.327     8.336 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73/O
+                         net (fo=32, routed)          0.861     9.197    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73_n_0
+    SLICE_X48Y40         LUT6 (Prop_lut6_I4_O)        0.332     9.529 r  core_i/core_i/id_stage_i/BReg_DP[31]_i_98/O
+                         net (fo=1, routed)           0.623    10.151    core_i/core_i/id_stage_i/BReg_DP[31]_i_98_n_0
+    SLICE_X49Y40         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    10.807 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57/CO[3]
+                         net (fo=1, routed)           0.000    10.807    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57_n_0
+    SLICE_X49Y41         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.921 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19/CO[3]
+                         net (fo=1, routed)           0.000    10.921    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19_n_0
+    SLICE_X49Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.035 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55/CO[3]
+                         net (fo=1, routed)           0.000    11.035    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55_n_0
+    SLICE_X49Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.149 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53/CO[3]
+                         net (fo=1, routed)           0.000    11.149    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53_n_0
+    SLICE_X49Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.263 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56/CO[3]
+                         net (fo=1, routed)           0.000    11.263    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56_n_0
+    SLICE_X49Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.377 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    11.377    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23_n_0
+    SLICE_X49Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.491 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54/CO[3]
+                         net (fo=1, routed)           0.000    11.491    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54_n_0
+    SLICE_X49Y47         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    11.804 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[31]_i_30/O[3]
+                         net (fo=3, routed)           0.464    12.268    core_i/core_i/id_stage_i/ex_stage_i/alu_i/data0[31]
+    SLICE_X45Y47         LUT6 (Prop_lut6_I1_O)        0.306    12.574 f  core_i/core_i/id_stage_i/BReg_DP[30]_i_5/O
+                         net (fo=31, routed)          1.030    13.605    core_i/core_i/id_stage_i/BReg_DP[30]_i_5_n_0
+    SLICE_X34Y49         LUT3 (Prop_lut3_I0_O)        0.150    13.755 f  core_i/core_i/id_stage_i/BReg_DP[28]_i_4/O
+                         net (fo=6, routed)           0.687    14.442    core_i/core_i/id_stage_i/BReg_DP[28]_i_4_n_0
+    SLICE_X36Y50         LUT6 (Prop_lut6_I0_O)        0.328    14.770 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_37/O
+                         net (fo=5, routed)           0.827    15.597    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_37_n_0
+    SLICE_X43Y49         LUT6 (Prop_lut6_I0_O)        0.124    15.721 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_29/O
+                         net (fo=4, routed)           0.458    16.179    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_29_n_0
+    SLICE_X43Y49         LUT6 (Prop_lut6_I5_O)        0.124    16.303 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[6]_i_17/O
+                         net (fo=3, routed)           0.891    17.194    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[6]_i_17_n_0
+    SLICE_X46Y46         LUT6 (Prop_lut6_I2_O)        0.124    17.318 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[25]_i_10/O
+                         net (fo=1, routed)           0.737    18.055    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[25]_i_10_n_0
+    SLICE_X46Y43         LUT6 (Prop_lut6_I0_O)        0.124    18.179 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[25]_i_7/O
+                         net (fo=1, routed)           0.000    18.179    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[25]_i_7_n_0
+    SLICE_X46Y43         MUXF7 (Prop_muxf7_I1_O)      0.214    18.393 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[25]_i_3/O
+                         net (fo=1, routed)           0.847    19.240    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[25]_i_3_n_0
+    SLICE_X35Y37         LUT5 (Prop_lut5_I2_O)        0.297    19.537 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[25]_i_1/O
+                         net (fo=1, routed)           0.000    19.537    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[31]_1[25]
+    SLICE_X35Y37         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[25]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.489    19.972    core_i/core_i/ex_stage_i/clk_i_IBUF_BUFG
+    SLICE_X35Y37         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[25]/C
+                         clock pessimism              0.294    20.266    
+                         clock uncertainty           -0.035    20.230    
+    SLICE_X35Y37         FDCE (Setup_fdce_C_D)        0.029    20.259    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[25]
+  -------------------------------------------------------------------
+                         required time                         20.259    
+                         arrival time                         -19.537    
+  -------------------------------------------------------------------
+                         slack                                  0.722    
+
+Slack (MET) :             0.746ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[24]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        14.041ns  (logic 4.529ns (32.255%)  route 9.512ns (67.745%))
+  Logic Levels:           19  (CARRY4=8 LUT3=1 LUT4=1 LUT5=1 LUT6=7 MUXF7=1)
+  Clock Path Skew:        -0.207ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.972ns = ( 19.972 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.710     5.472    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X69Y25         FDCE                                         r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X69Y25         FDCE (Prop_fdce_C_Q)         0.419     5.891 r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/Q
+                         net (fo=68, routed)          2.117     8.009    core_i/core_i/id_stage_i/alu_operator_ex[3]
+    SLICE_X48Y44         LUT4 (Prop_lut4_I0_O)        0.327     8.336 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73/O
+                         net (fo=32, routed)          0.861     9.197    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73_n_0
+    SLICE_X48Y40         LUT6 (Prop_lut6_I4_O)        0.332     9.529 r  core_i/core_i/id_stage_i/BReg_DP[31]_i_98/O
+                         net (fo=1, routed)           0.623    10.151    core_i/core_i/id_stage_i/BReg_DP[31]_i_98_n_0
+    SLICE_X49Y40         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    10.807 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57/CO[3]
+                         net (fo=1, routed)           0.000    10.807    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57_n_0
+    SLICE_X49Y41         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.921 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19/CO[3]
+                         net (fo=1, routed)           0.000    10.921    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19_n_0
+    SLICE_X49Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.035 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55/CO[3]
+                         net (fo=1, routed)           0.000    11.035    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55_n_0
+    SLICE_X49Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.149 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53/CO[3]
+                         net (fo=1, routed)           0.000    11.149    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53_n_0
+    SLICE_X49Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.263 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56/CO[3]
+                         net (fo=1, routed)           0.000    11.263    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56_n_0
+    SLICE_X49Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.377 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    11.377    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23_n_0
+    SLICE_X49Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.491 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54/CO[3]
+                         net (fo=1, routed)           0.000    11.491    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54_n_0
+    SLICE_X49Y47         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    11.804 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[31]_i_30/O[3]
+                         net (fo=3, routed)           0.464    12.268    core_i/core_i/id_stage_i/ex_stage_i/alu_i/data0[31]
+    SLICE_X45Y47         LUT6 (Prop_lut6_I1_O)        0.306    12.574 f  core_i/core_i/id_stage_i/BReg_DP[30]_i_5/O
+                         net (fo=31, routed)          1.064    13.638    core_i/core_i/id_stage_i/BReg_DP[30]_i_5_n_0
+    SLICE_X35Y47         LUT3 (Prop_lut3_I0_O)        0.153    13.791 f  core_i/core_i/id_stage_i/BReg_DP[7]_i_7/O
+                         net (fo=3, routed)           0.572    14.363    core_i/core_i/id_stage_i/BReg_DP[7]_i_7_n_0
+    SLICE_X35Y48         LUT6 (Prop_lut6_I0_O)        0.327    14.690 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_91/O
+                         net (fo=4, routed)           1.123    15.813    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_91_n_0
+    SLICE_X37Y49         LUT6 (Prop_lut6_I0_O)        0.124    15.937 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[24]_i_22/O
+                         net (fo=1, routed)           0.474    16.411    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[24]_i_22_n_0
+    SLICE_X40Y49         LUT6 (Prop_lut6_I3_O)        0.124    16.535 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[24]_i_17/O
+                         net (fo=4, routed)           0.625    17.161    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[24]_i_17_n_0
+    SLICE_X44Y46         LUT6 (Prop_lut6_I2_O)        0.124    17.285 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[24]_i_12/O
+                         net (fo=1, routed)           0.648    17.933    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[24]_i_12_n_0
+    SLICE_X44Y46         LUT6 (Prop_lut6_I4_O)        0.124    18.057 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[24]_i_7/O
+                         net (fo=1, routed)           0.000    18.057    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[24]_i_7_n_0
+    SLICE_X44Y46         MUXF7 (Prop_muxf7_I1_O)      0.217    18.274 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[24]_i_3/O
+                         net (fo=1, routed)           0.941    19.214    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[24]_i_3_n_0
+    SLICE_X39Y38         LUT5 (Prop_lut5_I2_O)        0.299    19.513 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[24]_i_1/O
+                         net (fo=1, routed)           0.000    19.513    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[31]_1[24]
+    SLICE_X39Y38         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[24]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.489    19.972    core_i/core_i/ex_stage_i/clk_i_IBUF_BUFG
+    SLICE_X39Y38         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[24]/C
+                         clock pessimism              0.294    20.266    
+                         clock uncertainty           -0.035    20.230    
+    SLICE_X39Y38         FDCE (Setup_fdce_C_D)        0.029    20.259    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[24]
+  -------------------------------------------------------------------
+                         required time                         20.259    
+                         arrival time                         -19.513    
+  -------------------------------------------------------------------
+                         slack                                  0.746    
+
+Slack (MET) :             0.804ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[26]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        13.984ns  (logic 4.525ns (32.358%)  route 9.459ns (67.642%))
+  Logic Levels:           19  (CARRY4=8 LUT3=1 LUT4=1 LUT5=2 LUT6=6 MUXF7=1)
+  Clock Path Skew:        -0.206ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.973ns = ( 19.973 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.710     5.472    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X69Y25         FDCE                                         r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X69Y25         FDCE (Prop_fdce_C_Q)         0.419     5.891 r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/Q
+                         net (fo=68, routed)          2.117     8.009    core_i/core_i/id_stage_i/alu_operator_ex[3]
+    SLICE_X48Y44         LUT4 (Prop_lut4_I0_O)        0.327     8.336 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73/O
+                         net (fo=32, routed)          0.861     9.197    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73_n_0
+    SLICE_X48Y40         LUT6 (Prop_lut6_I4_O)        0.332     9.529 r  core_i/core_i/id_stage_i/BReg_DP[31]_i_98/O
+                         net (fo=1, routed)           0.623    10.151    core_i/core_i/id_stage_i/BReg_DP[31]_i_98_n_0
+    SLICE_X49Y40         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    10.807 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57/CO[3]
+                         net (fo=1, routed)           0.000    10.807    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57_n_0
+    SLICE_X49Y41         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.921 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19/CO[3]
+                         net (fo=1, routed)           0.000    10.921    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19_n_0
+    SLICE_X49Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.035 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55/CO[3]
+                         net (fo=1, routed)           0.000    11.035    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55_n_0
+    SLICE_X49Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.149 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53/CO[3]
+                         net (fo=1, routed)           0.000    11.149    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53_n_0
+    SLICE_X49Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.263 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56/CO[3]
+                         net (fo=1, routed)           0.000    11.263    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56_n_0
+    SLICE_X49Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.377 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    11.377    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23_n_0
+    SLICE_X49Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.491 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54/CO[3]
+                         net (fo=1, routed)           0.000    11.491    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54_n_0
+    SLICE_X49Y47         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    11.804 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[31]_i_30/O[3]
+                         net (fo=3, routed)           0.464    12.268    core_i/core_i/id_stage_i/ex_stage_i/alu_i/data0[31]
+    SLICE_X45Y47         LUT6 (Prop_lut6_I1_O)        0.306    12.574 f  core_i/core_i/id_stage_i/BReg_DP[30]_i_5/O
+                         net (fo=31, routed)          1.041    13.615    core_i/core_i/id_stage_i/BReg_DP[30]_i_5_n_0
+    SLICE_X38Y50         LUT3 (Prop_lut3_I0_O)        0.148    13.763 f  core_i/core_i/id_stage_i/BReg_DP[26]_i_4/O
+                         net (fo=6, routed)           0.515    14.278    core_i/core_i/id_stage_i/BReg_DP[26]_i_4_n_0
+    SLICE_X38Y50         LUT6 (Prop_lut6_I5_O)        0.328    14.606 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95/O
+                         net (fo=3, routed)           0.849    15.455    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95_n_0
+    SLICE_X39Y49         LUT6 (Prop_lut6_I1_O)        0.124    15.579 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58/O
+                         net (fo=3, routed)           0.689    16.268    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58_n_0
+    SLICE_X42Y49         LUT6 (Prop_lut6_I1_O)        0.124    16.392 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_34/O
+                         net (fo=18, routed)          0.758    17.150    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_34_n_0
+    SLICE_X45Y44         LUT5 (Prop_lut5_I0_O)        0.124    17.274 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[26]_i_11/O
+                         net (fo=1, routed)           0.677    17.951    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[26]_i_11_n_0
+    SLICE_X47Y47         LUT6 (Prop_lut6_I1_O)        0.124    18.075 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[26]_i_7/O
+                         net (fo=1, routed)           0.000    18.075    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[26]_i_7_n_0
+    SLICE_X47Y47         MUXF7 (Prop_muxf7_I1_O)      0.217    18.292 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[26]_i_3/O
+                         net (fo=1, routed)           0.865    19.158    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[26]_i_3_n_0
+    SLICE_X35Y38         LUT5 (Prop_lut5_I2_O)        0.299    19.457 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[26]_i_1/O
+                         net (fo=1, routed)           0.000    19.457    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[31]_1[26]
+    SLICE_X35Y38         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[26]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.490    19.973    core_i/core_i/ex_stage_i/clk_i_IBUF_BUFG
+    SLICE_X35Y38         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[26]/C
+                         clock pessimism              0.294    20.267    
+                         clock uncertainty           -0.035    20.231    
+    SLICE_X35Y38         FDCE (Setup_fdce_C_D)        0.029    20.260    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[26]
+  -------------------------------------------------------------------
+                         required time                         20.260    
+                         arrival time                         -19.457    
+  -------------------------------------------------------------------
+                         slack                                  0.804    
+
+Slack (MET) :             0.851ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[19]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        13.984ns  (logic 4.527ns (32.374%)  route 9.457ns (67.626%))
+  Logic Levels:           19  (CARRY4=8 LUT3=1 LUT4=1 LUT5=1 LUT6=7 MUXF7=1)
+  Clock Path Skew:        -0.207ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.972ns = ( 19.972 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.710     5.472    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X69Y25         FDCE                                         r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X69Y25         FDCE (Prop_fdce_C_Q)         0.419     5.891 r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/Q
+                         net (fo=68, routed)          2.117     8.009    core_i/core_i/id_stage_i/alu_operator_ex[3]
+    SLICE_X48Y44         LUT4 (Prop_lut4_I0_O)        0.327     8.336 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73/O
+                         net (fo=32, routed)          0.861     9.197    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73_n_0
+    SLICE_X48Y40         LUT6 (Prop_lut6_I4_O)        0.332     9.529 r  core_i/core_i/id_stage_i/BReg_DP[31]_i_98/O
+                         net (fo=1, routed)           0.623    10.151    core_i/core_i/id_stage_i/BReg_DP[31]_i_98_n_0
+    SLICE_X49Y40         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    10.807 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57/CO[3]
+                         net (fo=1, routed)           0.000    10.807    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57_n_0
+    SLICE_X49Y41         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.921 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19/CO[3]
+                         net (fo=1, routed)           0.000    10.921    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19_n_0
+    SLICE_X49Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.035 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55/CO[3]
+                         net (fo=1, routed)           0.000    11.035    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55_n_0
+    SLICE_X49Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.149 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53/CO[3]
+                         net (fo=1, routed)           0.000    11.149    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53_n_0
+    SLICE_X49Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.263 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56/CO[3]
+                         net (fo=1, routed)           0.000    11.263    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56_n_0
+    SLICE_X49Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.377 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    11.377    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23_n_0
+    SLICE_X49Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.491 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54/CO[3]
+                         net (fo=1, routed)           0.000    11.491    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54_n_0
+    SLICE_X49Y47         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    11.804 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[31]_i_30/O[3]
+                         net (fo=3, routed)           0.464    12.268    core_i/core_i/id_stage_i/ex_stage_i/alu_i/data0[31]
+    SLICE_X45Y47         LUT6 (Prop_lut6_I1_O)        0.306    12.574 f  core_i/core_i/id_stage_i/BReg_DP[30]_i_5/O
+                         net (fo=31, routed)          1.030    13.605    core_i/core_i/id_stage_i/BReg_DP[30]_i_5_n_0
+    SLICE_X34Y49         LUT3 (Prop_lut3_I0_O)        0.150    13.755 f  core_i/core_i/id_stage_i/BReg_DP[28]_i_4/O
+                         net (fo=6, routed)           0.422    14.176    core_i/core_i/id_stage_i/BReg_DP[28]_i_4_n_0
+    SLICE_X35Y49         LUT6 (Prop_lut6_I5_O)        0.328    14.504 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_93/O
+                         net (fo=6, routed)           0.892    15.397    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_93_n_0
+    SLICE_X36Y49         LUT6 (Prop_lut6_I0_O)        0.124    15.521 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[22]_i_22/O
+                         net (fo=2, routed)           0.949    16.470    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[22]_i_22_n_0
+    SLICE_X41Y49         LUT6 (Prop_lut6_I0_O)        0.124    16.594 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[19]_i_17/O
+                         net (fo=3, routed)           0.669    17.263    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[19]_i_17_n_0
+    SLICE_X42Y43         LUT6 (Prop_lut6_I5_O)        0.124    17.387 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[19]_i_11/O
+                         net (fo=1, routed)           0.634    18.021    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[19]_i_11_n_0
+    SLICE_X43Y42         LUT6 (Prop_lut6_I3_O)        0.124    18.145 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[19]_i_7/O
+                         net (fo=1, routed)           0.000    18.145    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[19]_i_7_n_0
+    SLICE_X43Y42         MUXF7 (Prop_muxf7_I1_O)      0.217    18.362 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[19]_i_3/O
+                         net (fo=1, routed)           0.795    19.157    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[19]_i_3_n_0
+    SLICE_X34Y37         LUT5 (Prop_lut5_I2_O)        0.299    19.456 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[19]_i_1/O
+                         net (fo=1, routed)           0.000    19.456    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[31]_1[19]
+    SLICE_X34Y37         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[19]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.489    19.972    core_i/core_i/ex_stage_i/clk_i_IBUF_BUFG
+    SLICE_X34Y37         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[19]/C
+                         clock pessimism              0.294    20.266    
+                         clock uncertainty           -0.035    20.230    
+    SLICE_X34Y37         FDCE (Setup_fdce_C_D)        0.077    20.307    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[19]
+  -------------------------------------------------------------------
+                         required time                         20.307    
+                         arrival time                         -19.456    
+  -------------------------------------------------------------------
+                         slack                                  0.851    
+
+Slack (MET) :             0.861ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[22]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        13.927ns  (logic 4.527ns (32.505%)  route 9.400ns (67.495%))
+  Logic Levels:           19  (CARRY4=8 LUT3=1 LUT4=1 LUT5=1 LUT6=7 MUXF7=1)
+  Clock Path Skew:        -0.208ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.971ns = ( 19.971 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.710     5.472    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X69Y25         FDCE                                         r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X69Y25         FDCE (Prop_fdce_C_Q)         0.419     5.891 r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/Q
+                         net (fo=68, routed)          2.117     8.009    core_i/core_i/id_stage_i/alu_operator_ex[3]
+    SLICE_X48Y44         LUT4 (Prop_lut4_I0_O)        0.327     8.336 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73/O
+                         net (fo=32, routed)          0.861     9.197    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73_n_0
+    SLICE_X48Y40         LUT6 (Prop_lut6_I4_O)        0.332     9.529 r  core_i/core_i/id_stage_i/BReg_DP[31]_i_98/O
+                         net (fo=1, routed)           0.623    10.151    core_i/core_i/id_stage_i/BReg_DP[31]_i_98_n_0
+    SLICE_X49Y40         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    10.807 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57/CO[3]
+                         net (fo=1, routed)           0.000    10.807    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57_n_0
+    SLICE_X49Y41         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.921 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19/CO[3]
+                         net (fo=1, routed)           0.000    10.921    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19_n_0
+    SLICE_X49Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.035 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55/CO[3]
+                         net (fo=1, routed)           0.000    11.035    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55_n_0
+    SLICE_X49Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.149 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53/CO[3]
+                         net (fo=1, routed)           0.000    11.149    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53_n_0
+    SLICE_X49Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.263 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56/CO[3]
+                         net (fo=1, routed)           0.000    11.263    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56_n_0
+    SLICE_X49Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.377 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    11.377    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23_n_0
+    SLICE_X49Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.491 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54/CO[3]
+                         net (fo=1, routed)           0.000    11.491    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54_n_0
+    SLICE_X49Y47         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    11.804 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[31]_i_30/O[3]
+                         net (fo=3, routed)           0.464    12.268    core_i/core_i/id_stage_i/ex_stage_i/alu_i/data0[31]
+    SLICE_X45Y47         LUT6 (Prop_lut6_I1_O)        0.306    12.574 f  core_i/core_i/id_stage_i/BReg_DP[30]_i_5/O
+                         net (fo=31, routed)          1.030    13.605    core_i/core_i/id_stage_i/BReg_DP[30]_i_5_n_0
+    SLICE_X34Y49         LUT3 (Prop_lut3_I0_O)        0.150    13.755 f  core_i/core_i/id_stage_i/BReg_DP[28]_i_4/O
+                         net (fo=6, routed)           0.687    14.442    core_i/core_i/id_stage_i/BReg_DP[28]_i_4_n_0
+    SLICE_X36Y50         LUT6 (Prop_lut6_I0_O)        0.328    14.770 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_37/O
+                         net (fo=5, routed)           0.487    15.257    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_37_n_0
+    SLICE_X42Y50         LUT6 (Prop_lut6_I2_O)        0.124    15.381 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[21]_i_26/O
+                         net (fo=3, routed)           0.829    16.211    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[21]_i_26_n_0
+    SLICE_X41Y50         LUT6 (Prop_lut6_I1_O)        0.124    16.335 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[22]_i_16/O
+                         net (fo=3, routed)           0.884    17.218    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[22]_i_16_n_0
+    SLICE_X42Y45         LUT6 (Prop_lut6_I3_O)        0.124    17.342 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[22]_i_11/O
+                         net (fo=1, routed)           0.593    17.936    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[22]_i_11_n_0
+    SLICE_X44Y45         LUT6 (Prop_lut6_I3_O)        0.124    18.060 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[22]_i_7/O
+                         net (fo=1, routed)           0.000    18.060    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[22]_i_7_n_0
+    SLICE_X44Y45         MUXF7 (Prop_muxf7_I1_O)      0.217    18.277 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[22]_i_3/O
+                         net (fo=1, routed)           0.824    19.100    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[22]_i_3_n_0
+    SLICE_X40Y37         LUT5 (Prop_lut5_I2_O)        0.299    19.399 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[22]_i_1/O
+                         net (fo=1, routed)           0.000    19.399    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[31]_1[22]
+    SLICE_X40Y37         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[22]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.488    19.971    core_i/core_i/ex_stage_i/clk_i_IBUF_BUFG
+    SLICE_X40Y37         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[22]/C
+                         clock pessimism              0.294    20.265    
+                         clock uncertainty           -0.035    20.229    
+    SLICE_X40Y37         FDCE (Setup_fdce_C_D)        0.031    20.260    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[22]
+  -------------------------------------------------------------------
+                         required time                         20.260    
+                         arrival time                         -19.399    
+  -------------------------------------------------------------------
+                         slack                                  0.861    
+
+Slack (MET) :             0.862ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[2]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        13.957ns  (logic 4.546ns (32.571%)  route 9.411ns (67.429%))
+  Logic Levels:           19  (CARRY4=8 LUT3=1 LUT4=1 LUT5=1 LUT6=7 MUXF7=1)
+  Clock Path Skew:        -0.210ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.969ns = ( 19.969 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.710     5.472    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X69Y25         FDCE                                         r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X69Y25         FDCE (Prop_fdce_C_Q)         0.419     5.891 r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/Q
+                         net (fo=68, routed)          2.117     8.009    core_i/core_i/id_stage_i/alu_operator_ex[3]
+    SLICE_X48Y44         LUT4 (Prop_lut4_I0_O)        0.327     8.336 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73/O
+                         net (fo=32, routed)          0.861     9.197    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73_n_0
+    SLICE_X48Y40         LUT6 (Prop_lut6_I4_O)        0.332     9.529 r  core_i/core_i/id_stage_i/BReg_DP[31]_i_98/O
+                         net (fo=1, routed)           0.623    10.151    core_i/core_i/id_stage_i/BReg_DP[31]_i_98_n_0
+    SLICE_X49Y40         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    10.807 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57/CO[3]
+                         net (fo=1, routed)           0.000    10.807    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57_n_0
+    SLICE_X49Y41         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.921 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19/CO[3]
+                         net (fo=1, routed)           0.000    10.921    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19_n_0
+    SLICE_X49Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.035 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55/CO[3]
+                         net (fo=1, routed)           0.000    11.035    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55_n_0
+    SLICE_X49Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.149 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53/CO[3]
+                         net (fo=1, routed)           0.000    11.149    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53_n_0
+    SLICE_X49Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.263 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56/CO[3]
+                         net (fo=1, routed)           0.000    11.263    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56_n_0
+    SLICE_X49Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.377 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    11.377    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23_n_0
+    SLICE_X49Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.491 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54/CO[3]
+                         net (fo=1, routed)           0.000    11.491    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54_n_0
+    SLICE_X49Y47         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    11.804 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[31]_i_30/O[3]
+                         net (fo=3, routed)           0.464    12.268    core_i/core_i/id_stage_i/ex_stage_i/alu_i/data0[31]
+    SLICE_X45Y47         LUT6 (Prop_lut6_I1_O)        0.306    12.574 f  core_i/core_i/id_stage_i/BReg_DP[30]_i_5/O
+                         net (fo=31, routed)          1.041    13.615    core_i/core_i/id_stage_i/BReg_DP[30]_i_5_n_0
+    SLICE_X38Y50         LUT3 (Prop_lut3_I0_O)        0.148    13.763 f  core_i/core_i/id_stage_i/BReg_DP[26]_i_4/O
+                         net (fo=6, routed)           0.515    14.278    core_i/core_i/id_stage_i/BReg_DP[26]_i_4_n_0
+    SLICE_X38Y50         LUT6 (Prop_lut6_I5_O)        0.328    14.606 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95/O
+                         net (fo=3, routed)           0.849    15.455    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95_n_0
+    SLICE_X39Y49         LUT6 (Prop_lut6_I1_O)        0.124    15.579 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58/O
+                         net (fo=3, routed)           0.689    16.268    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58_n_0
+    SLICE_X42Y49         LUT6 (Prop_lut6_I1_O)        0.124    16.392 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_34/O
+                         net (fo=18, routed)          0.688    17.080    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_34_n_0
+    SLICE_X41Y44         LUT6 (Prop_lut6_I5_O)        0.124    17.204 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_7/O
+                         net (fo=18, routed)          1.107    18.311    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_7_n_0
+    SLICE_X42Y34         LUT5 (Prop_lut5_I0_O)        0.116    18.427 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[2]_i_7/O
+                         net (fo=1, routed)           0.458    18.885    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[2]_i_7_n_0
+    SLICE_X41Y34         LUT6 (Prop_lut6_I3_O)        0.328    19.213 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[2]_i_3/O
+                         net (fo=1, routed)           0.000    19.213    core_i/core_i/id_stage_i/ex_stage_i/alu_result[2]
+    SLICE_X41Y34         MUXF7 (Prop_muxf7_I1_O)      0.217    19.430 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[2]_i_1/O
+                         net (fo=1, routed)           0.000    19.430    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[31]_1[2]
+    SLICE_X41Y34         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.486    19.969    core_i/core_i/ex_stage_i/clk_i_IBUF_BUFG
+    SLICE_X41Y34         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[2]/C
+                         clock pessimism              0.294    20.263    
+                         clock uncertainty           -0.035    20.227    
+    SLICE_X41Y34         FDCE (Setup_fdce_C_D)        0.064    20.291    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[2]
+  -------------------------------------------------------------------
+                         required time                         20.291    
+                         arrival time                         -19.430    
+  -------------------------------------------------------------------
+                         slack                                  0.862    
+
+Slack (MET) :             0.972ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[30]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        13.815ns  (logic 4.525ns (32.755%)  route 9.290ns (67.245%))
+  Logic Levels:           19  (CARRY4=8 LUT3=1 LUT4=1 LUT5=1 LUT6=7 MUXF7=1)
+  Clock Path Skew:        -0.209ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.970ns = ( 19.970 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.710     5.472    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X69Y25         FDCE                                         r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X69Y25         FDCE (Prop_fdce_C_Q)         0.419     5.891 r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/Q
+                         net (fo=68, routed)          2.117     8.009    core_i/core_i/id_stage_i/alu_operator_ex[3]
+    SLICE_X48Y44         LUT4 (Prop_lut4_I0_O)        0.327     8.336 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73/O
+                         net (fo=32, routed)          0.861     9.197    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73_n_0
+    SLICE_X48Y40         LUT6 (Prop_lut6_I4_O)        0.332     9.529 r  core_i/core_i/id_stage_i/BReg_DP[31]_i_98/O
+                         net (fo=1, routed)           0.623    10.151    core_i/core_i/id_stage_i/BReg_DP[31]_i_98_n_0
+    SLICE_X49Y40         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    10.807 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57/CO[3]
+                         net (fo=1, routed)           0.000    10.807    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57_n_0
+    SLICE_X49Y41         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.921 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19/CO[3]
+                         net (fo=1, routed)           0.000    10.921    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19_n_0
+    SLICE_X49Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.035 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55/CO[3]
+                         net (fo=1, routed)           0.000    11.035    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55_n_0
+    SLICE_X49Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.149 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53/CO[3]
+                         net (fo=1, routed)           0.000    11.149    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53_n_0
+    SLICE_X49Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.263 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56/CO[3]
+                         net (fo=1, routed)           0.000    11.263    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56_n_0
+    SLICE_X49Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.377 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    11.377    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23_n_0
+    SLICE_X49Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.491 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54/CO[3]
+                         net (fo=1, routed)           0.000    11.491    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54_n_0
+    SLICE_X49Y47         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    11.804 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[31]_i_30/O[3]
+                         net (fo=3, routed)           0.464    12.268    core_i/core_i/id_stage_i/ex_stage_i/alu_i/data0[31]
+    SLICE_X45Y47         LUT6 (Prop_lut6_I1_O)        0.306    12.574 f  core_i/core_i/id_stage_i/BReg_DP[30]_i_5/O
+                         net (fo=31, routed)          1.041    13.615    core_i/core_i/id_stage_i/BReg_DP[30]_i_5_n_0
+    SLICE_X38Y50         LUT3 (Prop_lut3_I0_O)        0.148    13.763 f  core_i/core_i/id_stage_i/BReg_DP[26]_i_4/O
+                         net (fo=6, routed)           0.515    14.278    core_i/core_i/id_stage_i/BReg_DP[26]_i_4_n_0
+    SLICE_X38Y50         LUT6 (Prop_lut6_I5_O)        0.328    14.606 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95/O
+                         net (fo=3, routed)           0.849    15.455    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95_n_0
+    SLICE_X39Y49         LUT6 (Prop_lut6_I1_O)        0.124    15.579 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58/O
+                         net (fo=3, routed)           0.843    16.422    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58_n_0
+    SLICE_X42Y49         LUT6 (Prop_lut6_I2_O)        0.124    16.546 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[1]_i_12/O
+                         net (fo=4, routed)           0.615    17.161    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[1]_i_12_n_0
+    SLICE_X45Y45         LUT6 (Prop_lut6_I5_O)        0.124    17.285 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[30]_i_12/O
+                         net (fo=1, routed)           0.665    17.950    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[30]_i_12_n_0
+    SLICE_X45Y45         LUT6 (Prop_lut6_I3_O)        0.124    18.074 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[30]_i_8/O
+                         net (fo=1, routed)           0.000    18.074    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[30]_i_8_n_0
+    SLICE_X45Y45         MUXF7 (Prop_muxf7_I1_O)      0.217    18.291 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[30]_i_3/O
+                         net (fo=1, routed)           0.697    18.988    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[30]_i_3_n_0
+    SLICE_X41Y36         LUT5 (Prop_lut5_I2_O)        0.299    19.287 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[30]_i_1/O
+                         net (fo=1, routed)           0.000    19.287    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[31]_1[30]
+    SLICE_X41Y36         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[30]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.487    19.970    core_i/core_i/ex_stage_i/clk_i_IBUF_BUFG
+    SLICE_X41Y36         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[30]/C
+                         clock pessimism              0.294    20.264    
+                         clock uncertainty           -0.035    20.228    
+    SLICE_X41Y36         FDCE (Setup_fdce_C_D)        0.031    20.259    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[30]
+  -------------------------------------------------------------------
+                         required time                         20.259    
+                         arrival time                         -19.287    
+  -------------------------------------------------------------------
+                         slack                                  0.972    
+
+Slack (MET) :             1.040ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[9]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[0]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        13.829ns  (logic 2.477ns (17.911%)  route 11.352ns (82.089%))
+  Logic Levels:           11  (LUT2=2 LUT3=1 LUT5=2 LUT6=6)
+  Clock Path Skew:        -0.173ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.947ns = ( 19.947 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.413ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.651     5.413    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X47Y28         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X47Y28         FDCE (Prop_fdce_C_Q)         0.456     5.869 f  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[9]/Q
+                         net (fo=20, routed)          1.947     7.817    core_i/core_i/id_stage_i/alu_operand_b_ex[9]
+    SLICE_X69Y39         LUT3 (Prop_lut3_I1_O)        0.154     7.971 r  core_i/core_i/id_stage_i/mscratch_q[31]_i_3/O
+                         net (fo=14, routed)          1.888     9.859    core_i/core_i/id_stage_i/mscratch_q[31]_i_3_n_0
+    SLICE_X93Y35         LUT6 (Prop_lut6_I0_O)        0.327    10.186 f  core_i/core_i/id_stage_i/gen_rf[31].mem[31][5]_i_9/O
+                         net (fo=2, routed)           0.450    10.637    core_i/core_i/id_stage_i/gen_rf[31].mem[31][5]_i_9_n_0
+    SLICE_X93Y39         LUT6 (Prop_lut6_I5_O)        0.124    10.761 f  core_i/core_i/id_stage_i/mie_q[31]_i_9/O
+                         net (fo=1, routed)           0.263    11.023    core_i/core_i/id_stage_i/mie_q[31]_i_9_n_0
+    SLICE_X93Y39         LUT6 (Prop_lut6_I0_O)        0.124    11.147 f  core_i/core_i/id_stage_i/mie_q[31]_i_6/O
+                         net (fo=41, routed)          1.266    12.414    core_i/core_i/id_stage_i/csr_access_ex_o_reg_9
+    SLICE_X83Y32         LUT2 (Prop_lut2_I0_O)        0.118    12.532 f  core_i/core_i/id_stage_i/mie_q[29]_i_5/O
+                         net (fo=10, routed)          0.500    13.032    core_i/core_i/id_stage_i/mie_q[29]_i_5_n_0
+    SLICE_X83Y36         LUT6 (Prop_lut6_I5_O)        0.326    13.358 f  core_i/core_i/id_stage_i/gen_rf[31].mem[31][31]_i_12/O
+                         net (fo=64, routed)          1.268    14.626    core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[6]_0
+    SLICE_X80Y40         LUT2 (Prop_lut2_I1_O)        0.124    14.750 r  core_i/core_i/id_stage_i/gen_rf[31].mem[31][31]_i_15/O
+                         net (fo=25, routed)          1.112    15.862    core_i/core_i/id_stage_i/csr_access_ex_o_reg_4
+    SLICE_X85Y32         LUT5 (Prop_lut5_I4_O)        0.150    16.012 r  core_i/core_i/id_stage_i/gen_rf[31].mem[31][0]_i_4/O
+                         net (fo=2, routed)           0.448    16.460    core_i/core_i/id_stage_i/register_file_i/alu_operand_c_ex_o_reg[0]_1
+    SLICE_X84Y32         LUT6 (Prop_lut6_I1_O)        0.326    16.786 r  core_i/core_i/id_stage_i/register_file_i/gen_rf[31].mem[31][0]_i_2/O
+                         net (fo=35, routed)          1.561    18.346    core_i/core_i/id_stage_i/register_file_i/csr_access_ex_o_reg_8
+    SLICE_X50Y24         LUT5 (Prop_lut5_I3_O)        0.124    18.470 f  core_i/core_i/id_stage_i/register_file_i/alu_operand_a_ex_o[0]_i_2/O
+                         net (fo=4, routed)           0.648    19.119    core_i/core_i/if_stage_i/alu_operand_b_ex_o_reg[0]
+    SLICE_X50Y26         LUT6 (Prop_lut6_I1_O)        0.124    19.243 r  core_i/core_i/if_stage_i/alu_operand_b_ex_o[0]_i_1/O
+                         net (fo=1, routed)           0.000    19.243    core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[31]_1[0]
+    SLICE_X50Y26         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.464    19.947    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X50Y26         FDCE                                         r  core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[0]/C
+                         clock pessimism              0.294    20.241    
+                         clock uncertainty           -0.035    20.205    
+    SLICE_X50Y26         FDCE (Setup_fdce_C_D)        0.077    20.282    core_i/core_i/id_stage_i/alu_operand_b_ex_o_reg[0]
+  -------------------------------------------------------------------
+                         required time                         20.282    
+                         arrival time                         -19.243    
+  -------------------------------------------------------------------
+                         slack                                  1.040    
+
+Slack (MET) :             1.053ns  (required time - arrival time)
+  Source:                 core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Destination:            core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[9]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@7.500ns period=15.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            15.000ns  (clk_i rise@15.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        13.765ns  (logic 4.350ns (31.601%)  route 9.415ns (68.399%))
+  Logic Levels:           19  (CARRY4=8 LUT3=1 LUT4=1 LUT6=8 MUXF7=1)
+  Clock Path Skew:        -0.211ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.968ns = ( 19.968 - 15.000 ) 
+    Source Clock Delay      (SCD):    5.472ns
+    Clock Pessimism Removal (CPR):    0.294ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    Y9                                                0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.490     1.490 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           2.171     3.661    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     3.762 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.710     5.472    core_i/core_i/id_stage_i/clk_i_IBUF_BUFG
+    SLICE_X69Y25         FDCE                                         r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X69Y25         FDCE (Prop_fdce_C_Q)         0.419     5.891 r  core_i/core_i/id_stage_i/alu_operator_ex_o_reg[3]/Q
+                         net (fo=68, routed)          2.117     8.009    core_i/core_i/id_stage_i/alu_operator_ex[3]
+    SLICE_X48Y44         LUT4 (Prop_lut4_I0_O)        0.327     8.336 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73/O
+                         net (fo=32, routed)          0.861     9.197    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_73_n_0
+    SLICE_X48Y40         LUT6 (Prop_lut6_I4_O)        0.332     9.529 r  core_i/core_i/id_stage_i/BReg_DP[31]_i_98/O
+                         net (fo=1, routed)           0.623    10.151    core_i/core_i/id_stage_i/BReg_DP[31]_i_98_n_0
+    SLICE_X49Y40         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.656    10.807 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57/CO[3]
+                         net (fo=1, routed)           0.000    10.807    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_57_n_0
+    SLICE_X49Y41         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    10.921 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19/CO[3]
+                         net (fo=1, routed)           0.000    10.921    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[6]_i_19_n_0
+    SLICE_X49Y42         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.035 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55/CO[3]
+                         net (fo=1, routed)           0.000    11.035    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_55_n_0
+    SLICE_X49Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.149 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53/CO[3]
+                         net (fo=1, routed)           0.000    11.149    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_53_n_0
+    SLICE_X49Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.263 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56/CO[3]
+                         net (fo=1, routed)           0.000    11.263    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_56_n_0
+    SLICE_X49Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.377 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23/CO[3]
+                         net (fo=1, routed)           0.000    11.377    core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[20]_i_23_n_0
+    SLICE_X49Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114    11.491 r  core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54/CO[3]
+                         net (fo=1, routed)           0.000    11.491    core_i/core_i/id_stage_i/BReg_DP_reg[31]_i_54_n_0
+    SLICE_X49Y47         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313    11.804 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[31]_i_30/O[3]
+                         net (fo=3, routed)           0.464    12.268    core_i/core_i/id_stage_i/ex_stage_i/alu_i/data0[31]
+    SLICE_X45Y47         LUT6 (Prop_lut6_I1_O)        0.306    12.574 f  core_i/core_i/id_stage_i/BReg_DP[30]_i_5/O
+                         net (fo=31, routed)          1.041    13.615    core_i/core_i/id_stage_i/BReg_DP[30]_i_5_n_0
+    SLICE_X38Y50         LUT3 (Prop_lut3_I0_O)        0.148    13.763 f  core_i/core_i/id_stage_i/BReg_DP[26]_i_4/O
+                         net (fo=6, routed)           0.515    14.278    core_i/core_i/id_stage_i/BReg_DP[26]_i_4_n_0
+    SLICE_X38Y50         LUT6 (Prop_lut6_I5_O)        0.328    14.606 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95/O
+                         net (fo=3, routed)           0.849    15.455    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_95_n_0
+    SLICE_X39Y49         LUT6 (Prop_lut6_I1_O)        0.124    15.579 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58/O
+                         net (fo=3, routed)           0.689    16.268    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_58_n_0
+    SLICE_X42Y49         LUT6 (Prop_lut6_I1_O)        0.124    16.392 f  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_34/O
+                         net (fo=18, routed)          0.688    17.080    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[31]_i_34_n_0
+    SLICE_X41Y44         LUT6 (Prop_lut6_I5_O)        0.124    17.204 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_7/O
+                         net (fo=18, routed)          0.969    18.173    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[28]_i_7_n_0
+    SLICE_X41Y33         LUT6 (Prop_lut6_I2_O)        0.124    18.297 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[9]_i_4/O
+                         net (fo=1, routed)           0.600    18.897    core_i/core_i/id_stage_i/regfile_wdata_exec_wb[9]_i_4_n_0
+    SLICE_X39Y33         LUT6 (Prop_lut6_I1_O)        0.124    19.021 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb[9]_i_3/O
+                         net (fo=1, routed)           0.000    19.021    core_i/core_i/id_stage_i/ex_stage_i/alu_result[9]
+    SLICE_X39Y33         MUXF7 (Prop_muxf7_I1_O)      0.217    19.238 r  core_i/core_i/id_stage_i/regfile_wdata_exec_wb_reg[9]_i_1/O
+                         net (fo=1, routed)           0.000    19.238    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[31]_1[9]
+    SLICE_X39Y33         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[9]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     15.000    15.000 r  
+    Y9                                                0.000    15.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    15.000    clk_i
+    Y9                   IBUF (Prop_ibuf_I_O)         1.420    16.420 r  clk_i_IBUF_inst/O
+                         net (fo=1, routed)           1.972    18.392    clk_i_IBUF
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    18.483 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=2098, routed)        1.485    19.968    core_i/core_i/ex_stage_i/clk_i_IBUF_BUFG
+    SLICE_X39Y33         FDCE                                         r  core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[9]/C
+                         clock pessimism              0.294    20.262    
+                         clock uncertainty           -0.035    20.226    
+    SLICE_X39Y33         FDCE (Setup_fdce_C_D)        0.064    20.290    core_i/core_i/ex_stage_i/regfile_wdata_exec_wb_reg[9]
+  -------------------------------------------------------------------
+                         required time                         20.290    
+                         arrival time                         -19.238    
+  -------------------------------------------------------------------
+                         slack                                  1.053    
+
+
+
+

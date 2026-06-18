@@ -301,6 +301,10 @@ if {[file exists [file join $repo_root ".git"]]} {
     if {![catch {exec git -C [file join $repo_root "cv32e40p_no_alu_forwarding"] rev-parse HEAD} no_alu_hash]} {
         puts $fp "cv32e40p_no_alu_forwarding_commit=$no_alu_hash"
     }
+
+    if {![catch {exec git -C [file join $repo_root "cv32e40p_no_alu_mul_forwarding"] rev-parse HEAD} no_alu_mul_hash]} {
+        puts $fp "cv32e40p_no_alu_mul_forwarding_commit=$no_alu_mul_hash"
+    }
 }
 
 close $fp

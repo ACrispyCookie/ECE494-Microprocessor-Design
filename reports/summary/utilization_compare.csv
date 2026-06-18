@@ -11,3 +11,7 @@ no-alu-forwarding,post_implementation,Slice LUTs,LUTs,4200,53200,7.89
 no-alu-forwarding,post_implementation,Slice Registers,FFs/Regs,2096,106400,1.97
 no-alu-forwarding,post_implementation,DSPs,DSPs,5,220,2.27
 no-alu-forwarding,post_implementation,Block RAM Tile,BRAM Tiles,4.5,140,3.21
+no-alu-mul-forwarding,post_implementation,Slice LUTs,LUTs,4186,53200,7.87
+no-alu-mul-forwarding,post_implementation,Slice Registers,FFs/Regs,2092,106400,1.97
+no-alu-mul-forwarding,post_implementation,DSPs,DSPs,5,220,2.27
+no-alu-mul-forwarding,post_implementation,Block RAM Tile,BRAM Tiles,4.5,140,3.21

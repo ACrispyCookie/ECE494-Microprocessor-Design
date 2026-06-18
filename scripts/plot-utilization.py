@@ -5,6 +5,7 @@ Inputs by default:
   reports/baseline/utilization.rpt
   reports/no-mul-forwarding/utilization.rpt
   reports/no-alu-forwarding/utilization.rpt
+  reports/no-alu-mul-forwarding/utilization.rpt
 
 Outputs by default:
   reports/summary/utilization_compare.csv
@@ -25,7 +26,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding")
+DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding", "no-alu-mul-forwarding")
 RESOURCE_LABELS = {
     "Slice LUTs": "LUTs",
     "Slice Registers": "FFs/Regs",

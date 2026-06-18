@@ -10,3 +10,7 @@
 	path = cv32e40p_no_alu_forwarding
 	url = https://github.com/TsiantosD/cv32e40p.git
 	branch = master
+[submodule "cv32e40p_no_alu_mul_forwarding"]
+	path = cv32e40p_no_alu_mul_forwarding
+	url = https://github.com/TsiantosD/cv32e40p.git
+	branch = master

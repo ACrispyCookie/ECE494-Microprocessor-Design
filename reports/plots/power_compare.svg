@@ -19,30 +19,38 @@
 <line class="axisline" x1="110" y1="530" x2="1045" y2="530"/>
 <text class="axis" x="30" y="310.0" text-anchor="middle" transform="rotate(-90 30 310.0)">Power (W)</text>
 <text class="axis" x="265.8" y="566" text-anchor="middle">Total On-Chip</text>
-<rect x="144.5" y="200.0" width="71.6" height="330.0" fill="#2563eb" rx="3"/>
-<text class="label" x="180.3" y="193.0" text-anchor="middle">120.0 mW</text>
-<rect x="230.1" y="197.3" width="71.6" height="332.7" fill="#dc2626" rx="3"/>
-<text class="label" x="265.8" y="190.3" text-anchor="middle">121.0 mW</text>
-<rect x="315.6" y="202.8" width="71.6" height="327.2" fill="#16a34a" rx="3"/>
-<text class="label" x="351.4" y="195.8" text-anchor="middle">119.0 mW</text>
+<rect x="144.5" y="200.0" width="50.2" height="330.0" fill="#2563eb" rx="3"/>
+<text class="label" x="169.6" y="193.0" text-anchor="middle">120.0 mW</text>
+<rect x="208.7" y="197.3" width="50.2" height="332.7" fill="#dc2626" rx="3"/>
+<text class="label" x="233.8" y="190.3" text-anchor="middle">121.0 mW</text>
+<rect x="272.8" y="202.8" width="50.2" height="327.2" fill="#16a34a" rx="3"/>
+<text class="label" x="297.9" y="195.8" text-anchor="middle">119.0 mW</text>
+<rect x="337.0" y="202.8" width="50.2" height="327.2" fill="#9333ea" rx="3"/>
+<text class="label" x="362.1" y="195.8" text-anchor="middle">119.0 mW</text>
 <text class="axis" x="577.5" y="566" text-anchor="middle">Dynamic</text>
-<rect x="456.2" y="491.5" width="71.6" height="38.5" fill="#2563eb" rx="3"/>
-<text class="label" x="491.9" y="484.5" text-anchor="middle">14.0 mW</text>
-<rect x="541.7" y="491.5" width="71.6" height="38.5" fill="#dc2626" rx="3"/>
-<text class="label" x="577.5" y="484.5" text-anchor="middle">14.0 mW</text>
-<rect x="627.3" y="497.0" width="71.6" height="33.0" fill="#16a34a" rx="3"/>
-<text class="label" x="663.1" y="490.0" text-anchor="middle">12.0 mW</text>
+<rect x="456.2" y="491.5" width="50.2" height="38.5" fill="#2563eb" rx="3"/>
+<text class="label" x="481.2" y="484.5" text-anchor="middle">14.0 mW</text>
+<rect x="520.3" y="491.5" width="50.2" height="38.5" fill="#dc2626" rx="3"/>
+<text class="label" x="545.4" y="484.5" text-anchor="middle">14.0 mW</text>
+<rect x="584.5" y="497.0" width="50.2" height="33.0" fill="#16a34a" rx="3"/>
+<text class="label" x="609.6" y="490.0" text-anchor="middle">12.0 mW</text>
+<rect x="648.7" y="494.2" width="50.2" height="35.8" fill="#9333ea" rx="3"/>
+<text class="label" x="673.8" y="487.2" text-anchor="middle">13.0 mW</text>
 <text class="axis" x="889.2" y="566" text-anchor="middle">Static</text>
-<rect x="767.8" y="238.5" width="71.6" height="291.5" fill="#2563eb" rx="3"/>
-<text class="label" x="803.6" y="231.5" text-anchor="middle">106.0 mW</text>
-<rect x="853.4" y="238.5" width="71.6" height="291.5" fill="#dc2626" rx="3"/>
-<text class="label" x="889.2" y="231.5" text-anchor="middle">106.0 mW</text>
-<rect x="938.9" y="238.5" width="71.6" height="291.5" fill="#16a34a" rx="3"/>
-<text class="label" x="974.7" y="231.5" text-anchor="middle">106.0 mW</text>
+<rect x="767.8" y="238.5" width="50.2" height="291.5" fill="#2563eb" rx="3"/>
+<text class="label" x="792.9" y="231.5" text-anchor="middle">106.0 mW</text>
+<rect x="832.0" y="238.5" width="50.2" height="291.5" fill="#dc2626" rx="3"/>
+<text class="label" x="857.1" y="231.5" text-anchor="middle">106.0 mW</text>
+<rect x="896.2" y="238.5" width="50.2" height="291.5" fill="#16a34a" rx="3"/>
+<text class="label" x="921.3" y="231.5" text-anchor="middle">106.0 mW</text>
+<rect x="960.3" y="238.5" width="50.2" height="291.5" fill="#9333ea" rx="3"/>
+<text class="label" x="985.4" y="231.5" text-anchor="middle">106.0 mW</text>
 <rect x="110" y="589" width="16" height="16" fill="#2563eb" rx="2"/>
 <text class="legend" x="134" y="602">baseline</text>
 <rect x="370" y="589" width="16" height="16" fill="#dc2626" rx="2"/>
 <text class="legend" x="394" y="602">no-mul-forwarding</text>
 <rect x="630" y="589" width="16" height="16" fill="#16a34a" rx="2"/>
 <text class="legend" x="654" y="602">no-alu-forwarding</text>
+<rect x="890" y="589" width="16" height="16" fill="#9333ea" rx="2"/>
+<text class="legend" x="914" y="602">no-alu-mul-forwarding</text>
 </svg>

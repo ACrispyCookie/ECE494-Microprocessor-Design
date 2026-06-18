@@ -352,7 +352,7 @@ proc print_help {} {
   puts "Syntax:"
   puts "$script_file"
   puts "$script_file -tclargs \[--origin_dir <path>\]"
-  puts "$script_file -tclargs \[--experiment <baseline|no-mul-forwarding|no-alu-forwarding>\]"
+  puts "$script_file -tclargs \[--experiment <baseline|no-mul-forwarding|no-alu-forwarding|no-alu-mul-forwarding>\]"
   puts "$script_file -tclargs \[--core_dir <path-to-cv32e40p-checkout>\]"
   puts "$script_file -tclargs \[--build_dir <path>\]"
   puts "$script_file -tclargs \[--project_name <name>\]"
@@ -367,7 +367,8 @@ proc print_help {} {
   puts "                       to baseline. Known values:"
   puts "                         baseline -> cv32e40p_baseline"
   puts "                         no-mul-forwarding -> cv32e40p_no_mul_forwarding"
-  puts "                         no-alu-forwarding -> cv32e40p_no_alu_forwarding\n"
+  puts "                         no-alu-forwarding -> cv32e40p_no_alu_forwarding"
+  puts "                         no-alu-mul-forwarding -> cv32e40p_no_alu_mul_forwarding\n"
   puts "\[--core_dir <path>\]   Explicit cv32e40p checkout path. Overrides"
   puts "                       --experiment-based selection.\n"
   puts "\[--build_dir <path>\]  Vivado project output directory. Default:"
@@ -376,7 +377,7 @@ proc print_help {} {
   puts "                       name is the name of the project from where this"
   puts "                       script was generated.\n"
   puts "\[--clock_period <ns>\] Override clk_i target period in ns. Default:"
-  puts "                       15.000 for baseline/no-alu-forwarding, 10.000 for no-mul-forwarding.\n"
+  puts "                       15.000 for baseline/no-alu-forwarding/no-alu-mul-forwarding, 10.000 for no-mul-forwarding.\n"
   puts "\[--help\]               Print help information for this script"
   puts "-------------------------------------------------------------------------\n"
   exit 0
@@ -411,6 +412,7 @@ if { $core_dir eq "" } {
     "baseline" { set core_dir [file join $origin_dir "cv32e40p_baseline"] }
     "no-mul-forwarding" { set core_dir [file join $origin_dir "cv32e40p_no_mul_forwarding"] }
     "no-alu-forwarding" { set core_dir [file join $origin_dir "cv32e40p_no_alu_forwarding"] }
+    "no-alu-mul-forwarding" { set core_dir [file join $origin_dir "cv32e40p_no_alu_mul_forwarding"] }
     default {
       puts "ERROR: Unknown experiment '$experiment'. Use --core_dir for a custom checkout."
       return 1

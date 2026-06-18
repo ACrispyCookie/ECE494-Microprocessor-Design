@@ -39,6 +39,8 @@ VERSIONS = {
     "no-mul-forwarding": "cv32e40p_no_mul_forwarding",
     "no_alu_forwarding": "cv32e40p_no_alu_forwarding",
     "no-alu-forwarding": "cv32e40p_no_alu_forwarding",
+    "no_alu_mul_forwarding": "cv32e40p_no_alu_mul_forwarding",
+    "no-alu-mul-forwarding": "cv32e40p_no_alu_mul_forwarding",
 }
 
 CV32_FILES = [
@@ -305,11 +307,23 @@ def run_one(version: str, sim: Path, test: str, gcc: str, objcopy: str, objdump:
 def parse_args() -> argparse.Namespace:
     tests = sorted(p.stem for p in ASM_DIR.glob("*.S") if p.name != "test_macros.S")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", "--versions", nargs="+", default=["baseline", "no_mul_forwarding", "no_alu_forwarding"], choices=sorted(VERSIONS))
+    parser.add_argument("--version", "--versions", nargs="+", default=["baseline", "no_mul_forwarding", "no_alu_forwarding", "no_alu_mul_forwarding"], choices=sorted(VERSIONS))
     parser.add_argument("--test", "--tests", nargs="+", default=tests, choices=tests)
     parser.add_argument("--force-rebuild", action="store_true", help="Re-run sv2v and iverilog even if vvp already exists")
     parser.add_argument("--timeout-cycles", type=int, default=2000)
     return parser.parse_args()
+
+
+def ensure_core_submodules(core_dir: Path) -> None:
+    if not core_dir.exists():
+        rel = core_dir.relative_to(ROOT)
+        print(f"[SETUP] Initializing submodule {rel}")
+        run(["git", "submodule", "update", "--init", "--recursive", "--", str(rel)], cwd=ROOT, timeout=600)
+        return
+
+    if (core_dir / ".git").exists():
+        print(f"[SETUP] Initializing nested submodules under {core_dir.relative_to(ROOT)}")
+        run(["git", "submodule", "update", "--init", "--recursive"], cwd=core_dir, timeout=600)
 
 
 def main() -> int:
@@ -327,6 +341,7 @@ def main() -> int:
     for requested_version in args.version:
         version = requested_version.replace("-", "_")
         core_dir = ROOT / VERSIONS[requested_version]
+        ensure_core_submodules(core_dir)
         sim = build_sim(version, core_dir, sv2v, iverilog, vvp, args.force_rebuild)
         for test in args.test:
             all_ok &= run_one(version, sim, test, gcc, objcopy, objdump, vvp, args.timeout_cycles)

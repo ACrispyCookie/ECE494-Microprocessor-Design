@@ -59,3 +59,23 @@ no-alu-forwarding,post_implementation,category_vccbram_dynamic_w,Vccbram Dynamic
 no-alu-forwarding,post_implementation,category_vcco_mio0_dynamic_w,Vcco_mio0 Dynamic,1.8,0
 no-alu-forwarding,post_implementation,category_vcco_mio1_dynamic_w,Vcco_mio1 Dynamic,1.8,0
 no-alu-forwarding,post_implementation,category_vccpll_dynamic_w,Vccpll Dynamic,1.8,0.003
+no-alu-mul-forwarding,post_implementation,total_on_chip_power_w,Total On-Chip,0.119,
+no-alu-mul-forwarding,post_implementation,dynamic_power_w,Dynamic,0.013,
+no-alu-mul-forwarding,post_implementation,device_static_power_w,Static,0.106,
+no-alu-mul-forwarding,post_implementation,category_block_ram_dynamic_w,Block RAM Dynamic,0.001,3.21
+no-alu-mul-forwarding,post_implementation,category_clocks_dynamic_w,Clocks Dynamic,0.004,3
+no-alu-mul-forwarding,post_implementation,category_cs_registers_i_dynamic_w,cs_registers_i Dynamic,0.001,
+no-alu-mul-forwarding,post_implementation,category_dsps_dynamic_w,DSPs Dynamic,0.001,2.27
+no-alu-mul-forwarding,post_implementation,category_i_o_dynamic_w,I/O Dynamic,0.002,5
+no-alu-mul-forwarding,post_implementation,category_junction_temperature_dynamic_w,Junction Temperature Dynamic,26.4,
+no-alu-mul-forwarding,post_implementation,category_lut_as_logic_dynamic_w,LUT as Logic Dynamic,0.002,7.87
+no-alu-mul-forwarding,post_implementation,category_mgtavcc_dynamic_w,MGTAVcc Dynamic,1,0
+no-alu-mul-forwarding,post_implementation,category_mgtavtt_dynamic_w,MGTAVtt Dynamic,1.2,0
+no-alu-mul-forwarding,post_implementation,category_mgtvccaux_dynamic_w,MGTVccaux Dynamic,1.8,0
+no-alu-mul-forwarding,post_implementation,category_signals_dynamic_w,Signals Dynamic,0.003,
+no-alu-mul-forwarding,post_implementation,category_slice_logic_dynamic_w,Slice Logic Dynamic,0.003,
+no-alu-mul-forwarding,post_implementation,category_vccaux_io_dynamic_w,Vccaux_io Dynamic,1.8,0
+no-alu-mul-forwarding,post_implementation,category_vccbram_dynamic_w,Vccbram Dynamic,1,0.001
+no-alu-mul-forwarding,post_implementation,category_vcco_mio0_dynamic_w,Vcco_mio0 Dynamic,1.8,0
+no-alu-mul-forwarding,post_implementation,category_vcco_mio1_dynamic_w,Vcco_mio1 Dynamic,1.8,0
+no-alu-mul-forwarding,post_implementation,category_vccpll_dynamic_w,Vccpll Dynamic,1.8,0.003

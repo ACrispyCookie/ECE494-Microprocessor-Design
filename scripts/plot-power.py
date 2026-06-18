@@ -5,6 +5,7 @@ Inputs by default:
   reports/baseline/power.rpt
   reports/no-mul-forwarding/power.rpt
   reports/no-alu-forwarding/power.rpt
+  reports/no-alu-mul-forwarding/power.rpt
 
 Outputs by default:
   reports/<experiment>/power_metrics.csv
@@ -27,8 +28,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding")
-COLORS = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a"}
+DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding", "no-alu-mul-forwarding")
+COLORS = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a", "no-alu-mul-forwarding": "#9333ea"}
 FALLBACK_COLORS = ["#16a34a", "#9333ea", "#9333ea", "#ea580c"]
 SUMMARY_ORDER = (
     "total_on_chip_power_w",
