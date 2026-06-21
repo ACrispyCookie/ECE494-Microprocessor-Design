@@ -28,6 +28,42 @@ If Vivado is not on `PATH`, set `VIVADO` explicitly:
 export VIVADO=/path/to/Vivado/2022.2/bin/vivado
 ```
 
+## Tool dependencies
+
+The project uses different tools depending on the flow:
+
+```text
+flow                         required tools
+---------------------------  --------------------------------------------------
+Vivado project/reports        Vivado 2022.2 or compatible Vivado installation
+RTL tests                     Python 3, make, Icarus Verilog (iverilog + vvp),
+                              RISC-V bare-metal GNU toolchain, sv2v
+RTL benchmarks                Python 3, make, Icarus Verilog (iverilog + vvp),
+                              RISC-V bare-metal GNU toolchain, sv2v
+Plot regeneration             Python 3 only for the SVG plot scripts in scripts/
+```
+
+For the RTL tests and RTL benchmarks, the RISC-V toolchain must provide these executables on `PATH`:
+
+```text
+riscv-none-elf-gcc
+riscv-none-elf-objcopy
+riscv-none-elf-objdump
+```
+
+The benchmark flow specifically compiles freestanding RV32IM C programs with `riscv-none-elf-gcc`, then uses `riscv-none-elf-objcopy` to create the IMEM/DMEM images loaded by the benchmark testbench.  If these tools are missing, `make rtl-tests` and `make rtl-benchmarks` will fail before simulation.
+
+A typical local setup is:
+
+```bash
+export PATH=/path/to/riscv-toolchain/bin:$PATH
+export VIVADO=/path/to/Vivado/2022.2/bin/vivado
+```
+
+`sv2v` is needed because Icarus Verilog cannot parse all CV32E40P SystemVerilog sources directly.  If `sv2v` is not already installed, `scripts/run-rtl-tests.py` and `scripts/run-rtl-benchmarks.py` try to use a bundled checkout under `../tools/sv2v-0.0.13/` or download the pinned Linux release into `build/tools/`.
+
+No extra Python packages are required for the main regression/benchmark/report scripts; they use the Python standard library and generate SVG plots directly.  The standalone exploratory scripts `scripts/plot-execution-time-change.py` and `scripts/plot-break-even-frequency.py` are optional and require `matplotlib`/`numpy` if used.
+
 ## RTL testbench flow
 
 The RTL tests live under `rtl-tests/` and are run by `scripts/run-rtl-tests.py`.  The runner assembles the test program, converts CV32E40P SystemVerilog with `sv2v`, compiles with `iverilog`, runs `vvp`, and compares final DMEM/register-file state against generated golden dumps.
