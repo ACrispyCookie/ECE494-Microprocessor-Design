@@ -34,6 +34,12 @@ RESOURCE_LABELS = {
     "Block RAM Tile": "BRAM Tiles",
 }
 RESOURCE_ORDER = ("Slice LUTs", "Slice Registers", "DSPs", "Block RAM Tile")
+DISPLAY_NAMES = {
+    "baseline": "Baseline",
+    "no-mul-forwarding": "No MUL fwd",
+    "no-alu-forwarding": "No ALU fwd",
+    "no-alu-mul-forwarding": "No ALU+MUL fwd",
+}
 
 
 @dataclass(frozen=True)
@@ -150,6 +156,10 @@ def svg_escape(text: str) -> str:
     )
 
 
+def display_name(experiment: str) -> str:
+    return DISPLAY_NAMES.get(experiment, experiment)
+
+
 def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
     svg_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -157,19 +167,20 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
     resources = [RESOURCE_LABELS[resource] for resource in RESOURCE_ORDER]
     by_key = {(row.experiment, row.label): row for row in rows}
 
-    width = 1100
-    height = 660
-    margin_left = 120
-    margin_right = 60
-    margin_top = 90
-    margin_bottom = 115
+    width = 1180
+    height = 680
+    margin_left = 125
+    margin_right = 65
+    margin_top = 95
+    margin_bottom = 125
     plot_w = width - margin_left - margin_right
     plot_h = height - margin_top - margin_bottom
 
     utilization_values = [utilization_percent(row) for row in rows]
     max_util = max(utilization_values) if utilization_values else 1.0
     max_util = max(max_util, 1.0)
-    # Add headroom for labels and round up to a readable percent tick.
+    # Keep slide ticks clean: this design is below 10%, so a fixed 0-10% scale
+    # makes small differences visible without misleading autoscaling.
     y_max = max(10.0, math.ceil(max_util * 1.15))
 
     colors = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a", "no-alu-mul-forwarding": "#9333ea"}
@@ -195,9 +206,9 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
     parts: list[str] = []
     parts.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">')
     parts.append('<rect width="100%" height="100%" fill="#ffffff"/>')
-    parts.append('<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:28px;font-weight:700}.subtitle{font-size:14px;fill:#4b5563}.axis{font-size:13px;fill:#374151}.tick{font-size:12px;fill:#6b7280}.label{font-size:12px;fill:#111827}.legend{font-size:14px}.grid{stroke:#e5e7eb;stroke-width:1}.axisline{stroke:#374151;stroke-width:1.5}</style>')
-    parts.append(f'<text class="title" x="{width/2}" y="38" text-anchor="middle">Vivado Utilization Comparison</text>')
-    parts.append(f'<text class="subtitle" x="{width/2}" y="62" text-anchor="middle">Resource utilization percentage parsed from reports/*/utilization.rpt</text>')
+    parts.append('<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:30px;font-weight:700}.subtitle{font-size:15px;fill:#4b5563}.axis{font-size:15px;font-weight:600;fill:#374151}.tick{font-size:13px;fill:#6b7280}.label{font-size:13px;fill:#111827}.legend{font-size:14px}.grid{stroke:#e5e7eb;stroke-width:1}.axisline{stroke:#374151;stroke-width:1.5}</style>')
+    parts.append(f'<text class="title" x="{width/2}" y="38" text-anchor="middle">FPGA Resource Utilization</text>')
+    parts.append(f'<text class="subtitle" x="{width/2}" y="64" text-anchor="middle">Post-implementation utilization on Zynq-7020</text>')
 
     # Grid and y-axis.
     for tick in ticks:
@@ -206,7 +217,8 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
         parts.append(f'<text class="tick" x="{margin_left-10}" y="{y+4:.1f}" text-anchor="end">{fmt_percent(tick)}</text>')
     parts.append(f'<line class="axisline" x1="{margin_left}" y1="{margin_top}" x2="{margin_left}" y2="{margin_top+plot_h}"/>')
     parts.append(f'<line class="axisline" x1="{margin_left}" y1="{margin_top+plot_h}" x2="{width-margin_right}" y2="{margin_top+plot_h}"/>')
-    parts.append(f'<text class="axis" x="28" y="{margin_top+plot_h/2}" text-anchor="middle" transform="rotate(-90 28 {margin_top+plot_h/2})">Utilization (%)</text>')
+    parts.append(f'<text class="axis" x="30" y="{margin_top+plot_h/2}" text-anchor="middle" transform="rotate(-90 30 {margin_top+plot_h/2})">FPGA utilization (% of Zynq-7020)</text>')
+    parts.append(f'<text class="axis" x="{margin_left+plot_w/2}" y="{height-28}" text-anchor="middle">Vivado report_utilization resource type</text>')
 
     # Bars.
     for i, resource in enumerate(resources):
@@ -229,9 +241,9 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
     legend_y = height - 45
     for j, experiment in enumerate(experiments):
         color = colors.get(experiment, fallback_colors[j % len(fallback_colors)])
-        x = legend_x + j * 250
+        x = legend_x + j * 230
         parts.append(f'<rect x="{x}" y="{legend_y-13}" width="16" height="16" fill="{color}" rx="2"/>')
-        parts.append(f'<text class="legend" x="{x+24}" y="{legend_y}">{svg_escape(experiment)}</text>')
+        parts.append(f'<text class="legend" x="{x+24}" y="{legend_y}">{svg_escape(display_name(experiment))}</text>')
 
     parts.append('</svg>')
     svg_path.write_text("\n".join(parts) + "\n", encoding="utf-8")

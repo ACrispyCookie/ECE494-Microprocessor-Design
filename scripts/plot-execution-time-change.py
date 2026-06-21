@@ -32,16 +32,16 @@ def plot_execution_time_change(f_base_hz, f_new_hz, base_cpi=1.0):
     fig, ax = plt.subplots(figsize=(10, 6))
     
     # Plot the main trend line
-    ax.plot(x_pct, exec_time_change_pct, color='black', linewidth=2, zorder=3)
+    ax.plot(x_pct, exec_time_change_pct, color='black', linewidth=2.8, zorder=3)
     
     # Add a break-even horizontal line at 0%
     ax.axhline(0, color='gray', linestyle='--', linewidth=1.5, zorder=2)
     
     # Fill areas to show "Faster" vs "Slower"
     ax.fill_between(x_pct, exec_time_change_pct, 0, where=(exec_time_change_pct < 0), 
-                    color='green', alpha=0.2, label='Faster (Execution Time Decreased)')
+                    color='green', alpha=0.2, label='Faster')
     ax.fill_between(x_pct, exec_time_change_pct, 0, where=(exec_time_change_pct > 0), 
-                    color='red', alpha=0.2, label='Slower (Execution Time Increased)')
+                    color='red', alpha=0.2, label='Slower')
     
     # Draw dashed vertical line from break-even point to the x-axis
     if 0 <= break_even_pct <= x_pct[-1]:
@@ -51,7 +51,7 @@ def plot_execution_time_change(f_base_hz, f_new_hz, base_cpi=1.0):
         ax.vlines(x=break_even_pct, ymin=ymin, ymax=0, color='purple', linestyle='--', linewidth=1.5, zorder=4)
         
         # Plot the point on the break-even line (0%)
-        ax.scatter([break_even_pct], [0], color='purple', s=80, zorder=5, label='Break-even Cutoff')
+        ax.scatter([break_even_pct], [0], color='purple', s=90, zorder=5, label='Break-even cutoff')
         
         # Annotate the X-axis intersection (Dependency Rate)
         ax.annotate(f'{break_even_pct:.1f}%', xy=(break_even_pct, ymin), 
@@ -62,10 +62,11 @@ def plot_execution_time_change(f_base_hz, f_new_hz, base_cpi=1.0):
     # Formatting the plot
     f_base_mhz = f_base_hz / 1_000_000
     f_new_mhz = f_new_hz / 1_000_000
-    ax.set_title(f"Impact of MUL Structural Change on Execution Time\n(Baseline: {f_base_mhz} MHz -> New: {f_new_mhz} MHz)", 
-                 fontsize=14, fontweight='bold')
-    ax.set_xlabel("MUL Forwarding Path Usage (% of instructions)", fontsize=12)
-    ax.set_ylabel("Execution Time Change (%)", fontsize=12)
+    ax.set_title(f"Execution Time Impact of Removing MUL Forwarding\nBaseline: {f_base_mhz:.1f} MHz → New: {f_new_mhz:.1f} MHz",
+                 fontsize=16, fontweight='bold')
+    ax.set_xlabel("MUL dependency rate (% of instructions)", fontsize=13, fontweight='bold')
+    ax.set_ylabel("Execution time change (%)", fontsize=13, fontweight='bold')
+    ax.tick_params(axis='both', labelsize=11)
     
     # Y-axis formatter to explicitly show + or -
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: f'{y:+.1f}%'))

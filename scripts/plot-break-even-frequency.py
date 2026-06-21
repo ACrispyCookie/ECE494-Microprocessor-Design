@@ -28,24 +28,25 @@ def plot_break_even_frequency(base_freq_mhz=66.6, base_cpi=1.0, stall_penalty=1,
     
     # Create the plot
     fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(x_dep_rate, y_req_freq, color='#1f77b4', linewidth=2.5, 
-            label="Break-even Performance Limit")
+    ax.plot(x_dep_rate, y_req_freq, color='#1f77b4', linewidth=2.8,
+            label="Break-even limit")
     
     # Custom Y-axis formatter to display: <Freq> MHz (+...%)
     def format_y_ticks(y, pos):
         pct_increase = ((y - base_freq_mhz) / base_freq_mhz) * 100
         if pct_increase == 0:
-            return f"{y:.1f} MHz"
-        return f"{y:.1f} MHz (+{pct_increase:.1f}%)"
+            return f"{y:.0f} MHz"
+        return f"{y:.0f} MHz\n(+{pct_increase:.0f}%)"
     
     ax.yaxis.set_major_formatter(FuncFormatter(format_y_ticks))
     
     # Title and Labels
-    ax.set_title(f"Break-Even Frequency vs. Dependency Rate ({min_dep_rate}% to {max_dep_rate}%)\n"
-                 f"(Base: {base_freq_mhz} MHz | Base CPI: {base_cpi} | Penalty: {stall_penalty} cycles)", 
-                 fontsize=14, fontweight='bold', pad=15)
-    ax.set_xlabel("Dependency Rate (% of executed instructions)", fontsize=12)
-    ax.set_ylabel("Required Target Frequency", fontsize=12)
+    ax.set_title(f"Break-Even Frequency vs. Dependency Rate\n"
+                 f"Base: {base_freq_mhz} MHz, CPI={base_cpi}, penalty={stall_penalty} cycle",
+                 fontsize=16, fontweight='bold', pad=15)
+    ax.set_xlabel("Dependency rate (% of executed instructions)", fontsize=13, fontweight='bold')
+    ax.set_ylabel("Required frequency (MHz)", fontsize=13, fontweight='bold')
+    ax.tick_params(axis='both', labelsize=11)
     
     # Aesthetics
     ax.grid(True, linestyle='--', alpha=0.7)
@@ -63,9 +64,9 @@ def plot_break_even_frequency(base_freq_mhz=66.6, base_cpi=1.0, stall_penalty=1,
     
     # Fill the background zones
     ax.fill_between(x_dep_rate, y_req_freq, top_limit, 
-                    color='green', alpha=0.1, label='Performance Gain Zone (Worth It)')
+                    color='green', alpha=0.1, label='Net speedup zone')
     ax.fill_between(x_dep_rate, y_req_freq, 0, 
-                    color='red', alpha=0.1, label='Performance Loss Zone (Not Worth It)')
+                    color='red', alpha=0.1, label='Net slowdown zone')
                     
     # Plot the specific custom point if provided
     if target_freq_mhz is not None:
@@ -80,7 +81,7 @@ def plot_break_even_frequency(base_freq_mhz=66.6, base_cpi=1.0, stall_penalty=1,
         
         # Plot a point on the curve for the break-even cutoff
         ax.scatter([break_even_dep_rate], [target_freq_mhz], color='purple', s=80, edgecolor='white', zorder=5, 
-                   label="Max Allowed Dep Rate")
+                   label="Max dependency rate")
                    
         # Annotate the Y-axis intersection (Target Frequency)
         ax.annotate(f'{target_freq_mhz:.1f} MHz', xy=(min_dep_rate, target_freq_mhz), 

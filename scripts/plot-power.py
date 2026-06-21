@@ -31,15 +31,21 @@ from typing import Iterable
 DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding", "no-alu-mul-forwarding")
 COLORS = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a", "no-alu-mul-forwarding": "#9333ea"}
 FALLBACK_COLORS = ["#16a34a", "#9333ea", "#9333ea", "#ea580c"]
+DISPLAY_NAMES = {
+    "baseline": "Baseline",
+    "no-mul-forwarding": "No MUL fwd",
+    "no-alu-forwarding": "No ALU fwd",
+    "no-alu-mul-forwarding": "No ALU+MUL fwd",
+}
 SUMMARY_ORDER = (
     "total_on_chip_power_w",
     "dynamic_power_w",
     "device_static_power_w",
 )
 SUMMARY_LABELS = {
-    "total_on_chip_power_w": "Total On-Chip",
-    "dynamic_power_w": "Dynamic",
-    "device_static_power_w": "Static",
+    "total_on_chip_power_w": "Total\nFPGA Power",
+    "dynamic_power_w": "Dynamic\nSwitching Power",
+    "device_static_power_w": "Static\nLeakage Power",
 }
 
 
@@ -241,8 +247,31 @@ def svg_escape(text: str) -> str:
 
 def fmt_w(value: float) -> str:
     if value >= 1.0:
-        return f"{value:.3f} W".rstrip("0").rstrip(".")
-    return f"{value * 1000.0:.1f} mW".rstrip("0").rstrip(".")
+        number = f"{value:.3f}".rstrip("0").rstrip(".")
+        return f"{number} W"
+    number = f"{value * 1000.0:.1f}".rstrip("0").rstrip(".")
+    return f"{number} mW"
+
+
+def display_name(experiment: str) -> str:
+    return DISPLAY_NAMES.get(experiment, experiment)
+
+
+def nice_power_axis(max_value_mw: float) -> tuple[float, float]:
+    """Return a slide-friendly (axis max, tick step) in mW."""
+    # The current Zynq-7020 reports are around 120 mW total; a 0..150 mW axis
+    # gives clean 25 mW ticks and enough headroom for value labels.
+    if max_value_mw <= 125.0:
+        return 150.0, 25.0
+    raw_step = max_value_mw / 5.0
+    magnitude = 10 ** math.floor(math.log10(raw_step))
+    for multiplier in (1, 2, 2.5, 5, 10):
+        step = multiplier * magnitude
+        y_max = math.ceil(max_value_mw / step) * step
+        if y_max >= max_value_mw * 1.08:
+            return y_max, step
+    step = 10 * magnitude
+    return math.ceil(max_value_mw / step) * step, step
 
 
 def write_svg(rows: list[PowerRow], path: Path) -> None:
@@ -254,18 +283,16 @@ def write_svg(rows: list[PowerRow], path: Path) -> None:
     metrics = [metric for metric in SUMMARY_ORDER if any(row.metric == metric for row in summary_rows)]
     by_key = {(row.experiment, row.metric): row for row in summary_rows}
 
-    width, height = 1100, 650
-    ml, mr, mt, mb = 110, 55, 90, 120
+    width, height = 1180, 670
+    ml, mr, mt, mb = 115, 60, 95, 125
     plot_w = width - ml - mr
     plot_h = height - mt - mb
-    max_value = max((row.value_w for row in summary_rows), default=1.0)
-    y_max = max(0.01, max_value * 1.2)
-    # Use a clean upper bound in W.
-    magnitude = 10 ** math.floor(math.log10(y_max)) if y_max > 0 else 1
-    y_max = math.ceil(y_max / magnitude * 5) / 5 * magnitude
+    max_value_mw = max((row.value_w * 1000.0 for row in summary_rows), default=1.0)
+    y_max, y_step = nice_power_axis(max_value_mw)
 
-    def y_for(value: float) -> float:
-        return mt + plot_h - (value / y_max) * plot_h
+    def y_for(value_w: float) -> float:
+        value_mw = value_w * 1000.0
+        return mt + plot_h - (value_mw / y_max) * plot_h
 
     group_w = plot_w / len(metrics)
     gap = 14
@@ -275,23 +302,26 @@ def write_svg(rows: list[PowerRow], path: Path) -> None:
     parts: list[str] = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="#ffffff"/>',
-        '<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:28px;font-weight:700}.subtitle{font-size:14px;fill:#4b5563}.axis{font-size:13px;fill:#374151}.tick{font-size:12px;fill:#6b7280}.label{font-size:12px;fill:#111827}.legend{font-size:14px}.grid{stroke:#e5e7eb;stroke-width:1}.axisline{stroke:#374151;stroke-width:1.5}</style>',
+        '<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:30px;font-weight:700}.subtitle{font-size:15px;fill:#4b5563}.axis{font-size:15px;font-weight:600;fill:#374151}.tick{font-size:13px;fill:#6b7280}.label{font-size:13px;fill:#111827}.legend{font-size:14px}.grid{stroke:#e5e7eb;stroke-width:1}.axisline{stroke:#374151;stroke-width:1.5}</style>',
         f'<text class="title" x="{width/2}" y="38" text-anchor="middle">Vivado Power Comparison</text>',
-        f'<text class="subtitle" x="{width/2}" y="62" text-anchor="middle">Summary power metrics parsed from reports/*/power.rpt</text>',
+        f'<text class="subtitle" x="{width/2}" y="64" text-anchor="middle">Post-implementation report_power summary on Zynq-7020</text>',
     ]
 
-    for i in range(6):
-        tick = y_max * i / 5
-        y = y_for(tick)
+    tick = 0.0
+    while tick <= y_max + 1e-9:
+        y = mt + plot_h - (tick / y_max) * plot_h
         parts.append(f'<line class="grid" x1="{ml}" y1="{y:.1f}" x2="{width-mr}" y2="{y:.1f}"/>')
-        parts.append(f'<text class="tick" x="{ml-10}" y="{y+4:.1f}" text-anchor="end">{tick:.3g}</text>')
+        parts.append(f'<text class="tick" x="{ml-10}" y="{y+4:.1f}" text-anchor="end">{tick:.0f}</text>')
+        tick += y_step
     parts.append(f'<line class="axisline" x1="{ml}" y1="{mt}" x2="{ml}" y2="{mt+plot_h}"/>')
     parts.append(f'<line class="axisline" x1="{ml}" y1="{mt+plot_h}" x2="{width-mr}" y2="{mt+plot_h}"/>')
-    parts.append(f'<text class="axis" x="30" y="{mt+plot_h/2}" text-anchor="middle" transform="rotate(-90 30 {mt+plot_h/2})">Power (W)</text>')
+    parts.append(f'<text class="axis" x="30" y="{mt+plot_h/2}" text-anchor="middle" transform="rotate(-90 30 {mt+plot_h/2})">Vivado power estimate (mW)</text>')
+    parts.append(f'<text class="axis" x="{ml+plot_w/2}" y="{height-28}" text-anchor="middle">Vivado report_power summary metric</text>')
 
     for i, metric in enumerate(metrics):
         center = ml + i * group_w + group_w / 2
-        parts.append(f'<text class="axis" x="{center:.1f}" y="{mt+plot_h+36}" text-anchor="middle">{svg_escape(SUMMARY_LABELS[metric])}</text>')
+        for line_no, label_line in enumerate(SUMMARY_LABELS[metric].split("\n")):
+            parts.append(f'<text class="axis" x="{center:.1f}" y="{mt+plot_h+31 + line_no * 18}" text-anchor="middle">{svg_escape(label_line)}</text>')
         total_w = len(experiments) * bar_w + (len(experiments) - 1) * gap
         for j, exp in enumerate(experiments):
             row = by_key.get((exp, metric))
@@ -306,10 +336,10 @@ def write_svg(rows: list[PowerRow], path: Path) -> None:
 
     lx, ly = ml, height - 48
     for j, exp in enumerate(experiments):
-        x = lx + j * 260
+        x = lx + j * 230
         color = COLORS.get(exp, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
         parts.append(f'<rect x="{x}" y="{ly-13}" width="16" height="16" fill="{color}" rx="2"/>')
-        parts.append(f'<text class="legend" x="{x+24}" y="{ly}">{svg_escape(exp)}</text>')
+        parts.append(f'<text class="legend" x="{x+24}" y="{ly}">{svg_escape(display_name(exp))}</text>')
 
     parts.append('</svg>')
     path.write_text("\n".join(parts) + "\n", encoding="utf-8")

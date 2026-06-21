@@ -30,6 +30,12 @@ from typing import Iterable
 DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding", "no-alu-mul-forwarding")
 COLORS = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a", "no-alu-mul-forwarding": "#9333ea"}
 FALLBACK_COLORS = ["#16a34a", "#9333ea", "#ea580c"]
+DISPLAY_NAMES = {
+    "baseline": "Baseline",
+    "no-mul-forwarding": "No MUL fwd",
+    "no-alu-forwarding": "No ALU fwd",
+    "no-alu-mul-forwarding": "No ALU+MUL fwd",
+}
 
 # Horizontal space, in SVG pixels, left empty between adjacent histogram bins.
 # Increase this if grouped bars look too crowded; decrease it for wider bars.
@@ -263,90 +269,120 @@ def svg_escape(text: str) -> str:
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
+def display_name(experiment: str) -> str:
+    return DISPLAY_NAMES.get(experiment, experiment)
+
+
+def nice_tick_step(max_value: float, target_ticks: int = 5) -> int:
+    if max_value <= 0:
+        return 1
+    raw = max_value / target_ticks
+    magnitude = 10 ** math.floor(math.log10(raw))
+    for multiplier in (1, 2, 5, 10):
+        step = multiplier * magnitude
+        if raw <= step:
+            return max(1, int(math.ceil(step)))
+    return max(1, int(math.ceil(10 * magnitude)))
+
+
+def fmt_axis_value(value: float) -> str:
+    if abs(value - round(value)) < 1e-9:
+        return str(int(round(value)))
+    return f"{value:.1f}".rstrip("0").rstrip(".")
+
+
+def presentation_axis(metric: str, values: list[float]) -> tuple[float, float, float]:
+    """Return fixed-ish axis bounds/tick step with clean slide labels."""
+    if not values:
+        return 0.0, 1.0, 0.2
+    if metric == "slack":
+        # Slack is non-negative in these implemented runs. 0..14 ns gives clean
+        # 2 ns ticks and keeps the lower-slack critical region visually obvious.
+        return 0.0, max(14.0, math.ceil(max(values) / 2.0) * 2.0), 2.0
+    # Datapath delay tops out at ~15 ns. A fixed 0..15 ns axis with 2.5 ns ticks
+    # avoids awkward 14.17-style labels and is easier to read in slides.
+    return 0.0, max(15.0, math.ceil(max(values) / 2.5) * 2.5), 2.5
+
+
 def write_hist_svg(paths_by_exp: dict[str, list[TimingPath]], metric: str, output: Path) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     getter = (lambda p: p.slack) if metric == "slack" else (lambda p: p.datapath_delay)
-    title = "Slack Histogram" if metric == "slack" else "Datapath Delay Histogram"
-    x_label = "Slack (ns)" if metric == "slack" else "Datapath delay (ns)"
+    title = "Timing Slack Distribution" if metric == "slack" else "Datapath Delay Distribution"
+    x_label = "Vivado path slack (ns, higher is better)" if metric == "slack" else "Vivado datapath delay (ns, lower is better)"
 
     experiments = list(paths_by_exp)
     all_values = [v for paths in paths_by_exp.values() for p in paths if (v := getter(p)) is not None]
-    bins, lo, hi = histogram(all_values, bins=24)
-    bin_edges = [(start, end) for start, end, _count in bins]
+    lo, hi, x_step = presentation_axis(metric, all_values)
+    num_bins = 28 if metric == "slack" else 30
+    width = (hi - lo) / num_bins if hi != lo else 1.0
+    bin_edges = [(lo + i * width, lo + (i + 1) * width) for i in range(num_bins)]
     counts_by_exp: dict[str, list[int]] = {}
     max_count = 1
     for exp, paths in paths_by_exp.items():
         values = [v for p in paths if (v := getter(p)) is not None]
-        exp_bins, _lo, _hi = histogram(values, bins=24)
         # Re-bin on the shared global range.
-        width = (hi - lo) / 24 if hi != lo else 1.0
-        counts = [0] * 24
+        counts = [0] * num_bins
         for value in values:
-            idx = min(23, max(0, int((value - lo) / width)))
+            idx = min(num_bins - 1, max(0, int((value - lo) / width)))
             counts[idx] += 1
         counts_by_exp[exp] = counts
         max_count = max(max_count, max(counts) if counts else 0)
 
-    width_svg = 1100
-    height_svg = 700 if metric == "datapath_delay" else 620
-    ml, mr, mt = 90, 40, 85
-    # The datapath-delay plot shows one tick label for every histogram bin, so
-    # give the bottom area enough room for rotated labels plus the legend.
-    mb = 180 if metric == "datapath_delay" else 105
+    width_svg = 1180
+    height_svg = 660
+    ml, mr, mt = 100, 45, 90
+    mb = 125
     plot_w = width_svg - ml - mr
     plot_h = height_svg - mt - mb
-    group_w = plot_w / 24
+    group_w = plot_w / num_bins
     bin_gap = min(max(0, HISTOGRAM_BIN_GAP_PX), max(0, group_w - 12))
     bar_gap = 2
     bar_area_w = group_w - bin_gap
     bar_w = max(3, (bar_area_w - 8) / max(1, len(experiments)) - bar_gap)
 
+    y_step = nice_tick_step(max_count, target_ticks=5)
+    y_max = max(y_step, int(math.ceil(max_count / y_step) * y_step))
+
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width_svg}" height="{height_svg}" viewBox="0 0 {width_svg} {height_svg}">',
         '<rect width="100%" height="100%" fill="#ffffff"/>',
-        '<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:28px;font-weight:700}.subtitle{font-size:14px;fill:#4b5563}.axis{font-size:13px;fill:#374151}.tick{font-size:11px;fill:#6b7280}.grid{stroke:#e5e7eb}.axisline{stroke:#374151;stroke-width:1.5}.legend{font-size:14px}</style>',
+        '<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:30px;font-weight:700}.subtitle{font-size:15px;fill:#4b5563}.axis{font-size:15px;font-weight:600;fill:#374151}.tick{font-size:13px;fill:#6b7280}.grid{stroke:#e5e7eb}.axisline{stroke:#374151;stroke-width:1.5}.legend{font-size:14px}</style>',
         f'<text class="title" x="{width_svg/2}" y="38" text-anchor="middle">{title}</text>',
-        f'<text class="subtitle" x="{width_svg/2}" y="62" text-anchor="middle">Parsed from reports/*/timing_paths.csv</text>',
+        f'<text class="subtitle" x="{width_svg/2}" y="64" text-anchor="middle">Post-implementation timing paths from Vivado report_timing</text>',
     ]
-    for i in range(6):
-        tick = max_count * i / 5
-        y = mt + plot_h - (tick / max_count) * plot_h
+    for tick in range(0, y_max + y_step, y_step):
+        y = mt + plot_h - (tick / y_max) * plot_h
         parts.append(f'<line class="grid" x1="{ml}" y1="{y:.1f}" x2="{width_svg-mr}" y2="{y:.1f}"/>')
-        parts.append(f'<text class="tick" x="{ml-8}" y="{y+4:.1f}" text-anchor="end">{tick:.0f}</text>')
+        parts.append(f'<text class="tick" x="{ml-10}" y="{y+4:.1f}" text-anchor="end">{tick}</text>')
     parts.append(f'<line class="axisline" x1="{ml}" y1="{mt}" x2="{ml}" y2="{mt+plot_h}"/>')
     parts.append(f'<line class="axisline" x1="{ml}" y1="{mt+plot_h}" x2="{width_svg-mr}" y2="{mt+plot_h}"/>')
-    parts.append(f'<text class="axis" x="22" y="{mt+plot_h/2}" transform="rotate(-90 22 {mt+plot_h/2})" text-anchor="middle">Path count</text>')
-    parts.append(f'<text class="axis" x="{ml+plot_w/2}" y="{height_svg-25}" text-anchor="middle">{x_label}</text>')
+    parts.append(f'<text class="axis" x="28" y="{mt+plot_h/2}" transform="rotate(-90 28 {mt+plot_h/2})" text-anchor="middle">Timing path count</text>')
+    parts.append(f'<text class="axis" x="{ml+plot_w/2}" y="{height_svg-28}" text-anchor="middle">{x_label}</text>')
+
+    value = lo
+    while value <= hi + 1e-9:
+        x = ml + ((value - lo) / (hi - lo)) * plot_w if hi != lo else ml
+        parts.append(f'<line class="axisline" x1="{x:.1f}" y1="{mt+plot_h}" x2="{x:.1f}" y2="{mt+plot_h+6}"/>')
+        parts.append(f'<text class="tick" x="{x:.1f}" y="{mt+plot_h+24}" text-anchor="middle">{fmt_axis_value(value)}</text>')
+        value += x_step
 
     for i, (start, end) in enumerate(bin_edges):
         gx = ml + i * group_w
         tick_x = gx + group_w / 2
-        if metric == "datapath_delay":
-            # Label every datapath-delay group.  Use the bin center because the
-            # bars represent a delay range; this puts the delay value directly
-            # below each grouped set of bars without the labels colliding.
-            label = f"{(start + end) / 2:.2f}"
-            label_y = mt + plot_h + 38
-            parts.append(
-                f'<text class="tick" x="{tick_x:.1f}" y="{label_y:.1f}" '
-                f'text-anchor="end" transform="rotate(-45 {tick_x:.1f} {label_y:.1f})">{label}</text>'
-            )
-        elif i % 3 == 0:
-            parts.append(f'<text class="tick" x="{tick_x:.1f}" y="{mt+plot_h+22}" text-anchor="middle">{start:.2f}</text>')
         for j, exp in enumerate(experiments):
             count = counts_by_exp[exp][i]
-            h = (count / max_count) * plot_h if max_count else 0
+            h = (count / y_max) * plot_h if y_max else 0
             x = gx + bin_gap / 2 + 4 + j * (bar_w + bar_gap)
             y = mt + plot_h - h
             color = COLORS.get(exp, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
             parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}" rx="1"/>')
 
-    lx, ly = ml, height_svg - 55
+    lx, ly = ml, height_svg - 65
     for j, exp in enumerate(experiments):
-        x = lx + j * 250
+        x = lx + j * 230
         color = COLORS.get(exp, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
         parts.append(f'<rect x="{x}" y="{ly-13}" width="16" height="16" fill="{color}" rx="2"/>')
-        parts.append(f'<text class="legend" x="{x+24}" y="{ly}">{svg_escape(exp)}</text>')
+        parts.append(f'<text class="legend" x="{x+24}" y="{ly}">{svg_escape(display_name(exp))}</text>')
 
     parts.append('</svg>')
     output.write_text("\n".join(parts) + "\n", encoding="utf-8")
