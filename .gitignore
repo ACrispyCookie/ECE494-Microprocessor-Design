@@ -49,6 +49,7 @@ xsim.dir/
 dmem_dump.txt
 dmem_dump.mem
 build/rtl-tests/
+build/rtl-benchmarks/
 build/tools/
 
 # Editor / OS files
@@ -71,6 +72,7 @@ venv/
 !reports/**/*.rpt
 !reports/**/*.csv
 !reports/**/*.png
+reports/benchmarks/
 
 *.tex
 *.bib

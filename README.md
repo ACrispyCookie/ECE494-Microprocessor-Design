@@ -65,6 +65,63 @@ build/rtl-tests/<version>/<test>/
 
 Important files there include `program_imem.mem`, `expected_dmem.mem`, `expected_regfile.mem`, `dmem_dump.mem`, `regfile_dump.mem`, and `sim.log`.
 
+## RTL benchmark flow
+
+The C benchmarks live under `benchmarks/src/` and are run by `scripts/run-rtl-benchmarks.py`.  This flow is separate from the assembly correctness regression: it builds bare-metal RV32IM C workloads, initializes both instruction and data memories, runs a larger benchmark testbench, and records cycle metrics from memory-mapped start/stop/DONE stores.
+
+Available benchmarks:
+
+```text
+vvadd multiply median sort rsort mm dhrystone
+```
+
+Run all benchmarks on all RTL variants:
+
+```bash
+make rtl-benchmarks
+# equivalent:
+python3 scripts/run-rtl-benchmarks.py --version all --benchmark all
+```
+
+Run one RTL variant and one benchmark:
+
+```bash
+python3 scripts/run-rtl-benchmarks.py --version baseline --benchmark vvadd
+python3 scripts/run-rtl-benchmarks.py --version 1 --benchmark multiply      # 1 = no-mul-forwarding
+python3 scripts/run-rtl-benchmarks.py --version 2 --benchmark sort          # 2 = no-alu-forwarding
+python3 scripts/run-rtl-benchmarks.py --version 3 --benchmark mm            # 3 = no-alu-mul-forwarding
+```
+
+Make targets are also provided:
+
+```bash
+make rtl-benchmarks-baseline RTL_BENCH_ARGS="--benchmark vvadd"
+make rtl-benchmarks-no-mul-forwarding RTL_BENCH_ARGS="--benchmark all"
+make rtl-benchmarks-no-alu-forwarding RTL_BENCH_ARGS="--benchmark median sort"
+make rtl-benchmarks-no-alu-mul-forwarding RTL_BENCH_ARGS="--benchmark mm dhrystone"
+```
+
+Per-run artifacts are written under:
+
+```text
+build/rtl-benchmarks/<version>/<benchmark>/
+```
+
+Important files there include `program_imem.mem`, `program_dmem.mem`, `<benchmark>.elf`, `image_sizes.txt`, and `sim.log`.  The benchmark testbench prints a metric line of the form:
+
+```text
+[METRIC] total_cycles=<cycles> roi_cycles=<cycles> return_code=<code> signature=0x<hex>
+```
+
+Summary reports are regenerated at:
+
+```text
+reports/benchmarks/benchmark_results.csv
+reports/benchmarks/benchmark_results.md
+```
+
+The benchmark testbench uses 128 KiB IMEM and 128 KiB DMEM for simulation only.  The Vivado wrapper defaults remain unchanged for the FPGA timing/utilization flow, so the benchmark memory-size increase does not affect the existing implementation comparisons.
+
 ## Vivado project creation
 
 Create/update a Vivado project for one variant:

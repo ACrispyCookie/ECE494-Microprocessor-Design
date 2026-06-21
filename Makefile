@@ -1,6 +1,7 @@
 VIVADO ?= vivado
 EXPERIMENT ?= baseline
 RTL_TEST_ARGS ?=
+RTL_BENCH_ARGS ?=
 
 CORE_DIR_baseline := cv32e40p_baseline
 CORE_DIR_no-mul-forwarding := cv32e40p_no_mul_forwarding
@@ -15,7 +16,7 @@ CLOCK_PERIOD_no-alu-forwarding := 15.000
 CLOCK_PERIOD_no-alu-mul-forwarding := 15.000
 CLOCK_PERIOD ?= $(CLOCK_PERIOD_$(EXPERIMENT))
 
-.PHONY: all init-core-submodules baseline no-mul-forwarding no-alu-forwarding no-alu-mul-forwarding rtl-tests rtl-tests-baseline rtl-tests-no-mul-forwarding rtl-tests-no-alu-forwarding rtl-tests-no-alu-mul-forwarding reports utilization-reports utilization-plots timing-reports timing-plots clean
+.PHONY: all init-core-submodules baseline no-mul-forwarding no-alu-forwarding no-alu-mul-forwarding rtl-tests rtl-tests-baseline rtl-tests-no-mul-forwarding rtl-tests-no-alu-forwarding rtl-tests-no-alu-mul-forwarding rtl-benchmarks rtl-benchmarks-baseline rtl-benchmarks-no-mul-forwarding rtl-benchmarks-no-alu-forwarding rtl-benchmarks-no-alu-mul-forwarding reports utilization-reports utilization-plots timing-reports timing-plots clean
 
 all: init-core-submodules
 	$(VIVADO) -mode batch -source cv32e40p-zedboard-project.tcl -tclargs --experiment $(EXPERIMENT) --core_dir $(CORE_DIR) --build_dir $(BUILD_DIR) --project_name $(PROJECT_NAME) --clock_period $(CLOCK_PERIOD)
@@ -59,6 +60,21 @@ rtl-tests-no-alu-forwarding:
 
 rtl-tests-no-alu-mul-forwarding:
 	python3 scripts/run-rtl-tests.py --version no_alu_mul_forwarding $(RTL_TEST_ARGS)
+
+rtl-benchmarks:
+	python3 scripts/run-rtl-benchmarks.py $(RTL_BENCH_ARGS)
+
+rtl-benchmarks-baseline:
+	python3 scripts/run-rtl-benchmarks.py --version baseline $(RTL_BENCH_ARGS)
+
+rtl-benchmarks-no-mul-forwarding:
+	python3 scripts/run-rtl-benchmarks.py --version no_mul_forwarding $(RTL_BENCH_ARGS)
+
+rtl-benchmarks-no-alu-forwarding:
+	python3 scripts/run-rtl-benchmarks.py --version no_alu_forwarding $(RTL_BENCH_ARGS)
+
+rtl-benchmarks-no-alu-mul-forwarding:
+	python3 scripts/run-rtl-benchmarks.py --version no_alu_mul_forwarding $(RTL_BENCH_ARGS)
 
 reports:
 	./report.sh --comparison --report all --create-projects --yes --stage post-implementation
