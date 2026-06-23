@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="610" viewBox="0 0 1180 610">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Inter,Arial,sans-serif;fill:#111111}.title{font-size:30px;font-weight:700}.subtitle{font-size:15px;fill:#4b5563}.axis{font-size:16px;font-weight:700;fill:#111111}.tick{font-size:14px;fill:#111111}.label{font-size:13px;fill:#111111}.legend{font-size:15px;fill:#111111}.grid{stroke:#d9d9d9;stroke-width:1}.axisline{stroke:#111111;stroke-width:1.7}</style>
+<line class="grid" x1="115" y1="485.0" x2="1120" y2="485.0"/>
+<text class="tick" x="105" y="489.0" text-anchor="end">0</text>
+<line class="grid" x1="115" y1="411.7" x2="1120" y2="411.7"/>
+<text class="tick" x="105" y="415.7" text-anchor="end">25</text>
+<line class="grid" x1="115" y1="338.3" x2="1120" y2="338.3"/>
+<text class="tick" x="105" y="342.3" text-anchor="end">50</text>
+<line class="grid" x1="115" y1="265.0" x2="1120" y2="265.0"/>
+<text class="tick" x="105" y="269.0" text-anchor="end">75</text>
+<line class="grid" x1="115" y1="191.7" x2="1120" y2="191.7"/>
+<text class="tick" x="105" y="195.7" text-anchor="end">100</text>
+<line class="grid" x1="115" y1="118.3" x2="1120" y2="118.3"/>
+<text class="tick" x="105" y="122.3" text-anchor="end">125</text>
+<line class="grid" x1="115" y1="45.0" x2="1120" y2="45.0"/>
+<text class="tick" x="105" y="49.0" text-anchor="end">150</text>
+<line class="axisline" x1="115" y1="45" x2="115" y2="485"/>
+<line class="axisline" x1="115" y1="485" x2="1120" y2="485"/>
+<text class="axis" x="30" y="265.0" text-anchor="middle" transform="rotate(-90 30 265.0)">Vivado power estimate (mW)</text>
+<text class="axis" x="617.5" y="582" text-anchor="middle">Vivado report_power summary metric</text>
+<text class="axis" x="282.5" y="516" text-anchor="middle">Total</text>
+<text class="axis" x="282.5" y="534" text-anchor="middle">FPGA Power</text>
+<rect x="149.5" y="133.0" width="56.0" height="352.0" fill="#111111" stroke="#111111" stroke-width="1.2" rx="2"/>
+<rect x="219.5" y="130.1" width="56.0" height="354.9" fill="#555555" stroke="#000000" stroke-width="1.2" rx="2"/>
+<rect x="289.5" y="135.9" width="56.0" height="349.1" fill="#999999" stroke="#000000" stroke-width="1.2" rx="2"/>
+<rect x="359.5" y="135.9" width="56.0" height="349.1" fill="#d0d0d0" stroke="#000000" stroke-width="1.2" rx="2"/>
+<text class="axis" x="617.5" y="516" text-anchor="middle">Dynamic</text>
+<text class="axis" x="617.5" y="534" text-anchor="middle">Switching Power</text>
+<rect x="484.5" y="443.9" width="56.0" height="41.1" fill="#111111" stroke="#111111" stroke-width="1.2" rx="2"/>
+<rect x="554.5" y="443.9" width="56.0" height="41.1" fill="#555555" stroke="#000000" stroke-width="1.2" rx="2"/>
+<rect x="624.5" y="449.8" width="56.0" height="35.2" fill="#999999" stroke="#000000" stroke-width="1.2" rx="2"/>
+<rect x="694.5" y="446.9" width="56.0" height="38.1" fill="#d0d0d0" stroke="#000000" stroke-width="1.2" rx="2"/>
+<text class="axis" x="952.5" y="516" text-anchor="middle">Static</text>
+<text class="axis" x="952.5" y="534" text-anchor="middle">Leakage Power</text>
+<rect x="819.5" y="174.1" width="56.0" height="310.9" fill="#111111" stroke="#111111" stroke-width="1.2" rx="2"/>
+<rect x="889.5" y="174.1" width="56.0" height="310.9" fill="#555555" stroke="#000000" stroke-width="1.2" rx="2"/>
+<rect x="959.5" y="174.1" width="56.0" height="310.9" fill="#999999" stroke="#000000" stroke-width="1.2" rx="2"/>
+<rect x="1029.5" y="174.1" width="56.0" height="310.9" fill="#d0d0d0" stroke="#000000" stroke-width="1.2" rx="2"/>
+<rect x="115" y="549" width="16" height="16" fill="#111111" stroke="#111111" stroke-width="1.2" rx="2"/>
+<text class="legend" x="139" y="562">Baseline</text>
+<rect x="345" y="549" width="16" height="16" fill="#555555" stroke="#000000" stroke-width="1.2" rx="2"/>
+<text class="legend" x="369" y="562">No MUL fwd</text>
+<rect x="575" y="549" width="16" height="16" fill="#999999" stroke="#000000" stroke-width="1.2" rx="2"/>
+<text class="legend" x="599" y="562">No ALU fwd</text>
+<rect x="805" y="549" width="16" height="16" fill="#d0d0d0" stroke="#000000" stroke-width="1.2" rx="2"/>
+<text class="legend" x="829" y="562">No ALU+MUL fwd</text>
+</svg>

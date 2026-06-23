@@ -26,6 +26,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
+from plot_style import PlotStyle, add_style_arguments, bar_extra_attrs, color_for, style_from_args, svg_style_block
+
 DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding", "no-alu-mul-forwarding")
 RESOURCE_LABELS = {
     "Slice LUTs": "LUTs",
@@ -160,7 +162,8 @@ def display_name(experiment: str) -> str:
     return DISPLAY_NAMES.get(experiment, experiment)
 
 
-def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
+def write_svg(rows: list[UtilRow], svg_path: Path, style: PlotStyle | None = None) -> None:
+    style = style or PlotStyle()
     svg_path.parent.mkdir(parents=True, exist_ok=True)
 
     experiments = list(dict.fromkeys(row.experiment for row in rows))
@@ -168,10 +171,10 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
     by_key = {(row.experiment, row.label): row for row in rows}
 
     width = 1180
-    height = 680
+    height = 620 if style.clean else 680
     margin_left = 125
     margin_right = 65
-    margin_top = 95
+    margin_top = 45 if style.clean else 95
     margin_bottom = 125
     plot_w = width - margin_left - margin_right
     plot_h = height - margin_top - margin_bottom
@@ -206,9 +209,10 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
     parts: list[str] = []
     parts.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">')
     parts.append('<rect width="100%" height="100%" fill="#ffffff"/>')
-    parts.append('<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:30px;font-weight:700}.subtitle{font-size:15px;fill:#4b5563}.axis{font-size:15px;font-weight:600;fill:#374151}.tick{font-size:13px;fill:#6b7280}.label{font-size:13px;fill:#111827}.legend{font-size:14px}.grid{stroke:#e5e7eb;stroke-width:1}.axisline{stroke:#374151;stroke-width:1.5}</style>')
-    parts.append(f'<text class="title" x="{width/2}" y="38" text-anchor="middle">FPGA Resource Utilization</text>')
-    parts.append(f'<text class="subtitle" x="{width/2}" y="64" text-anchor="middle">Post-implementation utilization on Zynq-7020</text>')
+    parts.append(svg_style_block(style, label_font_size=13, axis_font_size=16, tick_font_size=14))
+    if style.show_titles:
+        parts.append(f'<text class="title" x="{width/2}" y="38" text-anchor="middle">FPGA Resource Utilization</text>')
+        parts.append(f'<text class="subtitle" x="{width/2}" y="64" text-anchor="middle">Post-implementation utilization on Zynq-7020</text>')
 
     # Grid and y-axis.
     for tick in ticks:
@@ -232,17 +236,18 @@ def write_svg(rows: list[UtilRow], svg_path: Path) -> None:
             util_pct = utilization_percent(row)
             y = y_for(util_pct)
             h = margin_top + plot_h - y
-            color = colors.get(experiment, fallback_colors[j % len(fallback_colors)])
-            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}" rx="3"/>')
-            parts.append(f'<text class="label" x="{x+bar_w/2:.1f}" y="{y-7:.1f}" text-anchor="middle">{fmt_percent(util_pct)}</text>')
+            color = color_for(experiment, j, style, colors)
+            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}"{bar_extra_attrs(j, style)}/>')
+            if style.show_value_labels:
+                parts.append(f'<text class="label" x="{x+bar_w/2:.1f}" y="{y-7:.1f}" text-anchor="middle">{fmt_percent(util_pct)}</text>')
 
     # Legend.
     legend_x = margin_left
     legend_y = height - 45
     for j, experiment in enumerate(experiments):
-        color = colors.get(experiment, fallback_colors[j % len(fallback_colors)])
+        color = color_for(experiment, j, style, colors)
         x = legend_x + j * 230
-        parts.append(f'<rect x="{x}" y="{legend_y-13}" width="16" height="16" fill="{color}" rx="2"/>')
+        parts.append(f'<rect x="{x}" y="{legend_y-13}" width="16" height="16" fill="{color}"{bar_extra_attrs(j, style)}/>')
         parts.append(f'<text class="legend" x="{x+24}" y="{legend_y}">{svg_escape(display_name(experiment))}</text>')
 
     parts.append('</svg>')
@@ -255,7 +260,9 @@ def main() -> int:
     parser.add_argument("--experiments", nargs="+", default=list(DEFAULT_EXPERIMENTS))
     parser.add_argument("--csv", type=Path, default=Path("reports/summary/utilization_compare.csv"))
     parser.add_argument("--svg", type=Path, default=Path("reports/plots/utilization_compare.svg"))
+    add_style_arguments(parser)
     args = parser.parse_args()
+    style = style_from_args(args)
 
     rows: list[UtilRow] = []
     try:
@@ -265,7 +272,7 @@ def main() -> int:
         parser.error(str(exc))
 
     write_csv(rows, args.csv)
-    write_svg(rows, args.svg)
+    write_svg(rows, args.svg, style)
 
     print(f"Wrote {args.csv}")
     print(f"Wrote {args.svg}")

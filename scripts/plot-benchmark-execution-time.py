@@ -21,6 +21,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
+from plot_style import PlotStyle, add_style_arguments, bar_extra_attrs, color_for, style_from_args, svg_style_block
+
 DEFAULT_INPUT = Path("reports/benchmarks/benchmark_results.csv")
 DEFAULT_OUTPUT = Path("reports/plots/benchmark_execution_time.svg")
 DEFAULT_VERSION_ORDER = ("baseline", "no_mul_forwarding", "no_alu_forwarding", "no_alu_mul_forwarding")
@@ -158,7 +160,8 @@ def display_name(version: str) -> str:
     return DISPLAY_NAMES.get(version, version.replace("_", " ").replace("-", " ").title())
 
 
-def write_svg(rows: list[BenchmarkRow], svg_path: Path, title: str, metric: str) -> None:
+def write_svg(rows: list[BenchmarkRow], svg_path: Path, title: str, metric: str, style: PlotStyle | None = None) -> None:
+    style = style or PlotStyle()
     svg_path.parent.mkdir(parents=True, exist_ok=True)
 
     versions = ordered_unique([row.version for row in rows], DEFAULT_VERSION_ORDER)
@@ -166,10 +169,10 @@ def write_svg(rows: list[BenchmarkRow], svg_path: Path, title: str, metric: str)
     by_key = {(row.version, row.benchmark): row for row in rows}
 
     width = 1280
-    height = 720
+    height = 650 if style.clean else 720
     margin_left = 105
     margin_right = 55
-    margin_top = 98
+    margin_top = 45 if style.clean else 98
     margin_bottom = 132
     plot_w = width - margin_left - margin_right
     plot_h = height - margin_top - margin_bottom
@@ -196,9 +199,10 @@ def write_svg(rows: list[BenchmarkRow], svg_path: Path, title: str, metric: str)
     parts: list[str] = []
     parts.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">')
     parts.append('<rect width="100%" height="100%" fill="#ffffff"/>')
-    parts.append('<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:30px;font-weight:700}.subtitle{font-size:15px;fill:#4b5563}.axis{font-size:15px;font-weight:600;fill:#374151}.tick{font-size:13px;fill:#6b7280}.label{font-size:11px;fill:#111827}.legend{font-size:14px}.grid{stroke:#e5e7eb;stroke-width:1}.axisline{stroke:#374151;stroke-width:1.5}</style>')
-    parts.append(f'<text class="title" x="{width/2}" y="38" text-anchor="middle">{svg_escape(title)}</text>')
-    parts.append(f'<text class="subtitle" x="{width/2}" y="64" text-anchor="middle">Grouped by benchmark; colors match the utilization plot RTL versions</text>')
+    parts.append(svg_style_block(style, label_font_size=11, axis_font_size=16, tick_font_size=14))
+    if style.show_titles:
+        parts.append(f'<text class="title" x="{width/2}" y="38" text-anchor="middle">{svg_escape(title)}</text>')
+        parts.append(f'<text class="subtitle" x="{width/2}" y="64" text-anchor="middle">Grouped by benchmark; colors match the utilization plot RTL versions</text>')
 
     for tick in ticks:
         y = y_for(tick)
@@ -220,11 +224,12 @@ def write_svg(rows: list[BenchmarkRow], svg_path: Path, title: str, metric: str)
             x = x_for(i, j)
             y = y_for(value_us)
             h = margin_top + plot_h - y
-            color = COLORS.get(version, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
-            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}" rx="3"/>')
-            # Keep labels compact; skip tiny bars where the value would collide with the x-axis.
-            label_y = max(y - 7, margin_top + 12)
-            parts.append(f'<text class="label" x="{x+bar_w/2:.1f}" y="{label_y:.1f}" text-anchor="middle" transform="rotate(-35 {x+bar_w/2:.1f} {label_y:.1f})">{fmt_us(value_us)}</text>')
+            color = color_for(version, j, style, COLORS)
+            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}"{bar_extra_attrs(j, style)}/>')
+            # Keep labels compact; skip them entirely in report style to avoid clutter.
+            if style.show_value_labels:
+                label_y = max(y - 7, margin_top + 12)
+                parts.append(f'<text class="label" x="{x+bar_w/2:.1f}" y="{label_y:.1f}" text-anchor="middle" transform="rotate(-35 {x+bar_w/2:.1f} {label_y:.1f})">{fmt_us(value_us)}</text>')
 
     legend_x = margin_left
     legend_y = height - 56
@@ -235,8 +240,8 @@ def write_svg(rows: list[BenchmarkRow], svg_path: Path, title: str, metric: str)
         if x + 190 > width - margin_right:
             x = legend_x + (j % 2) * 330
             y = legend_y + 24 * (j // 2)
-        color = COLORS.get(version, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
-        parts.append(f'<rect x="{x}" y="{y-13}" width="16" height="16" fill="{color}" rx="2"/>')
+        color = color_for(version, j, style, COLORS)
+        parts.append(f'<rect x="{x}" y="{y-13}" width="16" height="16" fill="{color}"{bar_extra_attrs(j, style)}/>')
         parts.append(f'<text class="legend" x="{x+24}" y="{y}">{svg_escape(display_name(version))}</text>')
 
     parts.append('</svg>')
@@ -250,11 +255,13 @@ def main() -> int:
     parser.add_argument("--include-failed", action="store_true", help="Include non-PASS rows if they have non-negative timing values")
     parser.add_argument("--title", default="RTL Benchmark Execution Time")
     parser.add_argument("--metric", default="ROI", help="Metric label shown on the y-axis; values come from roi_time_ns")
+    add_style_arguments(parser)
     args = parser.parse_args()
+    style = style_from_args(args)
 
     try:
         rows = read_benchmark_csv(args.csv, include_failed=args.include_failed)
-        write_svg(rows, args.svg, args.title, args.metric)
+        write_svg(rows, args.svg, args.title, args.metric, style)
     except (FileNotFoundError, ValueError) as exc:
         parser.error(str(exc))
 

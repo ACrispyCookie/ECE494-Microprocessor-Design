@@ -27,6 +27,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
+from plot_style import PlotStyle, add_style_arguments, bar_extra_attrs, color_for, style_from_args, svg_style_block
+
 DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding", "no-alu-mul-forwarding")
 COLORS = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a", "no-alu-mul-forwarding": "#9333ea"}
 FALLBACK_COLORS = ["#16a34a", "#9333ea", "#ea580c"]
@@ -222,7 +224,7 @@ def write_metrics(rows: list[dict[str, str]], path: Path) -> None:
         "critical_end_hierarchy",
     ]
     with path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fields)
+        writer = csv.DictWriter(f, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -246,7 +248,7 @@ def histogram(values: list[float], bins: int = 20) -> tuple[list[tuple[float, fl
 def write_distribution_csv(paths_by_exp: dict[str, list[TimingPath]], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator="\n")
         writer.writerow(["experiment", "metric", "bin_start", "bin_end", "count"])
         for exp, paths in paths_by_exp.items():
             for metric, getter in [
@@ -304,7 +306,8 @@ def presentation_axis(metric: str, values: list[float]) -> tuple[float, float, f
     return 0.0, max(15.0, math.ceil(max(values) / 2.5) * 2.5), 2.5
 
 
-def write_hist_svg(paths_by_exp: dict[str, list[TimingPath]], metric: str, output: Path) -> None:
+def write_hist_svg(paths_by_exp: dict[str, list[TimingPath]], metric: str, output: Path, style: PlotStyle | None = None) -> None:
+    style = style or PlotStyle()
     output.parent.mkdir(parents=True, exist_ok=True)
     getter = (lambda p: p.slack) if metric == "slack" else (lambda p: p.datapath_delay)
     title = "Timing Slack Distribution" if metric == "slack" else "Datapath Delay Distribution"
@@ -329,8 +332,8 @@ def write_hist_svg(paths_by_exp: dict[str, list[TimingPath]], metric: str, outpu
         max_count = max(max_count, max(counts) if counts else 0)
 
     width_svg = 1180
-    height_svg = 660
-    ml, mr, mt = 100, 45, 90
+    height_svg = 600 if style.clean else 660
+    ml, mr, mt = 100, 45, (45 if style.clean else 90)
     mb = 125
     plot_w = width_svg - ml - mr
     plot_h = height_svg - mt - mb
@@ -346,10 +349,13 @@ def write_hist_svg(paths_by_exp: dict[str, list[TimingPath]], metric: str, outpu
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width_svg}" height="{height_svg}" viewBox="0 0 {width_svg} {height_svg}">',
         '<rect width="100%" height="100%" fill="#ffffff"/>',
-        '<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:30px;font-weight:700}.subtitle{font-size:15px;fill:#4b5563}.axis{font-size:15px;font-weight:600;fill:#374151}.tick{font-size:13px;fill:#6b7280}.grid{stroke:#e5e7eb}.axisline{stroke:#374151;stroke-width:1.5}.legend{font-size:14px}</style>',
-        f'<text class="title" x="{width_svg/2}" y="38" text-anchor="middle">{title}</text>',
-        f'<text class="subtitle" x="{width_svg/2}" y="64" text-anchor="middle">Post-implementation timing paths from Vivado report_timing</text>',
+        svg_style_block(style, label_font_size=13, axis_font_size=16, tick_font_size=14),
     ]
+    if style.show_titles:
+        parts.extend([
+            f'<text class="title" x="{width_svg/2}" y="38" text-anchor="middle">{title}</text>',
+            f'<text class="subtitle" x="{width_svg/2}" y="64" text-anchor="middle">Post-implementation timing paths from Vivado report_timing</text>',
+        ])
     for tick in range(0, y_max + y_step, y_step):
         y = mt + plot_h - (tick / y_max) * plot_h
         parts.append(f'<line class="grid" x1="{ml}" y1="{y:.1f}" x2="{width_svg-mr}" y2="{y:.1f}"/>')
@@ -374,14 +380,14 @@ def write_hist_svg(paths_by_exp: dict[str, list[TimingPath]], metric: str, outpu
             h = (count / y_max) * plot_h if y_max else 0
             x = gx + bin_gap / 2 + 4 + j * (bar_w + bar_gap)
             y = mt + plot_h - h
-            color = COLORS.get(exp, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
-            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}" rx="1"/>')
+            color = color_for(exp, j, style, COLORS)
+            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}"{bar_extra_attrs(j, style)}/>')
 
     lx, ly = ml, height_svg - 65
     for j, exp in enumerate(experiments):
         x = lx + j * 230
-        color = COLORS.get(exp, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
-        parts.append(f'<rect x="{x}" y="{ly-13}" width="16" height="16" fill="{color}" rx="2"/>')
+        color = color_for(exp, j, style, COLORS)
+        parts.append(f'<rect x="{x}" y="{ly-13}" width="16" height="16" fill="{color}"{bar_extra_attrs(j, style)}/>')
         parts.append(f'<text class="legend" x="{x+24}" y="{ly}">{svg_escape(display_name(exp))}</text>')
 
     parts.append('</svg>')
@@ -396,7 +402,9 @@ def main() -> int:
     parser.add_argument("--distribution-csv", type=Path, default=Path("reports/summary/path_distribution.csv"))
     parser.add_argument("--slack-svg", type=Path, default=Path("reports/plots/slack_histogram.svg"))
     parser.add_argument("--datapath-svg", type=Path, default=Path("reports/plots/datapath_delay_histogram.svg"))
+    add_style_arguments(parser)
     args = parser.parse_args()
+    style = style_from_args(args)
 
     try:
         paths_by_exp = {
@@ -408,8 +416,8 @@ def main() -> int:
 
     write_metrics(metric_rows(paths_by_exp, args.reports_dir), args.metrics_csv)
     write_distribution_csv(paths_by_exp, args.distribution_csv)
-    write_hist_svg(paths_by_exp, "slack", args.slack_svg)
-    write_hist_svg(paths_by_exp, "datapath_delay", args.datapath_svg)
+    write_hist_svg(paths_by_exp, "slack", args.slack_svg, style)
+    write_hist_svg(paths_by_exp, "datapath_delay", args.datapath_svg, style)
     print(f"Wrote {args.metrics_csv}")
     print(f"Wrote {args.distribution_csv}")
     print(f"Wrote {args.slack_svg}")

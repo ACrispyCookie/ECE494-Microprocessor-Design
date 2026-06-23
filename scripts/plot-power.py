@@ -28,6 +28,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
+from plot_style import PlotStyle, add_style_arguments, bar_extra_attrs, color_for, style_from_args, svg_style_block
+
 DEFAULT_EXPERIMENTS = ("baseline", "no-mul-forwarding", "no-alu-forwarding", "no-alu-mul-forwarding")
 COLORS = {"baseline": "#2563eb", "no-mul-forwarding": "#dc2626", "no-alu-forwarding": "#16a34a", "no-alu-mul-forwarding": "#9333ea"}
 FALLBACK_COLORS = ["#16a34a", "#9333ea", "#9333ea", "#ea580c"]
@@ -274,7 +276,8 @@ def nice_power_axis(max_value_mw: float) -> tuple[float, float]:
     return math.ceil(max_value_mw / step) * step, step
 
 
-def write_svg(rows: list[PowerRow], path: Path) -> None:
+def write_svg(rows: list[PowerRow], path: Path, style: PlotStyle | None = None) -> None:
+    style = style or PlotStyle()
     path.parent.mkdir(parents=True, exist_ok=True)
     summary_rows = [row for row in rows if row.metric in SUMMARY_ORDER]
     if not summary_rows:
@@ -283,8 +286,8 @@ def write_svg(rows: list[PowerRow], path: Path) -> None:
     metrics = [metric for metric in SUMMARY_ORDER if any(row.metric == metric for row in summary_rows)]
     by_key = {(row.experiment, row.metric): row for row in summary_rows}
 
-    width, height = 1180, 670
-    ml, mr, mt, mb = 115, 60, 95, 125
+    width, height = 1180, (610 if style.clean else 670)
+    ml, mr, mt, mb = 115, 60, (45 if style.clean else 95), 125
     plot_w = width - ml - mr
     plot_h = height - mt - mb
     max_value_mw = max((row.value_w * 1000.0 for row in summary_rows), default=1.0)
@@ -302,10 +305,13 @@ def write_svg(rows: list[PowerRow], path: Path) -> None:
     parts: list[str] = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
         '<rect width="100%" height="100%" fill="#ffffff"/>',
-        '<style>text{font-family:Inter,Arial,sans-serif;fill:#111827}.title{font-size:30px;font-weight:700}.subtitle{font-size:15px;fill:#4b5563}.axis{font-size:15px;font-weight:600;fill:#374151}.tick{font-size:13px;fill:#6b7280}.label{font-size:13px;fill:#111827}.legend{font-size:14px}.grid{stroke:#e5e7eb;stroke-width:1}.axisline{stroke:#374151;stroke-width:1.5}</style>',
-        f'<text class="title" x="{width/2}" y="38" text-anchor="middle">Vivado Power Comparison</text>',
-        f'<text class="subtitle" x="{width/2}" y="64" text-anchor="middle">Post-implementation report_power summary on Zynq-7020</text>',
+        svg_style_block(style, label_font_size=13, axis_font_size=16, tick_font_size=14),
     ]
+    if style.show_titles:
+        parts.extend([
+            f'<text class="title" x="{width/2}" y="38" text-anchor="middle">Vivado Power Comparison</text>',
+            f'<text class="subtitle" x="{width/2}" y="64" text-anchor="middle">Post-implementation report_power summary on Zynq-7020</text>',
+        ])
 
     tick = 0.0
     while tick <= y_max + 1e-9:
@@ -330,15 +336,16 @@ def write_svg(rows: list[PowerRow], path: Path) -> None:
             x = ml + i * group_w + (group_w - total_w) / 2 + j * (bar_w + gap)
             y = y_for(row.value_w)
             h = mt + plot_h - y
-            color = COLORS.get(exp, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
-            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}" rx="3"/>')
-            parts.append(f'<text class="label" x="{x+bar_w/2:.1f}" y="{max(y-7, mt-6):.1f}" text-anchor="middle">{svg_escape(fmt_w(row.value_w))}</text>')
+            color = color_for(exp, j, style, COLORS)
+            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{h:.1f}" fill="{color}"{bar_extra_attrs(j, style)}/>')
+            if style.show_value_labels:
+                parts.append(f'<text class="label" x="{x+bar_w/2:.1f}" y="{max(y-7, mt-6):.1f}" text-anchor="middle">{svg_escape(fmt_w(row.value_w))}</text>')
 
     lx, ly = ml, height - 48
     for j, exp in enumerate(experiments):
         x = lx + j * 230
-        color = COLORS.get(exp, FALLBACK_COLORS[j % len(FALLBACK_COLORS)])
-        parts.append(f'<rect x="{x}" y="{ly-13}" width="16" height="16" fill="{color}" rx="2"/>')
+        color = color_for(exp, j, style, COLORS)
+        parts.append(f'<rect x="{x}" y="{ly-13}" width="16" height="16" fill="{color}"{bar_extra_attrs(j, style)}/>')
         parts.append(f'<text class="legend" x="{x+24}" y="{ly}">{svg_escape(display_name(exp))}</text>')
 
     parts.append('</svg>')
@@ -352,7 +359,9 @@ def main() -> int:
     parser.add_argument("--summary-csv", type=Path, default=Path("reports/summary/power_metrics.csv"))
     parser.add_argument("--svg", type=Path, default=Path("reports/plots/power_compare.svg"))
     parser.add_argument("--no-svg", action="store_true", help="write CSV outputs only; do not generate the SVG plot")
+    add_style_arguments(parser)
     args = parser.parse_args()
+    style = style_from_args(args)
 
     all_rows: list[PowerRow] = []
     try:
@@ -365,7 +374,7 @@ def main() -> int:
 
     write_csv(all_rows, args.summary_csv)
     if not args.no_svg:
-        write_svg(all_rows, args.svg)
+        write_svg(all_rows, args.svg, style)
     print(f"Wrote {args.summary_csv}")
     if not args.no_svg:
         print(f"Wrote {args.svg}")
