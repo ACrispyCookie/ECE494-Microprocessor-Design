@@ -1,6 +1,71 @@
-# ECE494 Microprocessor Design — CV32E40P forwarding experiments
+# ECE494 — Microprocessor Design: CV32E40P forwarding experiments
 
-This repository compares several CV32E40P RTL variants on a minimal ZedBoard-style wrapper.  The flow keeps each RTL variant in a separate git submodule and uses shared scripts for RTL simulation, Vivado project generation, report export, and comparison plots.
+![RISC-V](https://img.shields.io/badge/RISC--V-RV32IM-blue)
+![SystemVerilog](https://img.shields.io/badge/SystemVerilog-RTL-purple)
+![Vivado](https://img.shields.io/badge/Xilinx-Vivado-F15B2A)
+![FPGA](https://img.shields.io/badge/FPGA-ZedBoard-green)
+![CV32E40P](https://img.shields.io/badge/Core-CV32E40P-orange)
+![Coursework](https://img.shields.io/badge/UTH-ECE494-teal)
+
+Course project for **ECE494 — Microprocessor Design** at the **University of Thessaly**, comparing CV32E40P RISC-V forwarding variants on a minimal ZedBoard-style FPGA wrapper. The repository keeps each RTL variant in a separate submodule and uses shared scripts for RTL simulation, Vivado project generation, timing/utilization/power report export, benchmark execution, and comparison plots.
+
+## Quick overview
+
+<p align="center">
+  <img src="docs/images/ece494-evaluation-pipeline.svg" alt="ECE494 CV32E40P evaluation pipeline from RTL variants to tests, benchmarks, Vivado reports, and presentation artifacts" width="100%">
+</p>
+
+| Area | What is included |
+| --- | --- |
+| RISC-V RTL variants | Baseline CV32E40P plus no-multiplier-forwarding, no-ALU-forwarding, and combined no-ALU/no-multiplier-forwarding variants. |
+| Correctness testing | Icarus Verilog/sv2v-based RTL regressions with assembly tests, golden memory/register dumps, and focused dependency-stress cases. |
+| Benchmarking | Bare-metal RV32IM C benchmarks loaded into simulated instruction/data memories with cycle metrics for each RTL variant. |
+| Vivado comparison | Automated ZedBoard-style project generation and post-synthesis/post-implementation timing, utilization, power, and critical-path reports. |
+| Result visualization | Python scripts and generated plots for execution time, timing histograms, utilization, power, and presentation summaries. |
+
+## Standout work: timing optimization by selective forwarding removal
+
+The project studies whether removing selected forwarding paths can improve FPGA timing closure without breaking architectural behavior. The best-performing variant removes multiplier forwarding, keeps architectural correctness through existing writeback availability and dependency stalls, and is evaluated with both Vivado implementation reports and benchmark-level cycle measurements.
+
+Useful paths:
+
+- [`cv32e40p_baseline/`](cv32e40p_baseline/) — baseline CV32E40P submodule.
+- [`cv32e40p_no_mul_forwarding/`](cv32e40p_no_mul_forwarding/) — no-multiplier-forwarding RTL variant.
+- [`cv32e40p_no_alu_forwarding/`](cv32e40p_no_alu_forwarding/) — no-ALU-forwarding RTL variant.
+- [`cv32e40p_no_alu_mul_forwarding/`](cv32e40p_no_alu_mul_forwarding/) — combined forwarding-removal RTL variant.
+- [`rtl-tests/`](rtl-tests/) — assembly regression tests and golden outputs.
+- [`benchmarks/`](benchmarks/) — bare-metal benchmark sources and runtime support.
+- [`reports/`](reports/) — generated Vivado reports, summaries, and plots.
+- [`docs/reports/ece494-cv32e40p-forwarding-report.pdf`](docs/reports/ece494-cv32e40p-forwarding-report.pdf) — final project report.
+- [`docs/presentations/ece494-cv32e40p-final-presentation.pdf`](docs/presentations/ece494-cv32e40p-final-presentation.pdf) — final presentation.
+
+## Repository contents
+
+| Path | Description |
+| --- | --- |
+| [`cv32e40p_*`](.) | Variant-specific CV32E40P RTL submodules. |
+| [`zedboard-wrapper/`](zedboard-wrapper/) | Minimal FPGA wrapper, memories, clock gate, testbench, and constraints. |
+| [`rtl-tests/`](rtl-tests/) | RTL correctness tests, testbench files, and golden outputs. |
+| [`benchmarks/`](benchmarks/) | Bare-metal benchmark sources and runtime support. |
+| [`scripts/`](scripts/) | RTL-test, benchmark, plot, and report helper scripts. |
+| [`reports/`](reports/) | Generated timing/utilization/power reports, summary CSVs, and comparison plots. |
+| [`docs/reports/`](docs/reports/) | Final written report. |
+| [`docs/presentations/`](docs/presentations/) | Final presentation PDF. |
+| [`docs/images/`](docs/images/) | README architecture diagram and selected result plots. |
+
+## Selected results
+
+<p align="center">
+  <img src="docs/images/benchmark_execution_time.png" alt="Benchmark execution-time comparison across CV32E40P forwarding variants" width="48%">
+  <img src="docs/images/datapath_delay_histogram.png" alt="Datapath-delay histogram comparing timing-path distributions" width="48%">
+</p>
+
+<p align="center">
+  <img src="docs/images/utilization_compare.png" alt="FPGA utilization comparison across forwarding variants" width="48%">
+  <img src="docs/images/power_compare.png" alt="Power estimate comparison across forwarding variants" width="48%">
+</p>
+
+The report combines implementation-level timing/utilization/power data with benchmark execution time. The README keeps representative plot exports near the top while the full raw report set remains under [`reports/`](reports/).
 
 ## RTL variants
 

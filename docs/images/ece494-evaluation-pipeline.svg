@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+<title id="title">ECE494 CV32E40P evaluation workflow</title>
+<desc id="desc">Evaluation workflow connecting CV32E40P RTL variants, simulation, benchmarks, Vivado implementation, and comparison plots.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#38bdf8"/></marker><style>.bg{fill:#020617}.grid{stroke:#1e293b;stroke-width:.6}.box{fill:#0f172a;stroke-width:2;rx:16}.title{font:700 26px 'Segoe UI',sans-serif;fill:#f8fafc}.h{font:700 17px 'Segoe UI',sans-serif;fill:#f8fafc}.t{font:500 13px 'Segoe UI',sans-serif;fill:#cbd5e1}.s{font:600 12px 'Segoe UI',sans-serif;fill:#94a3b8}.line{stroke:#38bdf8;stroke-width:3;fill:none;marker-end:url(#arrow)}</style></defs>
+<rect class="bg" width="1200" height="500" rx="24"/><path class="grid" d="M0 80H1200M0 160H1200M0 240H1200M0 320H1200M0 400H1200M120 0V500M240 0V500M360 0V500M480 0V500M600 0V500M720 0V500M840 0V500M960 0V500M1080 0V500" opacity=".65"/>
+<text class="title" x="44" y="52">ECE494 CV32E40P forwarding experiment pipeline</text>
+<text class="s" x="44" y="78">RTL variants are checked for correctness, implemented in Vivado, benchmarked, and summarized as plots/report artifacts.</text>
+
+<rect class="box" x="50" y="135" width="230" height="210" stroke="#a78bfa"/><text class="h" x="82" y="174">RTL variants</text><text class="t" x="82" y="205">baseline</text><text class="t" x="82" y="230">no multiplier forwarding</text><text class="t" x="82" y="255">no ALU forwarding</text><text class="t" x="82" y="280">combined removal</text><text class="s" x="82" y="318">cv32e40p_* submodules</text>
+<path class="line" d="M280 240H355"/>
+<rect class="box" x="370" y="105" width="220" height="135" stroke="#60a5fa"/><text class="h" x="400" y="145">RTL tests</text><text class="t" x="400" y="176">assembly regressions</text><text class="t" x="400" y="202">golden memory/register dumps</text>
+<rect class="box" x="370" y="280" width="220" height="135" stroke="#34d399"/><text class="h" x="400" y="320">Benchmarks</text><text class="t" x="400" y="351">RV32IM C workloads</text><text class="t" x="400" y="377">cycle metrics per variant</text>
+<path class="line" d="M590 172H665"/><path class="line" d="M590 348H665"/>
+<rect class="box" x="680" y="135" width="230" height="210" stroke="#f59e0b"/><text class="h" x="710" y="174">Vivado reports</text><text class="t" x="710" y="205">timing paths and slack</text><text class="t" x="710" y="230">utilization hierarchy</text><text class="t" x="710" y="255">power estimates</text><text class="t" x="710" y="280">summary CSV exports</text><text class="s" x="710" y="318">reports/&lt;experiment&gt;/</text>
+<path class="line" d="M910 240H985"/>
+<rect class="box" x="1000" y="135" width="150" height="210" stroke="#fb7185"/><text class="h" x="1026" y="174">Portfolio</text><text class="t" x="1026" y="205">plots</text><text class="t" x="1026" y="230">report</text><text class="t" x="1026" y="255">slides</text><text class="s" x="1026" y="318">docs/ + README</text>
+</svg>
