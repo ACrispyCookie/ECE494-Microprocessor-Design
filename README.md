@@ -1,11 +1,9 @@
 # ECE494 — Microprocessor Design: CV32E40P forwarding experiments
 
-![RISC-V](https://img.shields.io/badge/RISC--V-RV32IM-blue)
-![SystemVerilog](https://img.shields.io/badge/SystemVerilog-RTL-purple)
-![Vivado](https://img.shields.io/badge/Xilinx-Vivado-F15B2A)
-![FPGA](https://img.shields.io/badge/FPGA-ZedBoard-green)
-![CV32E40P](https://img.shields.io/badge/Core-CV32E40P-orange)
-![Coursework](https://img.shields.io/badge/UTH-ECE494-teal)
+![SystemVerilog](https://img.shields.io/badge/SystemVerilog-0E7C86?style=flat&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik04IDZsLTYgNiA2IDZNMTYgNmw2IDYtNiA2IiBzdHJva2Utd2lkdGg9IjIuNCIvPjwvc3ZnPg==)
+![RISC-V](https://img.shields.io/badge/RISC--V-2E7D5B?style=flat&logo=riscv&logoColor=white)
+![Vivado](https://img.shields.io/badge/Vivado-8A6D2B?style=flat&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xNC43IDYuM2E0IDQgMCAwIDAtNS40IDUuMkwzIDE3LjhWMjFoMy4ybDYuMy02LjNhNCA0IDAgMCAwIDUuMi01LjRsLTIuNiAyLjYtMi40LS42LS42LTIuNHoiLz48L3N2Zz4=)
+![ZedBoard](https://img.shields.io/badge/ZedBoard-2E7D5B?style=flat&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjYiIHk9IjYiIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgcng9IjIiLz48cmVjdCB4PSI5LjUiIHk9IjkuNSIgd2lkdGg9IjUiIGhlaWdodD0iNSIgcng9IjEiIGZpbGw9IndoaXRlIiBzdHJva2U9Im5vbmUiLz48cGF0aCBkPSJNOSAydjNNMTUgMnYzTTkgMTl2M00xNSAxOXYzTTIgOWgzTTIgMTVoM00xOSA5aDNNMTkgMTVoMyIvPjwvc3ZnPg==)
 
 Course project for **ECE494 — Microprocessor Design** at the **University of Thessaly**, comparing CV32E40P RISC-V forwarding variants on a minimal ZedBoard-style FPGA wrapper. The repository keeps each RTL variant in a separate submodule and uses shared scripts for RTL simulation, Vivado project generation, timing/utilization/power report export, benchmark execution, and comparison plots.
 
