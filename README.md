@@ -23,11 +23,11 @@ Course project for **ECE494 — Microprocessor Design** at the **University of T
 | Vivado comparison | Automated ZedBoard-style project generation and post-synthesis/post-implementation timing, utilization, power, and critical-path reports. |
 | Result visualization | Python scripts and generated plots for execution time, timing histograms, utilization, power, and presentation summaries. |
 
-## Standout work: timing optimization by selective forwarding removal
+## Highlight: better timing by removing selected forwarding paths
 
-The project studies whether removing selected forwarding paths can improve FPGA timing closure without breaking architectural behavior. The best-performing variant removes multiplier forwarding, keeps architectural correctness through existing writeback availability and dependency stalls, and is evaluated with both Vivado implementation reports and benchmark-level cycle measurements.
+The project asks whether removing some forwarding paths helps FPGA timing closure without changing architectural behavior. The best variant removes multiplier forwarding; results stay correct because dependent instructions stall until writeback. Its default clock constraint is 14 ns versus the baseline's 15 ns. Both Vivado reports and benchmark cycle counts are used to judge the trade-off.
 
-Useful paths:
+Where to look:
 
 - [`cv32e40p_baseline/`](cv32e40p_baseline/) — baseline CV32E40P submodule.
 - [`cv32e40p_no_mul_forwarding/`](cv32e40p_no_mul_forwarding/) — no-multiplier-forwarding RTL variant.
@@ -65,7 +65,7 @@ Useful paths:
   <img src="docs/images/power_compare.png" alt="Power estimate comparison across forwarding variants" width="48%">
 </p>
 
-The report combines implementation-level timing/utilization/power data with benchmark execution time. The README keeps representative plot exports near the top while the full raw report set remains under [`reports/`](reports/).
+The report combines timing, utilization, and power from implementation with benchmark execution time. The full report set is under [`reports/`](reports/).
 
 ## RTL variants
 
